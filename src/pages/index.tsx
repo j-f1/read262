@@ -1,14 +1,14 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import { SitePage, Edge } from '../types'
+import { SpecPage, Edge, NestedSpecPage } from '../types'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import PageList from '../components/page-list'
 import '../components/ecmarkup.css'
 
-function nestPages(pages: SitePage[]) {
-  const nestedPages = new Array<SitePage>()
+function nestPages(pages: SpecPage[]) {
+  const nestedPages = new Array<NestedSpecPage>()
   for (const page of pages) {
     const lastPage = nestedPages[nestedPages.length - 1]
     if (lastPage && page.secnum.split('.')[0] === lastPage.secnum) {
@@ -25,7 +25,7 @@ const IndexPage = ({
     allSpecPage: { edges },
   },
 }: {
-  data: { allSpecPage: { edges: Array<Edge<SitePage>> } }
+  data: { allSpecPage: { edges: Array<Edge<SpecPage>> } }
 }) => (
   <Layout>
     <SEO title="Home" />

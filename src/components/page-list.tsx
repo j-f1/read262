@@ -1,9 +1,9 @@
 import React from 'react'
 import SectionTitle from '../components/section-title'
 import { Link } from 'gatsby'
-import { SitePage } from '../types'
+import { SpecPage, NestedSpecPage } from '../types'
 
-const PageList = ({ pages }: { pages: Array<SitePage> }) => (
+const PageList = ({ pages }: { pages: Array<SpecPage | NestedSpecPage> }) => (
   <ul>
     {pages.map(({ id, route, secnum, title, hasContent, children }) => (
       <li key={id}>

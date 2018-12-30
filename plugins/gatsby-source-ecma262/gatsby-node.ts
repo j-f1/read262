@@ -8,6 +8,7 @@ import fetch from 'node-fetch'
 import fs from 'fs'
 import { JSDOM } from 'jsdom'
 import { promisify } from 'util'
+import { SpecPage } from '../../src/types'
 
 export async function sourceNodes({
   actions: { createNode },
@@ -73,6 +74,7 @@ export async function sourceNodes({
     ids[child.id] = route
   }
 
+  const nodes = new Array<SpecPage>()
   const buildPage = (clause: Element, parentRoute = '', nest = true) => {
     const children = Array.from(clause.children)
     const firstSubsection = children.findIndex(el =>
@@ -104,13 +106,13 @@ export async function sourceNodes({
     }
 
     const html = content.map(el => el.outerHTML).join('')
-    createNode({
+    nodes.push({
       id: 'page-' + id,
       route,
-      secnum: secnum ? secnum.textContent : undefined,
+      secnum: secnum && secnum.textContent ? secnum.textContent : '',
       title: secnum
         ? (header.textContent || '').replace(secnum.textContent || '', '')
-        : header.textContent,
+        : header.textContent || '',
       hasContent: html !== '',
       internal: {
         type: 'SpecPage',
@@ -135,7 +137,19 @@ export async function sourceNodes({
     buildPage(clause)
   }
 
-  createNode()
+  const findNode = (i: number, di: number): SpecPage | undefined => {
+    i += di
+    while (nodes[i]) {
+      if (nodes[i].hasContent) return nodes[i]
+      i += di
+    }
+  }
+
+  nodes.forEach((node, i) => {
+    node.prev = pick(findNode(i, -1), 'route', 'secnum', 'title')
+    node.next = pick(findNode(i, +1), 'route', 'secnum', 'title')
+  })
+  nodes.forEach(node => createNode(node))
 }
 
 export async function createPages(
@@ -171,3 +185,18 @@ export async function createPages(
     })
   }
 }
+
+type Def<T> = T extends undefined ? never : T
+const pick = <T, K extends keyof Def<T>>(
+  obj: T,
+  ...keys: K[]
+): Pick<Def<T>, K> | undefined =>
+  obj
+    ? keys.reduce(
+        (res, key) => {
+          res[key] = (obj as Def<T>)[key]
+          return res
+        },
+        {} as Pick<Def<T>, K>
+      )
+    : undefined

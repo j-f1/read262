@@ -4,9 +4,10 @@ import { graphql, navigate } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import SectionTitle from '../components/section-title'
-import { Edge, SitePage } from '../types'
+import PrevNext from '../components/prev-next'
+import { Edge, SpecPage } from '../types'
 
-const SpecPage = ({
+const SpecSection = ({
   data: {
     allSpecPage: {
       edges: [
@@ -14,6 +15,8 @@ const SpecPage = ({
           node: {
             secnum,
             title,
+            prev,
+            next,
             internal: { content },
           },
         },
@@ -21,7 +24,7 @@ const SpecPage = ({
     },
   },
 }: {
-  data: { allSpecPage: { edges: [Edge<SitePage>] } }
+  data: { allSpecPage: { edges: [Edge<SpecPage>] } }
 }) => {
   React.useEffect(() => {
     const handler = (event: MouseEvent) => {
@@ -55,16 +58,27 @@ const SpecPage = ({
         </h1>
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </article>
+      <PrevNext prev={prev} next={next} />
     </Layout>
   )
 }
 export const query = graphql`
-  query GetPageQuery($route: String) {
+  query GetSectionQuery($route: String) {
     allSpecPage(filter: { route: { eq: $route } }) {
       edges {
         node {
           secnum
           title
+          prev {
+            route
+            secnum
+            title
+          }
+          next {
+            route
+            secnum
+            title
+          }
           internal {
             content
           }
@@ -74,4 +88,4 @@ export const query = graphql`
   }
 `
 
-export default SpecPage
+export default SpecSection
