@@ -4,5 +4,8 @@
   "dependencies": {
     "jsdom": "^13.1.0",
     "node-fetch": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^12.2.1"
   }
 }

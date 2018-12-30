@@ -86,7 +86,7 @@ h1 .secnum::after {
 }
 
 emu-xref[aoid] a,
-emu-alg emu-xref[href$="#assert"] a {
+emu-alg emu-xref[href$='#assert'] a {
   color: #206ca7;
   text-decoration: none;
 }

@@ -5,10 +5,17 @@
  */
 
 // const fetch = require('node-fetch')
-const fs = require('fs')
-const { JSDOM } = require('jsdom')
+import fs from 'fs'
+import { JSDOM } from 'jsdom'
+import {} from 'gatsby'
 
-exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
+export function sourceNodes({
+  actions: { createNode },
+  createContentDigest,
+}: {
+  actions: { createNode: Function }
+  createContentDigest: (x: any) => string
+}) {
   const {
     window: { document },
   } = new JSDOM(
@@ -20,15 +27,18 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
     clause: 'emu-clause, emu-annex',
   }
 
-  const ids = Object.create(null)
-  for (const child of document.querySelectorAll('#spec-container [id]')) {
-    let segments = []
+  const ids: { [key: string]: string } = Object.create(null)
+  for (const child of Array.from(
+    document.querySelectorAll('#spec-container [id]')
+  )) {
+    let segments = new Array<string>()
     let parent = child
     do {
       if (parent.matches(selectors.clause))
         segments.unshift(parent.id.replace('sec-', ''))
+      if (!parent.parentElement) break
       parent = parent.parentElement
-    } while (parent && parent.id !== 'spec-container')
+    } while (parent.id !== 'spec-container')
 
     const route =
       '/' +
@@ -46,12 +56,14 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
     ids[child.id] = route
   }
 
-  const buildPage = (clause, parentRoute = '', nest = true) => {
+  const buildPage = (clause: Element, parentRoute = '', nest = true) => {
     const children = Array.from(clause.children)
     const firstSubsection = children.findIndex(el =>
       el.matches(selectors.clause)
     )
     const header = clause.querySelector('h1')
+    if (!header)
+      throw new TypeError('could not find header for section ' + clause.id)
 
     const content = children.slice(
       children.indexOf(header) + 1,
@@ -62,11 +74,11 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
     const secnum = header.querySelector('.secnum')
 
     for (const para of content) {
-      for (const link of para.querySelectorAll('[href]')) {
+      for (const link of Array.from(para.querySelectorAll('[href]'))) {
         const href = link.getAttribute('href')
         if (href && href.startsWith('#')) {
           if (!ids[href.slice(1)]) {
-            console.warn(`Warning! Unrecognized ID ${li.href.slice(1)}`)
+            console.warn(`Warning! Unrecognized ID ${href.slice(1)}`)
             continue
           }
           link.setAttribute('href', ids[href.slice(1)])
@@ -80,7 +92,7 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
       route,
       secnum: secnum ? secnum.textContent : undefined,
       title: secnum
-        ? header.textContent.replace(secnum.textContent, '')
+        ? (header.textContent || '').replace(secnum.textContent || '', '')
         : header.textContent,
       hasContent: html !== '',
       internal: {
@@ -98,9 +110,10 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
     }
   }
 
-  buildPage(document.querySelector('emu-intro'))
-  for (const clause of document.querySelectorAll(
-    '#spec-container > emu-clause, #spec-container > emu-annex'
+  for (const clause of Array.from(
+    document.querySelectorAll(
+      '#spec-container > emu-intro, #spec-container > emu-clause, #spec-container > emu-annex'
+    )
   )) {
     buildPage(clause)
   }
@@ -108,7 +121,13 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
   createNode()
 }
 
-exports.createPages = async ({ graphql, actions: { createPage } }, options) => {
+export async function createPages(
+  {
+    graphql,
+    actions: { createPage },
+  }: { graphql: Function; actions: { createPage: Function } },
+  options: { component: string }
+) {
   const result = await graphql(/* GraphQL */ `
     query ListRoutesQuery {
       allSpecPage {

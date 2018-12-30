@@ -1,8 +1,9 @@
 import React from 'react'
 import SectionTitle from '../components/title'
 import { Link } from 'gatsby'
+import { SitePage } from '../types'
 
-const PageList = ({ pages }) => (
+const PageList = ({ pages }: { pages: Array<SitePage> }) => (
   <ul>
     {pages.map(({ id, route, secnum, title, hasContent, children }) => (
       <li key={id}>

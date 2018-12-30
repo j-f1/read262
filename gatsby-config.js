@@ -1,3 +1,5 @@
+require('ts-node/register')
+
 module.exports = {
   siteMetadata: {
     title: `read262`,
@@ -5,6 +7,7 @@ module.exports = {
     author: `@j-f1`,
   },
   plugins: [
+    `gatsby-plugin-typescript`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -19,7 +22,7 @@ module.exports = {
     },
     {
       resolve: 'gatsby-source-ecma262',
-      options: { component: require.resolve('./src/templates/section.js') },
+      options: { component: require.resolve('./src/templates/section.tsx') },
     },
     {
       resolve: 'gatsby-plugin-web-font-loader',

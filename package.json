@@ -6,9 +6,10 @@
     "postinstall": "cd plugins/gatsby-source-ecma262; yarn",
     "build": "gatsby build",
     "develop": "gatsby develop --https",
-    "start": "npm run develop",
-    "format": "prettier --write src/**/*.{js,json,css}",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
+    "start": "yarn develop",
+    "prettier": "prettier src/**/*.{js,json,css}",
+    "format": "yarn prettier --write",
+    "test": "yarn prettier --check && yarn tsc"
   },
   "dependencies": {
     "gatsby": "^2.0.76",
@@ -17,16 +18,20 @@
     "gatsby-plugin-offline": "^2.0.16",
     "gatsby-plugin-react-helmet": "^3.0.2",
     "gatsby-plugin-sharp": "^2.0.14",
+    "gatsby-plugin-typescript": "^2.0.3",
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "^2.0.8",
     "gatsby-transformer-sharp": "^2.1.8",
     "prop-types": "^15.6.2",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
-    "react-helmet": "^5.2.0"
+    "react-helmet": "^5.2.0",
+    "ts-node": "^7.0.1"
   },
   "devDependencies": {
-    "prettier": "^1.15.2"
+    "@types/react-helmet": "^5.0.7",
+    "prettier": "prettier/prettier",
+    "typescript": "^3.2.2"
   },
   "guppy": {
     "id": "2124b010-0b81-11e9-90f7-191942761272",
