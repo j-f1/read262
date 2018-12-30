@@ -1,7 +1,6 @@
 /* Adapted from https://github.com/bterlson/ecmarkup/blob/7f4f75b1/css/elements.css */
 code {
   font-weight: bold;
-  font-family: Consolas, Monaco, monospace;
   white-space: pre;
 }
 
@@ -26,7 +25,7 @@ var.referenced {
 }
 
 emu-const {
-  font-family: sans-serif;
+  font-family: var(--sans);
 }
 
 emu-val {

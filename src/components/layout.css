@@ -1,8 +1,17 @@
+:root {
+  --sans: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --serif: Merriweather, georgia, serif;
+  --mono: Fira Code, SFMono-Regular, Consolas, Roboto Mono, Droid Sans Mono,
+    Liberation Mono, Menlo, Courier, monospace;
+
+  --link: #0000aa;
+}
 body {
   margin: 0;
 }
 a {
-  background-color: transparent;
+  color: var(--link);
   -webkit-text-decoration-skip: objects;
 }
 abbr[title] {
@@ -20,7 +29,7 @@ h1 {
   -webkit-appearance: none;
 }
 html {
-  font: 112.5%/1.45em georgia, serif;
+  font: 112.5%/1.45em light var(--serif);
   box-sizing: border-box;
   overflow-y: scroll;
 }
@@ -46,19 +55,16 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--sans);
   text-rendering: optimizeLegibility;
 }
 tt,
 code {
   background-color: hsla(0, 0%, 0%, 0.04);
   border-radius: 3px;
-  font-family: 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono',
-    'Liberation Mono', Menlo, Courier, monospace;
-  padding: 0;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
+  font-family: var(--mono);
+  padding-left: 0.1em;
+  padding-right: 0.1em;
 }
 pre code {
   background: none;
@@ -74,4 +80,28 @@ h1 .secnum {
 }
 h1 .secnum:not(:empty)::after {
   content: ' • ';
+}
+
+emu-xref[aoid] a,
+emu-alg emu-xref[href$="#assert"] a {
+  color: #206ca7;
+  text-decoration: none;
+}
+
+emu-nt a:not(:hover) {
+  text-decoration: none;
+}
+emu-nt a:hover {
+  color: var(--link) !important;
+}
+
+/* square : characters */
+emu-geq {
+  font-family: Cambria, Palatino Linotype, Palatino, Liberation Serif, serif;
+}
+
+article emu-note > span.note {
+  font-family: var(--sans);
+  min-width: 70px;
+  padding-left: 0.5em;
 }

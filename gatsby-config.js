@@ -21,6 +21,19 @@ module.exports = {
       resolve: 'gatsby-source-ecma262',
       options: { component: require.resolve('./src/templates/section.js') },
     },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Merriweather:400,400i,700,700i'],
+        },
+        custom: {
+          families: ['Fira Code:n3,n4,n5,n7'],
+          urls:
+            'https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css',
+        },
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     'gatsby-plugin-offline',
