@@ -1,6 +1,7 @@
 import { Link, graphql, StaticQuery } from 'gatsby'
 import React from 'react'
 import Container from './container'
+import GithubCorner from 'react-github-corner'
 
 const Header = () => (
   <header
@@ -30,6 +31,11 @@ const Header = () => (
           </Link>
         </Container>
       )}
+    />
+    <GithubCorner
+      href="https://github.com/j-f1/read262"
+      octoColor="#F0DB4F"
+      bannerColor="#323330"
     />
   </header>
 )
