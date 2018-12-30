@@ -20,6 +20,7 @@
     "gatsby-plugin-react-helmet": "^3.0.2",
     "gatsby-plugin-sharp": "^2.0.14",
     "gatsby-plugin-typescript": "^2.0.3",
+    "gatsby-plugin-typescript-checker": "^1.0.3",
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "^2.0.8",
     "gatsby-transformer-sharp": "^2.1.8",

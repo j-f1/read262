@@ -2416,7 +2416,7 @@ chokidar@^1.7.0:
   optionalDependencies:
     fsevents "^1.0.0"
 
-chokidar@^2.0.0, chokidar@^2.0.2:
+chokidar@^2.0.0, chokidar@^2.0.2, chokidar@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.0.4.tgz#356ff4e2b0e8e43e322d18a372460bbcf3accd26"
   dependencies:
@@ -4451,6 +4451,18 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
 
+fork-ts-checker-webpack-plugin@^0.5.0:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-0.5.2.tgz#a73b3630bd0a69409a6e4824e54c03a62fe82d8f"
+  integrity sha512-a5IG+xXyKnpruI0CP/anyRLAoxWtp3lzdG6flxicANnoSzz64b12dJ7ASAVRrI2OaWwZR2JyBaMHFQqInhWhIw==
+  dependencies:
+    babel-code-frame "^6.22.0"
+    chalk "^2.4.1"
+    chokidar "^2.0.4"
+    micromatch "^3.1.10"
+    minimatch "^3.0.4"
+    tapable "^1.0.0"
+
 form-data@~2.3.2:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.3.tgz#dcce52c05f644f298c6a7ab936bd724ceffbf3a6"
@@ -4657,6 +4669,13 @@ gatsby-plugin-sharp@^2.0.14:
     progress "^1.1.8"
     sharp "^0.21.0"
     svgo "^0.7.2"
+
+gatsby-plugin-typescript-checker@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript-checker/-/gatsby-plugin-typescript-checker-1.0.3.tgz#08f8112e19e01884524d4a0a6fd408675b1611c5"
+  integrity sha512-h7n3P/jOrnSdCfSEH1xPQeRHFcoxcdoh5KBSOnRAkIxnFemtiZpkNKXXWc/DisSdtXVyI0N1QZ/hFaTuALWTjw==
+  dependencies:
+    fork-ts-checker-webpack-plugin "^0.5.0"
 
 gatsby-plugin-typescript@^2.0.3:
   version "2.0.3"
