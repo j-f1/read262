@@ -55,6 +55,7 @@ h3,
 h4,
 h5,
 h6 {
+  color: #323330;
   font-family: var(--sans);
   text-rendering: optimizeLegibility;
 }

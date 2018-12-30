@@ -4,7 +4,7 @@ import React from 'react'
 const Header = ({ siteTitle = '' }) => (
   <div
     style={{
-      background: `rebeccapurple`,
+      background: `#F0DB4F`,
       marginBottom: `1.45rem`,
     }}
   >
@@ -19,7 +19,9 @@ const Header = ({ siteTitle = '' }) => (
         <Link
           to="/"
           style={{
-            color: `white`,
+            color: `#323330`,
+            // source: https://github.com/voodootikigod/logo.js/blob/1544bdee/js.html#L21
+            fontFamily: `Futura, Trebuchet MS, Arial, sans-serif`,
             textDecoration: `none`,
           }}
         >
