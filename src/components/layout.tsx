@@ -3,6 +3,7 @@ import { Link, StaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
 import './layout.css'
+import Container from './container'
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
   <StaticQuery
@@ -18,11 +19,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => (
     render={data => (
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div
+        <Container
           style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
             paddingTop: 0,
           }}
         >
@@ -36,7 +34,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => (
             </a>
             ) • Built with <a href="https://www.gatsbyjs.org">Gatsby</a>
           </footer>
-        </div>
+        </Container>
       </>
     )}
   />

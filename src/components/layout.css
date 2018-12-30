@@ -122,3 +122,18 @@ footer {
   padding: 1em 2em 0;
   margin: 0 -2em;
 }
+
+header {
+  color: #323330;
+}
+header h1 {
+  margin-bottom: 0;
+  /* source: https://github.com/voodootikigod/logo.js/blob/1544bdee/js.html#L21 */
+  font-family: Futura, Trebuchet MS, Arial, sans-serif;
+  font-size: 2.1em;
+  margin-top: 0;
+}
+header a {
+  color: inherit;
+  text-decoration: none;
+}
