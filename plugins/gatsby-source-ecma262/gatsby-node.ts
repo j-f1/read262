@@ -6,6 +6,7 @@
 
 import fetch from 'node-fetch'
 import fs from 'fs'
+import { join } from 'path'
 import { JSDOM } from 'jsdom'
 import { promisify } from 'util'
 import { SpecPage } from '../../src/types'
@@ -17,7 +18,7 @@ export async function sourceNodes({
   actions: { createNode: Function }
   createContentDigest: (x: any) => string
 }) {
-  const cache = require.resolve('./cache.html')
+  const cache = path.join(__dirname, 'cache.html')
   const {
     window: { document },
   } = new JSDOM(
