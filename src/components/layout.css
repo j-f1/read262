@@ -28,7 +28,9 @@ article h1 {
   -webkit-appearance: none;
 }
 html {
-  font: 112.5%/1.45em light var(--serif);
+  font: 112.5%/1.45em;
+  font-weight: light;
+  font-family: var(--serif);
   box-sizing: border-box;
   overflow-y: scroll;
 }
