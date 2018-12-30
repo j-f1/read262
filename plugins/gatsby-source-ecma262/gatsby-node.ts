@@ -22,7 +22,7 @@ export async function sourceNodes({
   const {
     window: { document },
   } = new JSDOM(
-    (await promisify(fs.stat)(cache)).isFile()
+    fs.existsSync(cache)
       ? await promisify(fs.readFile)(cache, 'utf8')
       : await fetch('https://tc39.github.io/ecma262/').then(res => res.text())
   )
