@@ -8,8 +8,6 @@
 const fs = require('fs')
 const { JSDOM } = require('jsdom')
 
-const CONTENT = Symbol('jsdom content nodes')
-
 exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
   const {
     window: { document },
@@ -18,19 +16,23 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
     // await fetch('https://tc39.github.io/ecma262/').then(res => res.text())
   )
 
+  const selectors = {
+    clause: 'emu-clause, emu-annex',
+  }
+
   const ids = Object.create(null)
   for (const child of document.querySelectorAll('#spec-container [id]')) {
     let segments = []
     let parent = child
     do {
-      if (parent.matches('emu-clause'))
+      if (parent.matches(selectors.clause))
         segments.unshift(parent.id.replace('sec-', ''))
       parent = parent.parentElement
     } while (parent && parent.id !== 'spec-container')
 
     const route =
       '/' +
-      (child.matches('emu-clause') && segments.length < 2
+      (child.matches(selectors.clause) && segments.length < 2
         ? segments.slice(0, 2).join('/')
         : segments.slice(0, 2).join('/') + '#' + child.id)
 
@@ -46,17 +48,18 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
 
   const buildPage = (clause, parentRoute = '', nest = true) => {
     const children = Array.from(clause.children)
-    const firstSubsection = children.findIndex(
-      el => el.tagName.toLowerCase() === 'emu-clause'
+    const firstSubsection = children.findIndex(el =>
+      el.matches(selectors.clause)
     )
+    const header = clause.querySelector('h1')
 
     const content = children.slice(
-      1,
+      children.indexOf(header) + 1,
       !nest || firstSubsection === -1 ? undefined : firstSubsection
     )
     const id = clause.id
     const route = parentRoute + '/' + id.replace('sec-', '')
-    const secnum = children[0].querySelector('.secnum')
+    const secnum = header.querySelector('.secnum')
 
     for (const para of content) {
       for (const link of para.querySelectorAll('[href]')) {
@@ -77,8 +80,8 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
       route,
       secnum: secnum ? secnum.textContent : undefined,
       title: secnum
-        ? children[0].textContent.replace(secnum.textContent, '')
-        : children[0].textContent,
+        ? header.textContent.replace(secnum.textContent, '')
+        : header.textContent,
       internal: {
         type: 'SpecPage',
         mediaType: 'text/html',
@@ -96,7 +99,7 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
 
   buildPage(document.querySelector('emu-intro'))
   for (const clause of document.querySelectorAll(
-    '#spec-container > emu-clause'
+    '#spec-container > emu-clause, #spec-container > emu-annex'
   )) {
     buildPage(clause)
   }
