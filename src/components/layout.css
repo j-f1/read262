@@ -126,14 +126,20 @@ footer {
 header {
   color: #323330;
 }
-header h1 {
+header h1,
+header h2 {
   margin-bottom: 0;
   /* source: https://github.com/voodootikigod/logo.js/blob/1544bdee/js.html#L21 */
   font-family: Futura, Trebuchet MS, Arial, sans-serif;
+}
+header h1 {
   font-size: 2.1em;
   margin-top: 0;
 }
 header a {
   color: inherit;
   text-decoration: none;
+}
+header h2 {
+  font-size: 1.5em;
 }

@@ -24,6 +24,21 @@ export async function sourceNodes({
       ? await promisify(fs.readFile)(cache, 'utf8')
       : await fetch('https://tc39.github.io/ecma262/').then(res => res.text())
   )
+  const meta = {
+    title: document.querySelector('h1.title')!.textContent,
+    version: document.querySelector('h1.version')!.textContent,
+  }
+
+  createNode({
+    id: 'spec-meta',
+    ...meta,
+    internal: {
+      type: 'SpecMeta',
+      mediaType: 'application/json',
+      content: JSON.stringify(meta),
+      contentDigest: createContentDigest(JSON.stringify(meta)),
+    },
+  })
 
   const selectors = {
     clause: 'emu-clause, emu-annex',
