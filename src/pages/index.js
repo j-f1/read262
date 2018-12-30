@@ -6,15 +6,18 @@ import SEO from '../components/seo'
 
 const IndexPage = ({
   data: {
-    sections: { sections },
+    allSpecPage: { edges },
   },
 }) => (
   <Layout>
-      <SEO title="Home" />
-      <ul>
-          {sections.map(({ name, id, route }) => (
-              <li key={id}>
-          <a href={'/' + route}>{name}</a>
+    <SEO title="Home" />
+    <ul>
+      {edges.map(({ node: { id, route, secnum, title } }) => (
+        <li key={id}>
+          <a href={route}>
+            <span className="secnum">{secnum}</span>
+            {title}
+          </a>
         </li>
       ))}
     </ul>
@@ -23,11 +26,14 @@ const IndexPage = ({
 
 export const query = graphql`
   query ListPagesQuery {
-    sections {
-      sections {
-        id
-        route
-        name
+    allSpecPage {
+      edges {
+        node {
+          id
+          route
+          secnum
+          title
+        }
       }
     }
   }

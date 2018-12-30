@@ -6,31 +6,39 @@ import SEO from '../components/seo'
 
 const IndexPage = ({
   data: {
-    allSection: {
+    allSpecPage: {
       edges: [
         {
-          node: { name, path },
+          node: {
+            secnum,
+            title,
+            internal: { content },
+          },
         },
       ],
     },
   },
 }) => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title={title} />
     <h1>
-      {path.length ? path.join('.') + '. ' : ''}
-      {name}
+      <span className="secnum">{secnum}</span>
+      {title}
     </h1>
+    <article dangerouslySetInnerHTML={{ __html: content }} />
   </Layout>
 )
 
 export const query = graphql`
   query GetPageQuery($route: String) {
-    allSection(filter: { route: { eq: $route } }) {
+    allSpecPage(filter: { route: { eq: $route } }) {
       edges {
         node {
-          path
-          name
+          secnum
+          title
+          internal {
+            content
+          }
         }
       }
     }
