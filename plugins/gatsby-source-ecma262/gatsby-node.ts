@@ -6,7 +6,7 @@
 
 import fetch from 'node-fetch'
 import fs from 'fs'
-import { join } from 'path'
+import path from 'path'
 import { JSDOM } from 'jsdom'
 import { promisify } from 'util'
 import { SpecPage } from '../../src/types'
