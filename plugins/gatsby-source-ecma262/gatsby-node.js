@@ -82,6 +82,7 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
       title: secnum
         ? header.textContent.replace(secnum.textContent, '')
         : header.textContent,
+      hasContent: html !== '',
       internal: {
         type: 'SpecPage',
         mediaType: 'text/html',
@@ -114,6 +115,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }, options) => {
         edges {
           node {
             route
+            hasContent
           }
         }
       }
@@ -123,8 +125,9 @@ exports.createPages = async ({ graphql, actions: { createPage } }, options) => {
     throw result.errors
   }
   for (const {
-    node: { route },
+    node: { route, hasContent },
   } of result.data.allSpecPage.edges) {
+    if (!hasContent) continue
     createPage({
       path: route,
       component: options.component,
