@@ -75,11 +75,14 @@ h1 .secnum {
   opacity: 0.5;
   font-weight: 300;
 }
-.secnum:not(:empty)::after {
+.secnum:empty {
+  display: none;
+}
+.secnum::after {
   content: ' ';
 }
-h1 .secnum:not(:empty)::after {
-  content: ' • ';
+h1 .secnum::after {
+  content: ' •';
 }
 
 emu-xref[aoid] a,
