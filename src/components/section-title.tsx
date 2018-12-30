@@ -6,8 +6,7 @@ const SectionTitle = ({
   secnum,
 }: Pick<SitePage, 'title' | 'secnum'>) => (
   <>
-    <span className="secnum">{secnum}</span>
-    {title}
+    <span className="secnum">{secnum}</span> {title}
   </>
 )
 export default SectionTitle

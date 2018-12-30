@@ -19,9 +19,8 @@ abbr[title] {
   text-decoration: underline;
   text-decoration: underline dotted;
 }
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+article h1 {
+  margin: 0.67em 0 !important;
 }
 
 [type='search']::-webkit-search-cancel-button,
@@ -85,6 +84,9 @@ h1 .secnum {
 h1 .secnum::after {
   content: ' •';
 }
+emu-clause h1 .secnum::after {
+  content: ' • ';
+}
 
 emu-xref[aoid] a,
 emu-alg emu-xref[href$='#assert'] a {
@@ -108,4 +110,15 @@ article emu-note > span.note {
   font-family: var(--sans);
   min-width: 70px;
   padding-left: 0.5em;
+}
+
+footer {
+  font-family: var(--sans);
+  font-size: 0.75em;
+  color: #666;
+  line-height: 1.25;
+
+  border-top: 1px solid #aaa;
+  padding: 1em 2em 0;
+  margin: 0 -2em;
 }

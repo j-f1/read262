@@ -1,5 +1,5 @@
 import React from 'react'
-import SectionTitle from '../components/title'
+import SectionTitle from '../components/section-title'
 import { Link } from 'gatsby'
 import { SitePage } from '../types'
 
