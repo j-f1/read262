@@ -1,10 +1,10 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
-const IndexPage = ({
+const SpecPage = ({
   data: {
     allSpecPage: {
       edges: [
@@ -18,17 +18,28 @@ const IndexPage = ({
       ],
     },
   },
-}) => (
-  <Layout>
-    <SEO title={title} />
-    <h1>
-      <span className="secnum">{secnum}</span>
-      {title}
-    </h1>
-    <article dangerouslySetInnerHTML={{ __html: content }} />
-  </Layout>
-)
-
+}) => {
+  React.useEffect(() => {
+    const handler = event => {
+      if (event.target.matches('article a')) {
+        event.preventDefault()
+        navigate(event.target.getAttribute('href'))
+      }
+    }
+    document.addEventListener('click', handler)
+    return () => document.removeEventListener('click', handler)
+  }, [])
+  return (
+    <Layout>
+      <SEO title={title} />
+      <h1>
+        <span className="secnum">{secnum}</span>
+        {title}
+      </h1>
+      <article dangerouslySetInnerHTML={{ __html: content }} />
+    </Layout>
+  )
+}
 export const query = graphql`
   query GetPageQuery($route: String) {
     allSpecPage(filter: { route: { eq: $route } }) {
@@ -45,4 +56,4 @@ export const query = graphql`
   }
 `
 
-export default IndexPage
+export default SpecPage
