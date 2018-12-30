@@ -4,23 +4,25 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 import fs from 'fs'
 import { JSDOM } from 'jsdom'
-import {} from 'gatsby'
+import { promisify } from 'util'
 
-export function sourceNodes({
+export async function sourceNodes({
   actions: { createNode },
   createContentDigest,
 }: {
   actions: { createNode: Function }
   createContentDigest: (x: any) => string
 }) {
+  const cache = require.resolve('./cache.html')
   const {
     window: { document },
   } = new JSDOM(
-    fs.readFileSync(require.resolve('./cache.html'), 'utf8')
-    // await fetch('https://tc39.github.io/ecma262/').then(res => res.text())
+    (await promisify(fs.stat)(cache)).isFile()
+      ? await promisify(fs.readFile)(cache, 'utf8')
+      : await fetch('https://tc39.github.io/ecma262/').then(res => res.text())
   )
 
   const selectors = {

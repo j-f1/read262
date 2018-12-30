@@ -3,6 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "cache-spec": "curl https://tc39.github.io/ecma262 > plugins/gatsby-source-ecma262/cache.html",
     "postinstall": "cd plugins/gatsby-source-ecma262; yarn",
     "build": "gatsby build",
     "develop": "gatsby develop --https",
