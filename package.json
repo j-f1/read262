@@ -8,7 +8,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop --https",
     "start": "yarn develop",
-    "prettier": "prettier src/**/*.{js,json,css}",
+    "prettier": "prettier **/*.{js,tsx,json,css} --ignore-path .gitignore",
     "format": "yarn prettier --write",
     "test": "yarn prettier --check && yarn tsc"
   },
