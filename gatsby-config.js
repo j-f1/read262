@@ -6,8 +6,6 @@ Object.assign(process.env, {
   GATSBY_ALGOLIA_SEARCH_KEY: '530c361aee12e9f0e27938227e011277',
 })
 
-console.log(process.env.ALGOLIA_PUSH_KEY.length)
-
 module.exports = {
   siteMetadata: {
     title: 'read262',
