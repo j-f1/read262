@@ -2,23 +2,23 @@ require('ts-node/register')
 
 module.exports = {
   siteMetadata: {
-    title: `read262`,
-    description: `Read the ECMAScript spec in your browser`,
-    author: `@j-f1`,
+    title: 'read262',
+    description: 'Read the ECMAScript spec in your browser',
+    author: '@j-f1',
   },
   plugins: [
-    `gatsby-plugin-typescript`,
-    `gatsby-plugin-typescript-checker`,
-    `gatsby-plugin-react-helmet`,
+    'gatsby-plugin-typescript',
+    'gatsby-plugin-typescript-checker',
+    'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#f3df49`,
-        theme_color: `#f3df49`,
-        display: `minimal-ui`,
+        name: 'read262',
+        short_name: 'read262',
+        start_url: '/',
+        background_color: '#f3df49',
+        theme_color: '#f3df49',
+        display: 'minimal-ui',
       },
     },
     {
