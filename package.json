@@ -8,7 +8,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop --https",
     "start": "yarn develop",
-    "prettier": "prettier **/*.{js,tsx,json,css} --ignore-path .gitignore",
+    "prettier": "prettier **/*.{js,tsx,json,css} gatsby-*.js --ignore-path .gitignore",
     "format": "yarn prettier --write",
     "test": "yarn prettier --check && yarn tsc"
   },
@@ -17,6 +17,7 @@
     "@types/lunr": "^2.3.0",
     "gatsby": "^2.0.76",
     "gatsby-image": "^2.0.20",
+    "gatsby-plugin-algolia": "^0.3.0",
     "gatsby-plugin-manifest": "^2.0.9",
     "gatsby-plugin-offline": "^2.0.16",
     "gatsby-plugin-react-helmet": "^3.0.2",
