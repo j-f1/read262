@@ -147,3 +147,8 @@ header a {
 header h2 {
   font-size: 1.5em;
 }
+
+.nav-arrow {
+  font-family: var(--mono);
+  display: inline-block;
+}

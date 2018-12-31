@@ -24,16 +24,14 @@ const PrevNext = ({
     <li>
       {prev && (
         <Link to={prev.route} rel="prev">
-          <span style={{ fontFamily: 'var(--mono)' }}>&lt;-</span>{' '}
-          <SectionTitle {...prev} />
+          <span className="nav-arrow">&lt;-</span> <SectionTitle {...prev} />
         </Link>
       )}
     </li>
     <li>
       {next && (
         <Link to={next.route} rel="next">
-          <SectionTitle {...next} />{' '}
-          <span style={{ fontFamily: 'var(--mono)' }}>-></span>
+          <SectionTitle {...next} /> <span className="nav-arrow">-></span>
         </Link>
       )}
     </li>
