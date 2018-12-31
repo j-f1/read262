@@ -37,7 +37,7 @@ const SpecSection = ({
         const name = target.textContent!
         const shouldSelect = !target.classList.contains('referenced')
         let clause = target
-        while (!clause.matches('emu-clause')) {
+        while (!clause.matches('emu-clause, article')) {
           if (!clause.parentElement) return
           clause = clause.parentElement
         }
