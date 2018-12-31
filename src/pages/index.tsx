@@ -5,7 +5,6 @@ import { SpecPage, Edge, NestedSpecPage } from '../types'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import PageList from '../components/page-list'
-import '../components/ecmarkup.css'
 
 function nestPages(pages: SpecPage[]) {
   const nestedPages = new Array<NestedSpecPage>()
