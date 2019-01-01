@@ -2,7 +2,6 @@ require('ts-node/register')
 
 // Neither of these keys are secret.
 Object.assign(process.env, {
-  GATSBY_ALGOLIA_APP_ID: '31SWLKOAHM',
   GATSBY_ALGOLIA_SEARCH_KEY: '530c361aee12e9f0e27938227e011277',
 })
 
@@ -48,35 +47,5 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     'gatsby-plugin-offline',
-    {
-      resolve: 'gatsby-plugin-algolia',
-      options: {
-        appId: process.env.GATSBY_ALGOLIA_APP_ID,
-        apiKey: process.env.ALGOLIA_PUSH_KEY,
-        indexName: 'main',
-        queries: [
-          {
-            query: /* GraphQL */ `
-              query AlgoliaDataQuery {
-                allSpecPage {
-                  edges {
-                    node {
-                      objectID: id
-                      route
-                      title
-                      secnum
-                      internal {
-                        content
-                      }
-                    }
-                  }
-                }
-              }
-            `,
-            transformer: ({ data }) => data.allSpecPage.edges.map(e => e.node),
-          },
-        ],
-      },
-    },
   ],
 }

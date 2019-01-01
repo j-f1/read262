@@ -6,7 +6,6 @@
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
-    "@types/jsdom": "^12.2.1",
     "@types/node-fetch": "^2.1.4"
   }
 }
