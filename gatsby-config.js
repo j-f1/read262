@@ -1,9 +1,5 @@
 require('ts-node/register')
-
-// Neither of these keys are secret.
-Object.assign(process.env, {
-  GATSBY_ALGOLIA_SEARCH_KEY: '530c361aee12e9f0e27938227e011277',
-})
+require('dotenv').config({ path: require.resolve('./.env.public') })
 
 module.exports = {
   siteMetadata: {

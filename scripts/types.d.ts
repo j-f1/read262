@@ -13,11 +13,12 @@ declare module 'algolia-html-extractor' {
       tagsToExclude?: string
     }
     interface Record {
-      // html: string
+      objectID: string
+      html: string
       content: string
-      headings: string[]
+      headings: HTMLHeadingElement[]
       anchor: string
-      // node: HTMLElement
+      node: HTMLElement
       customRanking: {
         position: number
         heading: 100 | 90 | 80 | 70 | 60 | 50

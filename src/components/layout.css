@@ -8,6 +8,7 @@
     Liberation Mono, Menlo, Courier, monospace;
 
   --link: #0000aa;
+  --black: #323330;
 }
 body {
   margin: 0;
@@ -58,7 +59,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #323330;
+  color: var(--black);
   font-family: var(--sans);
   text-rendering: optimizeLegibility;
 }
@@ -128,7 +129,7 @@ footer {
 }
 
 header {
-  color: #323330;
+  color: var(--black);
 }
 header h1,
 header h2 {
@@ -152,4 +153,17 @@ header h2 {
   font-family: var(--mono);
   display: inline-block;
   white-space: nowrap;
+}
+
+.search-hit {
+  font-family: var(--sans);
+  color: var(--black);
+  text-decoration: none;
+}
+.hit-title {
+  text-decoration: underline;
+}
+.hit-content {
+  margin-top: 0;
+  opacity: 0.5;
 }

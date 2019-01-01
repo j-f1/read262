@@ -1,0 +1,10 @@
+patch-package
+--- a/node_modules/@rehooks/online-status/index.d.ts
++++ b/node_modules/@rehooks/online-status/index.d.ts
+@@ -1,5 +1 @@
+-interface ... {
+-  // ...
+-}
+-
+-export default function use...(): ...;
++export default function useOnlineStatus(): boolean;
