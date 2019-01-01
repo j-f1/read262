@@ -99,6 +99,7 @@ const spinner = ora()
   }
 
   tty && spinner.start('Pushing records')
+  await indexToUse.waitTask((await indexToUse.clearIndex()).taskID)
   let done = 0
   const chunkJobs = chunk(records, 1000).map(async function(chunk) {
     const { taskID } = await indexToUse.addObjects(chunk)

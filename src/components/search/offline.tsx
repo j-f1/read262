@@ -5,11 +5,15 @@ import useInputValue from '@rehooks/input-value'
 
 import { Edge, SpecPage } from '../../types'
 import SectionTitle from '../section-title'
+import { SearchProps } from '../search'
 
 type FlatSpecPage = SpecPage & SpecPage['internal']
 
-const SearchImpl = ({ pages }: { pages: FlatSpecPage[] }) => {
-  const { value, onChange } = useInputValue('')
+const SearchImpl = ({
+  pages,
+  value,
+  onChange,
+}: { pages: FlatSpecPage[] } & SearchProps) => {
   const indexRef = useRef<lunr.Index | null>(null)
   if (indexRef.current === null) {
     indexRef.current = lunr(function() {
@@ -50,7 +54,7 @@ const SearchImpl = ({ pages }: { pages: FlatSpecPage[] }) => {
   )
 }
 
-const Search = () => (
+const Search = (props: SearchProps) => (
   <StaticQuery
     query={graphql`
       query GetSearchData {
@@ -70,6 +74,7 @@ const Search = () => (
     `}
     render={(data: { allSpecPage: { edges: Array<Edge<SpecPage>> } }) => (
       <SearchImpl
+        {...props}
         pages={data.allSpecPage.edges.map(edge =>
           Object.assign(edge.node, edge.node.internal)
         )}

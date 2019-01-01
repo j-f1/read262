@@ -8,6 +8,7 @@ import {
 import { Hit as HitObj } from 'react-instantsearch-core'
 import { SearchRecord } from '../../types'
 import { Link } from 'gatsby'
+import { SearchProps } from '../search'
 
 const Hit = ({ hit }: { hit: HitObj<SearchRecord> }) => (
   <Link to={hit.route} className="search-hit">
@@ -38,14 +39,15 @@ const OptionalHighlight = ({
     <>{hit[attribute]}</>
   )
 
-const Search = () => (
+const Search = ({ value, onChange }: SearchProps) => (
   <InstantSearch
     appId={process.env.GATSBY_ALGOLIA_APP_ID!}
     apiKey={process.env.GATSBY_ALGOLIA_SEARCH_KEY!}
+    searchState={{ query: value }}
     indexName="main"
   >
-    <SearchBox />
-    <Hits<SearchRecord> hitComponent={Hit} />
+    <SearchBox showLoadingIndicator onChange={onChange} />
+    {value && <Hits<SearchRecord> hitComponent={Hit} />}
   </InstantSearch>
 )
 export default Search
