@@ -13,7 +13,7 @@ declare module 'algolia-html-extractor' {
       tagsToExclude?: string
     }
     interface Record {
-      html: string
+      // html: string
       content: string
       headings: string[]
       anchor: string

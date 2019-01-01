@@ -9,6 +9,7 @@ import algolia from 'algoliasearch'
 import ora from 'ora'
 import chunk from 'lodash.chunk'
 import chalk from 'chalk'
+import { promisify as p } from 'util'
 
 interface Record extends HtmlExtractor.Record {
   route: string
@@ -40,30 +41,52 @@ const extractor = new HtmlExtractor()
 }
 
 const projectRoot = path.dirname(__dirname)
-const matches = glob.sync('public/**/*.html', { cwd: projectRoot })
-let records = new Array<Record>()
-
-for (const filename of matches) {
-  if (filename.includes('404') || filename.includes('public/index.html'))
-    continue
-  const content = fs.readFileSync(path.join(projectRoot, filename), 'utf8')
-  records = records.concat(
-    extractor.run(content, { cssSelector: 'p,li,emu-grammar' }).map(record => ({
-      ...record,
-      route:
-        filename
-          .replace(/\\/g, '/')
-          .replace(/^public/, '')
-          .replace(/(\/index)?\.html$/, '') +
-        (record.anchor ? `#${record.anchor}` : ''),
-      node: undefined,
-    }))
-  )
-}
-
-const spinner = ora('Initializing...')
 const tty = !!process.stdout.isTTY
+const spinner = ora()
 ;(async () => {
+  spinner.start('Globbing')
+  const matches = await p(glob)('public/**/*.html', { cwd: projectRoot })
+  let records = new Array<Record>()
+  let i = 0
+  let n = 0
+  spinner.text = `Reading ${matches.length} files`
+
+  for (const filename of matches) {
+    i++
+    tty &&
+      (spinner.text = chalk`Reading files ({bold ${String(
+        Math.round((i / matches.length) * 100)
+      )}%}) {gray ${filename}}`)
+    if (filename.includes('404') || filename.includes('public/index.html'))
+      continue
+    n++
+    const content = await p(fs.readFile)(
+      path.join(projectRoot, filename),
+      'utf8'
+    )
+    records = records.concat(
+      extractor
+        .run(content, {
+          cssSelector:
+            'p, emu-grammar, emu-clause>ul, emu-clause>ol, div>ul, div>ol',
+        })
+        .map(record => ({
+          ...record,
+          route:
+            filename
+              .replace(/\\/g, '/')
+              .replace(/^public/, '')
+              .replace(/(\/index)?\.html$/, '') +
+            (record.anchor ? `#${record.anchor}` : ''),
+          content: record.content.replace(/\s+/g, ' '),
+          node: undefined,
+          html: undefined,
+        }))
+    )
+  }
+
+  spinner.succeed(`Read ${records.length} records from ${n} files`)
+
   const client = algolia('31SWLKOAHM', process.env.ALGOLIA_PUSH_KEY!)
   const indexName = 'main'
   const backupName = `${indexName}_tmp`
@@ -86,9 +109,13 @@ const tty = !!process.stdout.isTTY
   }
 
   tty && spinner.start('Pushing records')
-  const chunkJobs = chunk(records, 1000).map(async function(chunk) {
+  let done = 0
+  const chunkJobs = chunk(records, 100).map(async function(chunk) {
     const { taskID } = await indexToUse.addObjects(chunk)
-    return indexToUse.waitTask(taskID)
+    done += chunk.length
+    tty && (spinner.text = `Pushing records (${done}/${records.length})`)
+    spinner.render()
+    await indexToUse.waitTask(taskID)
   })
   await Promise.all(chunkJobs)
   spinner.succeed('Records pushed')
