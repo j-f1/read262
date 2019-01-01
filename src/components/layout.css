@@ -151,4 +151,5 @@ header h2 {
 .nav-arrow {
   font-family: var(--mono);
   display: inline-block;
+  white-space: nowrap;
 }
