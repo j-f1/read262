@@ -6,7 +6,7 @@ import OfflineSearch from './search/offline'
 import OnlineSearch from './search/online'
 
 const Search = () => {
-  const props = useInputValue('test')
+  const props = useInputValue('')
 
   return useOnline() ? (
     <OnlineSearch {...props} />
