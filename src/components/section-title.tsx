@@ -4,7 +4,10 @@ import { SpecPage } from '../types'
 const SectionTitle = ({
   title,
   secnum,
-}: Pick<SpecPage, 'title' | 'secnum'>) => (
+}: {
+  title: React.ReactNode
+  secnum: React.ReactNode
+}) => (
   <>
     <span className="secnum">{secnum}</span> {title}
   </>

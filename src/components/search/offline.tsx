@@ -1,6 +1,8 @@
 import React, { useRef } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import lunr from 'lunr'
+import match from 'autosuggest-highlight/match'
+import parse from 'autosuggest-highlight/parse'
 
 import { Edge, SpecPage } from '../../types'
 import SectionTitle from '../section-title'
@@ -8,6 +10,13 @@ import { SearchProps } from '../search'
 
 type FlatSpecPage = SpecPage & SpecPage['internal']
 
+const Highlight = ({ text, query }: { text: string; query: string }) => (
+  <>
+    {parse(text, match(text, query)).map(({ text, highlight }, i) =>
+      highlight ? <mark key={i}>{text}</mark> : text
+    )}
+  </>
+)
 const SearchImpl = ({
   pages,
   value,
@@ -34,10 +43,16 @@ const SearchImpl = ({
           {results.map(({ ref, score }) => {
             const page = pages.find(({ route }) => route === ref)
             if (!page) return null
+            debugger
             return (
               <li key={ref}>
-                <Link to={page.route}>
-                  <SectionTitle {...page} />
+                <Link to={page.route} className="search-hit">
+                  <strong className="hit-title">
+                    <SectionTitle
+                      secnum={page.secnum}
+                      title={<Highlight text={page.title} query={value} />}
+                    />
+                  </strong>
                 </Link>{' '}
                 {process.env.NODE_ENV === 'development' && (
                   <small style={{ fontFamily: 'var(--sans)', opacity: 0.5 }}>
