@@ -37,8 +37,9 @@
     --text: #d6d6d6;
   }
   /* white becomes #1e1e1e */
-  object {
-    filter: brightness(88.2%) invert();
+  object,
+  img {
+    filter: brightness(88.3%) invert() hue-rotate(0.5turn);
   }
 }
 
