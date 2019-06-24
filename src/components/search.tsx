@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import useOnline from '@rehooks/online-status'
-import useInputValue, { InputValue } from '@rehooks/input-value'
 
 import OfflineSearch from './search/offline'
 import OnlineSearch from './search/online'
 
+export type SearchProps = {
+  value: string
+  onChange: (event: React.ChangeEvent<{ value: string }>) => void
+}
+
 const Search = () => {
-  const props = useInputValue('')
+  let [value, setValue] = useState('')
+  let onChange = useCallback<SearchProps['onChange']>(
+    event => setValue(event.currentTarget.value),
+    []
+  )
+
+  const props = { value, onChange }
 
   return useOnline() ? (
     <OnlineSearch {...props} />
@@ -15,5 +25,3 @@ const Search = () => {
   )
 }
 export default Search
-
-export type SearchProps = InputValue<string>

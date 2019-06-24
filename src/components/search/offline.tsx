@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import lunr from 'lunr'
-import useInputValue from '@rehooks/input-value'
 
 import { Edge, SpecPage } from '../../types'
 import SectionTitle from '../section-title'
