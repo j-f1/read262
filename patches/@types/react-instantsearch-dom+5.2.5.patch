@@ -1,0 +1,12 @@
+patch-package
+--- a/node_modules/@types/react-instantsearch-dom/index.d.ts
++++ b/node_modules/@types/react-instantsearch-dom/index.d.ts
+@@ -122,7 +122,7 @@ export interface SearchBoxProps extends CommonWidgetProps {
+ 
+   onSubmit?: (event: React.SyntheticEvent<HTMLFormElement>) => any;
+   onReset?: (event: React.SyntheticEvent<HTMLFormElement>) => any;
+-  onChange?: (event: React.SyntheticEvent<HTMLInputElement>) => any;
++  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+ }
+ /**
+  * The SearchBox component displays a search box that lets the user search for a specific query.
