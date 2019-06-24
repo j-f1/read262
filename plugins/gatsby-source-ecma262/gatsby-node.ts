@@ -1,15 +1,11 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
 import fetch from 'node-fetch'
 import fs from 'fs'
 import path from 'path'
 import { JSDOM } from 'jsdom'
 import { promisify } from 'util'
 import { SpecPage } from '../../src/types'
+
+const specURL = new URL('https://tc39.es/ecma262/')
 
 export async function sourceNodes({
   actions: { createNode },
@@ -24,7 +20,7 @@ export async function sourceNodes({
   } = new JSDOM(
     fs.existsSync(cache)
       ? await promisify(fs.readFile)(cache, 'utf8')
-      : await fetch('https://tc39.github.io/ecma262/').then(res => res.text())
+      : await fetch(specURL.toString()).then(res => res.text())
   )
   const meta = {
     title: document.querySelector('h1.title')!.textContent,
