@@ -8,8 +8,40 @@
     Liberation Mono, Menlo, Courier, monospace;
 
   --link: #0000aa;
+  --xref-link: #206ca7;
   --black: #323330;
+  --yellow: #f0db4f;
+  --background: #fff;
+  --text: #000;
+
+  background: var(--background);
+  color: var(--text);
+
+  supported-color-schemes: light dark;
+  color-scheme: light dark;
+
+  font: 112.5%/1.45em;
+  font-weight: light;
+  font-family: var(--serif);
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --link: #5454ff;
+    --xref-link: #4894ce;
+    --black: #e3e3e5;
+    --yellow: #907f0c;
+    --background: #1e1e1e;
+    --text: #d6d6d6;
+  }
+  /* white becomes #1e1e1e */
+  object {
+    filter: brightness(88.2%) invert();
+  }
+}
+
 body {
   margin: 0;
 }
@@ -36,13 +68,6 @@ main,
 [type='search']::-webkit-search-cancel-button,
 [type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
-}
-html {
-  font: 112.5%/1.45em;
-  font-weight: light;
-  font-family: var(--serif);
-  box-sizing: border-box;
-  overflow-y: scroll;
 }
 * {
   box-sizing: inherit;
@@ -102,7 +127,7 @@ emu-clause h1 .secnum::after {
 
 emu-xref[aoid] a,
 emu-alg emu-xref[href$='#assert'] a {
-  color: #206ca7;
+  color: var(--xref-link);
   text-decoration: none;
 }
 
@@ -137,6 +162,8 @@ footer {
 
 header {
   color: var(--black);
+  background: var(--yellow);
+  margin-bottom: 1.45rem;
 }
 header h1,
 header h2 {

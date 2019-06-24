@@ -9,7 +9,7 @@ pre code {
 }
 
 pre code.hljs {
-  background-color: #fff;
+  background-color: var(--background);
   margin: 0;
   padding: 0;
 }
@@ -24,7 +24,15 @@ var {
 
 var.referenced {
   color: #a0a029;
-  border-color: #a0a029;
+  border-color: currentColor;
+}
+@media (prefers-color-scheme: dark) {
+  var {
+    color: #45bcb2;
+  }
+  var.referenced {
+    color: #bcbc45;
+  }
 }
 
 emu-const {
@@ -69,6 +77,12 @@ emu-note {
   border-left: 5px solid #ccc;
   display: flex;
   flex-direction: row;
+}
+@media (prefers-color-scheme: dark) {
+  emu-note {
+    color: #aaa;
+    border-left-color: #333;
+  }
 }
 
 emu-note > span.note {
@@ -178,6 +192,12 @@ emu-nt a,
 emu-nt a:visited {
   color: #333;
 }
+@media (prefers-color-scheme: dark) {
+  emu-nt a,
+  emu-nt a:visited {
+    color: #bbb;
+  }
+}
 
 emu-rhs emu-nt {
   margin-right: 1ex;
@@ -185,7 +205,8 @@ emu-rhs emu-nt {
 
 emu-t {
   display: inline-block;
-  font-family: monospace;
+  font-family: var(--mono);
+  font-feature-settings: 'calt' off, 'onum', 'zero';
   font-weight: bold;
   white-space: nowrap;
   text-indent: 0;
@@ -213,9 +234,10 @@ emu-production[collapsed] emu-mods {
 }
 
 emu-params,
+emu-constraints,
 emu-opt {
   margin-right: 1ex;
-  font-family: monospace;
+  font-family: var(--mono);
 }
 
 emu-params,
@@ -225,6 +247,17 @@ emu-constraints {
 
 emu-opt {
   color: #b58900;
+}
+
+@media (prefers-color-scheme: dark) {
+  emu-params,
+  emu-constraints {
+    color: #45bcb2;
+  }
+
+  emu-opt {
+    color: #ffd149;
+  }
 }
 
 emu-gprose {
@@ -466,6 +499,12 @@ figure figcaption {
   color: #555555;
   font-weight: bold;
   text-align: center;
+  margin-bottom: 0.5em;
+}
+@media (prefers-color-scheme: dark) {
+  figure figcaption {
+    color: #aaaaaa;
+  }
 }
 
 emu-table table {
@@ -481,7 +520,7 @@ emu-table td,
 emu-table th,
 table.real-table td,
 table.real-table th {
-  border: 1px solid black;
+  border: 1px solid var(--text);
   padding: 0.4em;
   vertical-align: baseline;
 }
@@ -489,6 +528,13 @@ emu-table th,
 emu-table thead td,
 table.real-table th {
   background-color: #eeeeee;
+}
+@media (prefers-color-scheme: dark) {
+  emu-table th,
+  emu-table thead td,
+  table.real-table th {
+    background-color: #333;
+  }
 }
 
 /* Note: the left content edges of table.lightweight-table >tbody >tr >td
@@ -505,14 +551,27 @@ table.lightweight-table th {
 }
 
 /* diff styles */
+:root {
+  --diff-add: #e0f8e0;
+  --diff-add-border: #396;
+  --diff-del: #fee;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --diff-add: #024402;
+    --diff-add-border: #4a7;
+    --diff-del: #440d0d;
+  }
+}
+
 ins {
-  background-color: #e0f8e0;
+  background-color: var(--diff-add);
   text-decoration: none;
-  border-bottom: 1px solid #396;
+  border-bottom: 1px solid var(--diff-add-border);
 }
 
 del {
-  background-color: #fee;
+  background-color: var(--diff-del);
 }
 
 ins.block,
@@ -533,9 +592,9 @@ tr.ins > td > ins {
 }
 
 tr.ins > td {
-  background-color: #e0f8e0;
+  background-color: var(--diff-add);
 }
 
 tr.del > td {
-  background-color: #fee;
+  background-color: var(--diff-del);
 }

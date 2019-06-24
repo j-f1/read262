@@ -6,12 +6,7 @@ import GithubCorner from 'react-github-corner'
 const Header = () => {
   const iconFits = useMedia('(min-width: 825px)')
   return (
-    <header
-      style={{
-        background: `#F0DB4F`,
-        marginBottom: `1.45rem`,
-      }}
-    >
+    <header>
       <StaticQuery
         query={graphql`
           query GetSpecMeta {
@@ -40,8 +35,8 @@ const Header = () => {
       {iconFits && (
         <GithubCorner
           href="https://github.com/j-f1/read262"
-          octoColor="#F0DB4F"
-          bannerColor="#323330"
+          octoColor="var(--yellow)"
+          bannerColor="var(--black)"
         />
       )}
     </header>
