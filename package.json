@@ -7,7 +7,7 @@
     "cache-spec": "curl https://tc39.es/ecma262/ > plugins/gatsby-source-ecma262/cache.html",
     "postinstall": "patch-package; cd plugins/gatsby-source-ecma262; yarn",
     "build": "gatsby build",
-    "develop": "gatsby develop --https",
+    "develop": "gatsby develop",
     "start": "yarn develop",
     "prettier": "prettier **/*.{js,tsx,json,css} gatsby-*.js --ignore-path .gitignore",
     "format": "yarn prettier --write",
