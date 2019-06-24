@@ -18,6 +18,25 @@ const Search = () => {
 
   const props = { value, onChange }
 
+  if (process.env.NODE_ENV === 'development') {
+    const [isOnline, setOnline] = useState(true)
+    return (
+      <>
+        <p style={{ opacity: 0.6 }}>
+          <label>
+            <input
+              type="checkbox"
+              checked={isOnline}
+              onChange={e => setOnline(e.target.checked)}
+            />{' '}
+            Toggle Algolia/Lunr search
+          </label>
+        </p>
+        {isOnline ? <OnlineSearch {...props} /> : <OfflineSearch {...props} />}
+      </>
+    )
+  }
+
   return useOnline() ? (
     <OnlineSearch {...props} />
   ) : (
