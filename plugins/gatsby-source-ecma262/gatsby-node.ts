@@ -90,16 +90,23 @@ export async function sourceNodes({
     const secnum = header.querySelector('.secnum')
 
     for (const para of content) {
-      for (const link of Array.from(para.querySelectorAll('[href]'))) {
+      // force absolute URI
+      para.querySelectorAll('object').forEach(object => {
+        object.data = new URL(object.data, specURL).toString()
+      })
+      para.querySelectorAll('img').forEach(img => {
+        img.src = new URL(img.src, specURL).toString()
+      })
+      para.querySelectorAll('[href]').forEach(link => {
         const href = link.getAttribute('href')
         if (href && href.startsWith('#')) {
           if (!ids[href.slice(1)]) {
             console.warn(`Warning! Unrecognized ID ${href.slice(1)}`)
-            continue
+            return
           }
           link.setAttribute('href', ids[href.slice(1)])
         }
-      }
+      })
     }
 
     const html = content.map(el => el.outerHTML).join('')
