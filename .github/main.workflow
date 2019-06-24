@@ -8,7 +8,7 @@ workflow "Run tests" {
 
 action "Install Dependencies" {
   uses = "docker://node:12"
-  runs = ["sh", "-c", "yarn --ignore-scripts"]
+  runs = ["sh", "-c", "yarn --ignore-scripts; yarn postinstall"]
 }
 
 action "Type Check" {
