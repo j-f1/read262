@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link, graphql, StaticQuery } from 'gatsby'
-import { useMedia } from 'use-media'
+import useMedia from 'use-media'
 import GithubCorner from 'react-github-corner'
-
-import Container from './container'
 
 const Header = () => {
   const iconFits = useMedia('(min-width: 825px)')
@@ -31,12 +29,12 @@ const Header = () => {
             version: string
           }
         }) => (
-          <Container>
-            <Link style={{ color: 'inherit', textDecoration: `none` }} to="/">
+          <div className="container">
+            <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/">
               <h1>{title}</h1>
               <h2>{version}</h2>
             </Link>
-          </Container>
+          </div>
         )}
       />
       {iconFits && (

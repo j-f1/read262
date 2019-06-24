@@ -1,11 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import Container from './container'
-
 const Footer = () => (
   <footer>
-    <Container>
+    <div className="container">
       <a href="https://tc39.es/ecma262/">Spec content</a> © 2018 Ecma
       International (<Link to="/copyright-and-software-license">License</Link>)
       • Site © 2018 <a href="https://github.com/j-f1">Jed Fox</a> (
@@ -18,7 +16,7 @@ const Footer = () => (
           • <a href="/___graphql">GraphQL Explorer</a>
         </>
       )}
-    </Container>
+    </div>
   </footer>
 )
 export default Footer
