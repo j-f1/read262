@@ -22,8 +22,9 @@ import { SearchProps } from '../search'
 
 const Highlight = ({ text, query }: { text: string; query: string }) => (
   <>
-    {parse(text, match(text, query)).map(({ text, highlight }, i) =>
-      highlight ? <mark key={i}>{text}</mark> : text
+    {parse(text, match(text, query)).map(
+      ({ text, highlight }, i) =>
+        highlight ? <mark key={i}>{text}</mark> : text
     )}
   </>
 )
@@ -68,19 +69,22 @@ const Search = ({ value, onChange }: SearchProps) => {
   )
 
   const [results, setResults] = useState(new Array<lunr.Index.Result>())
-  useEffect(() => {
-    if (value === '') {
-      setResults([])
-      return
-    }
-    let active = true
-    worker.search(value).then(results => {
-      if (active) setResults(results)
-    })
-    return () => {
-      active = false
-    }
-  }, [value])
+  useEffect(
+    () => {
+      if (value === '') {
+        setResults([])
+        return
+      }
+      let active = true
+      worker.search(value).then(results => {
+        if (active) setResults(results)
+      })
+      return () => {
+        active = false
+      }
+    },
+    [value]
+  )
 
   return (
     <div>
