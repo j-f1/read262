@@ -57,7 +57,7 @@
     "ora": "^3.0.0",
     "patch-package": "^6.1.2",
     "postinstall-postinstall": "^2.0.0",
-    "prettier": "prettier/prettier",
+    "prettier": "^1.18.2",
     "typescript": "^3.2.2"
   },
   "guppy": {
