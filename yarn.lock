@@ -10149,7 +10149,7 @@ react-github-corner@^2.3.0:
   resolved "https://registry.yarnpkg.com/react-github-corner/-/react-github-corner-2.3.0.tgz#73ab17324b670c9cd955567b09663d385cfb05ef"
   integrity sha512-yVh8wtAfVA5CQYn8ygyxtsuCMoyiSEBVnzQJ3ynyWxZ1BzT2MHop4baZn/PnUnU9Yh8mwhLS5Y1RVxM5zNotGw==
 
-react-helmet@^5.2.0:
+react-helmet@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-5.2.1.tgz#16a7192fdd09951f8e0fe22ffccbf9bb3e591ffa"
   integrity sha512-CnwD822LU8NDBnjCpZ4ySh8L6HYyngViTZLfBBb3NjtrpN8m49clH8hidHouq20I51Y6TpCTISCBbqiY5GamwA==
@@ -12820,6 +12820,11 @@ worker-farm@^1.7.0:
   integrity sha512-rvw3QTZc8lAxyVrqcSGVm5yP/IJ2UcB3U0graE3LCFoZ0Yn2x4EoVSqJKdB/T5M+FLcRPjz4TDacRf3OCfNUzw==
   dependencies:
     errno "~0.1.7"
+
+workerize@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/workerize/-/workerize-0.1.7.tgz#cbfb05ee3ef0acf0a7e55d9d30f86e77294bc601"
+  integrity sha512-5sp00fQpti9Kd5TtKT82lX5FWh8RcwoRJoAM9+lPWnlpdDj3X0888nXJWelx+Pim96WURshLPxFqvku86VDwVg==
 
 wrap-ansi@^2.0.0:
   version "2.1.0"

@@ -1,14 +1,24 @@
-import React, { useRef } from 'react'
-import { StaticQuery, graphql, Link } from 'gatsby'
-import lunr from 'lunr'
+import React, { useState, useEffect } from 'react'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
+
+const workerize: <T extends { [key: string]: (...args: any[]) => any }>(
+  code: string,
+  options?: {
+    type?: 'classic' | 'module'
+    credentials?: 'omit' | 'same-origin' | 'include'
+    name?: string
+  }
+) => {
+  [K in keyof T]: T[K] extends (...args: infer P) => infer R
+    ? (...args: P) => Promise<R>
+    : never
+} = require('workerize').default
 
 import { Edge, SpecPage } from '../../types'
 import SectionTitle from '../section-title'
 import { SearchProps } from '../search'
-
-type FlatSpecPage = SpecPage & SpecPage['internal']
 
 const Highlight = ({ text, query }: { text: string; query: string }) => (
   <>
@@ -17,24 +27,61 @@ const Highlight = ({ text, query }: { text: string; query: string }) => (
     )}
   </>
 )
-const SearchImpl = ({
-  pages,
-  value,
-  onChange,
-}: { pages: FlatSpecPage[] } & SearchProps) => {
-  const indexRef = useRef<lunr.Index | null>(null)
-  if (indexRef.current === null) {
-    indexRef.current = lunr(function() {
-      this.ref('route')
-      this.field('title')
-      this.field('secnum')
-      this.field('content')
-      pages.forEach(doc => this.add(doc))
-    })
+
+type ResultPage = Pick<SpecPage, 'route' | 'title' | 'secnum'>
+
+const worker = workerize<{ search: (query: string) => lunr.Index.Result[] }>(`
+  importScripts('https://unpkg.com/lunr@2.3.6')
+
+  const indexFile = ${JSON.stringify(
+    new URL('/lunr-index.json', location.href)
+  )}
+  console.log('[WORKER] loading index from', indexFile)
+
+  let index = null
+  fetch(indexFile)
+    .then(res => res.json())
+    .then(data => (index = lunr.Index.load(data)))
+    .catch(err => console.error('Loading index failed:', err))
+
+  export function search(query) {
+    return index ? index.search(query) : []
   }
-  const results = indexRef.current
-    .search(value)
-    .filter(({ score }) => score > 0.01)
+`)
+
+const Search = ({ value, onChange }: SearchProps) => {
+  const data = useStaticQuery(graphql`
+    query GetPageResults {
+      allSpecPage {
+        edges {
+          node {
+            route
+            title
+            secnum
+          }
+        }
+      }
+    }
+  `)
+  const pages: ResultPage[] = data.allSpecPage.edges.map(
+    (e: Edge<unknown>) => e.node
+  )
+
+  const [results, setResults] = useState(new Array<lunr.Index.Result>())
+  useEffect(() => {
+    if (value === '') {
+      setResults([])
+      return
+    }
+    let active = true
+    worker.search(value).then(results => {
+      if (active) setResults(results)
+    })
+    return () => {
+      active = false
+    }
+  }, [value])
+
   return (
     <div>
       <input type="search" value={value} onChange={onChange} />
@@ -43,7 +90,6 @@ const SearchImpl = ({
           {results.map(({ ref, score }) => {
             const page = pages.find(({ route }) => route === ref)
             if (!page) return null
-            debugger
             return (
               <li key={ref}>
                 <Link to={page.route} className="search-hit">
@@ -68,32 +114,4 @@ const SearchImpl = ({
   )
 }
 
-const Search = (props: SearchProps) => (
-  <StaticQuery
-    query={graphql`
-      query GetSearchData {
-        allSpecPage {
-          edges {
-            node {
-              route
-              title
-              secnum
-              internal {
-                content
-              }
-            }
-          }
-        }
-      }
-    `}
-    render={(data: { allSpecPage: { edges: Array<Edge<SpecPage>> } }) => (
-      <SearchImpl
-        {...props}
-        pages={data.allSpecPage.edges.map(edge =>
-          Object.assign(edge.node, edge.node.internal)
-        )}
-      />
-    )}
-  />
-)
 export default Search
