@@ -35,7 +35,7 @@ module.exports = {
         custom: {
           families: ['Fira Code:n3,n4,n5,n7'],
           urls: [
-            'https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css',
+            'https://cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css',
           ],
         },
       },

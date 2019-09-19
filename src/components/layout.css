@@ -101,6 +101,7 @@ code {
   background-color: hsla(0, 0%, 0%, 0.04);
   border-radius: 3px;
   font-family: var(--mono);
+  font-feature-settings: 'ss03', 'onum';
   padding-left: 0.1em;
   padding-right: 0.1em;
 }
