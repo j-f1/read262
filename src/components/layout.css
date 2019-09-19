@@ -1,11 +1,11 @@
 @import './ecmarkup.css';
 
 :root {
-  --sans: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --sans: Futura, Trebuchet MS, Arial, sans-serif;
   --serif: Merriweather, georgia, serif;
   --mono: Fira Code, SFMono-Regular, Consolas, Roboto Mono, Droid Sans Mono,
     Liberation Mono, Menlo, Courier, monospace;
+  /* source: https://github.com/voodootikigod/logo.js/blob/1544bdee/js.html#L21 */
 
   --link: #0000aa;
   --xref-link: #206ca7;
@@ -170,8 +170,7 @@ header {
 header h1,
 header h2 {
   margin-bottom: 0;
-  /* source: https://github.com/voodootikigod/logo.js/blob/1544bdee/js.html#L21 */
-  font-family: Futura, Trebuchet MS, Arial, sans-serif;
+  font-family: var(--sans);
 }
 header h1 {
   font-size: 2.1em;

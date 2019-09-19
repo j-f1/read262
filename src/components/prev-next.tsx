@@ -19,6 +19,7 @@ const PrevNext = ({
       justifyContent: 'space-between',
       listStyle: 'none',
       padding: 0,
+      fontFamily: 'var(--sans)',
     }}
   >
     <li>

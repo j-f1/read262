@@ -261,8 +261,7 @@ emu-opt {
 }
 
 emu-gprose {
-  font-size: 0.9em;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: var(--sans);
 }
 
 emu-production emu-gprose {
