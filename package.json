@@ -13,6 +13,9 @@
     "format": "yarn prettier --write",
     "test": "yarn prettier --check && yarn tsc"
   },
+  "engines": {
+    "node": ">=10.x"
+  },
   "dependencies": {
     "@rehooks/online-status": "^1.0.0",
     "@types/react-instantsearch-dom": "^5.2.2",
