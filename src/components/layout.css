@@ -188,6 +188,7 @@ header h2 {
   font-family: var(--mono);
   display: inline-block;
   white-space: nowrap;
+  padding: 0 0.5em;
 }
 
 .search-hit {
