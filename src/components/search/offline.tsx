@@ -22,16 +22,18 @@ import { SearchProps } from '../search'
 
 const Highlight = ({ text, query }: { text: string; query: string }) => (
   <>
-    {parse(text, match(text, query)).map(
-      ({ text, highlight }, i) =>
-        highlight ? <mark key={i}>{text}</mark> : text
+    {parse(text, match(text, query)).map(({ text, highlight }, i) =>
+      highlight ? <mark key={i}>{text}</mark> : text
     )}
   </>
 )
 
 type ResultPage = Pick<SpecPage, 'route' | 'title' | 'secnum'>
 
-const worker = workerize<{ search: (query: string) => lunr.Index.Result[] }>(`
+const worker =
+  typeof location === 'undefined'
+    ? null
+    : workerize<{ search: (query: string) => lunr.Index.Result[] }>(`
   importScripts('https://unpkg.com/lunr@2.3.6')
 
   const indexFile = ${JSON.stringify(
@@ -43,6 +45,7 @@ const worker = workerize<{ search: (query: string) => lunr.Index.Result[] }>(`
   fetch(indexFile)
     .then(res => res.json())
     .then(data => (index = lunr.Index.load(data)))
+    .then(() => console.log('[WORKER] index loaded'))
     .catch(err => console.error('Loading index failed:', err))
 
   export function search(query) {
@@ -69,22 +72,19 @@ const Search = ({ value, onChange }: SearchProps) => {
   )
 
   const [results, setResults] = useState(new Array<lunr.Index.Result>())
-  useEffect(
-    () => {
-      if (value === '') {
-        setResults([])
-        return
-      }
-      let active = true
-      worker.search(value).then(results => {
-        if (active) setResults(results)
-      })
-      return () => {
-        active = false
-      }
-    },
-    [value]
-  )
+  useEffect(() => {
+    if (value === '') {
+      setResults([])
+      return
+    }
+    let active = true
+    worker!.search(value).then(results => {
+      if (active) setResults(results)
+    })
+    return () => {
+      active = false
+    }
+  }, [value])
 
   return (
     <div>

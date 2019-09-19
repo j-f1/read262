@@ -41,9 +41,4 @@ exports.createPages = async ({ graphql }) => {
   ).catch(err => {
     console.error('failed to write file', err)
   })
-
-  const workerOut = path.resolve(__dirname, './public/worker.js')
-  if (!require('fs').existsSync(workerOut)) {
-    await link(path.resolve(__dirname, './src/worker.js'), workerOut)
-  }
 }
