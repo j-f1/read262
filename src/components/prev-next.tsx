@@ -24,17 +24,29 @@ const PrevNext = ({
   >
     <li>
       {prev && (
-        <Link to={prev.route} rel="prev">
-          <span className="nav-arrow">&lt;-</span>
+        <Link
+          to={prev.route}
+          rel="prev"
+          aria-label={`Previous section (${prev.title})`}
+        >
+          <span className="nav-arrow" aria-hidden="true">
+            &lt;-
+          </span>
           <SectionTitle {...prev} />
         </Link>
       )}
     </li>
     <li>
       {next && (
-        <Link to={next.route} rel="next">
+        <Link
+          to={next.route}
+          rel="next"
+          aria-label={`Next section (${next.title})`}
+        >
           <SectionTitle {...next} />
-          <span className="nav-arrow">-></span>
+          <span className="nav-arrow" aria-hidden="true">
+            ->
+          </span>
         </Link>
       )}
     </li>
