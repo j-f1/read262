@@ -1,0 +1,21 @@
+on: push
+name: Run tests
+jobs:
+  installDependencies:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Install Dependencies
+        uses: docker://node:12
+        with:
+          entrypoint: sh
+          args: -c "yarn --ignore-scripts; yarn postinstall"
+      - name: Lint
+        uses: CultureHQ/actions-yarn@master
+        with:
+          args: prettier --check
+      - name: Type Check
+        uses: CultureHQ/actions-yarn@master
+        with:
+          args: tsc
