@@ -1,5 +1,5 @@
 on: push
-name: Run tests
+name: Lint & Type Check
 jobs:
   codeQuality:
     name: Lint & Type Check
