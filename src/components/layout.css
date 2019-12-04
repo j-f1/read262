@@ -48,7 +48,6 @@ body {
 }
 a {
   color: var(--link);
-  -webkit-text-decoration-skip: objects;
 }
 abbr[title] {
   border-bottom: none;
@@ -210,7 +209,7 @@ header h2 {
   list-style-type: none;
 }
 .toc-list {
-  padding-left: 0;
+  padding-left: 1ex;
 }
 .toc-list ol {
   padding-left: 50px;
@@ -220,13 +219,13 @@ header h2 {
 }
 .toc-list li::before {
   font-family: var(--mono);
-  content: counters(idx, '.', decimal);
+  content: counters(idx, '.', decimal) '.';
   margin-left: calc(6px - 40px);
   text-align: right;
   position: relative;
   display: inline-block;
   right: 6px;
-  width: 50px;
+  width: 60px;
 }
 .toc-list.is-appendix {
   counter-reset: appendix;
@@ -239,8 +238,8 @@ header h2 {
   counter-increment: appendix-idx;
 }
 .toc-list.is-appendix li::before {
-  content: counter(appendix, upper-alpha) '.' counter(appendix-idx, decimal);
+  content: counter(appendix, upper-alpha) '.' counter(appendix-idx, decimal) '.';
 }
 .toc-list.is-appendix > li::before {
-  content: counter(appendix, upper-alpha);
+  content: counter(appendix, upper-alpha) '.';
 }

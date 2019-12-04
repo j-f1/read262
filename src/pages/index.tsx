@@ -34,9 +34,9 @@ const IndexPage = ({
   return (
     <Layout>
       <SEO title="Home" />
-      <p>
+      <h3>
         <Link to={pages[0].route}>{pages[0].title}</Link>
-      </p>
+      </h3>
       <ol className="toc-list">
         {mainContent.map(({ id, route, title, hasContent, children }) => (
           <li key={id}>
@@ -45,6 +45,7 @@ const IndexPage = ({
           </li>
         ))}
       </ol>
+      <h3>Appendix</h3>
       <ol className="toc-list is-appendix">
         {appendix.map(({ id, route, secnum, title, hasContent, children }) => (
           <li key={id}>
