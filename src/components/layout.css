@@ -209,6 +209,12 @@ header h2 {
   counter-reset: idx;
   list-style-type: none;
 }
+.toc-list {
+  padding-left: 0;
+}
+.toc-list ol {
+  padding-left: 50px;
+}
 .toc-list li {
   counter-increment: idx;
 }
@@ -220,6 +226,7 @@ header h2 {
   position: relative;
   display: inline-block;
   right: 6px;
+  width: 50px;
 }
 .toc-list.is-appendix {
   counter-reset: appendix;
