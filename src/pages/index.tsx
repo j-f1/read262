@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 
 import { SpecPage, Edge, NestedSpecPage } from '../types'
 import Layout from '../components/layout'
@@ -25,12 +25,37 @@ const IndexPage = ({
   },
 }: {
   data: { allSpecPage: { edges: Array<Edge<SpecPage>> } }
-}) => (
-  <Layout>
-    <SEO title="Home" />
-    <PageList pages={nestPages(edges.map(edge => edge.node))} />
-  </Layout>
-)
+}) => {
+  const pages = nestPages(edges.map(edge => edge.node))
+  const appendixIdx = pages.findIndex(p => p.secnum[0] === 'A')
+  const intro = pages[0]
+  const mainContent = pages.slice(1, appendixIdx)
+  const appendix = pages.slice(appendixIdx)
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <p>
+        <Link to={pages[0].route}>{pages[0].title}</Link>
+      </p>
+      <ol className="toc-list">
+        {mainContent.map(({ id, route, title, hasContent, children }) => (
+          <li key={id}>
+            {hasContent ? <Link to={route}>{title}</Link> : title}
+            {children && children.length ? <PageList pages={children} /> : null}
+          </li>
+        ))}
+      </ol>
+      <ol className="toc-list is-appendix">
+        {appendix.map(({ id, route, secnum, title, hasContent, children }) => (
+          <li key={id}>
+            {hasContent ? <Link to={route}>{title}</Link> : title}
+            {children && children.length ? <PageList pages={children} /> : null}
+          </li>
+        ))}
+      </ol>
+    </Layout>
+  )
+}
 
 export const query = graphql`
   query ListPagesQuery {

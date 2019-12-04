@@ -203,3 +203,37 @@ header h2 {
   margin-top: 0;
   opacity: 0.5;
 }
+
+.toc-list,
+.toc-list ol {
+  counter-reset: idx;
+  list-style-type: none;
+}
+.toc-list li {
+  counter-increment: idx;
+}
+.toc-list li::before {
+  font-family: var(--mono);
+  content: counters(idx, '.', decimal);
+  margin-left: calc(6px - 40px);
+  text-align: right;
+  position: relative;
+  display: inline-block;
+  right: 6px;
+}
+.toc-list.is-appendix {
+  counter-reset: appendix;
+}
+.toc-list.is-appendix > li {
+  counter-reset: appendix-idx;
+  counter-increment: appendix;
+}
+.toc-list.is-appendix ol li {
+  counter-increment: appendix-idx;
+}
+.toc-list.is-appendix li::before {
+  content: counter(appendix, upper-alpha) '.' counter(appendix-idx, decimal);
+}
+.toc-list.is-appendix > li::before {
+  content: counter(appendix, upper-alpha);
+}
