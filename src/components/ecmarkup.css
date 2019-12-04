@@ -1,7 +1,7 @@
-/* Adapted from https://github.com/bterlson/ecmarkup/blob/7f4f75b1/css/elements.css */
+/* Adapted from https://github.com/bterlson/ecmarkup/blob/c0b5352/css/elements.css */
 code {
   font-weight: bold;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 pre code {

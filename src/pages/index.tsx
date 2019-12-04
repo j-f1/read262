@@ -37,6 +37,7 @@ const IndexPage = ({
       <h3>
         <Link to={pages[0].route}>{pages[0].title}</Link>
       </h3>
+      <h3>Main Content</h3>
       <ol className="toc-list">
         {mainContent.map(({ id, route, title, hasContent, children }) => (
           <li key={id}>
