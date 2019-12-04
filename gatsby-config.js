@@ -8,6 +8,8 @@ module.exports = {
     author: '@j-f1',
   },
   plugins: [
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     'gatsby-plugin-typescript',
     'gatsby-plugin-typescript-checker',
     'gatsby-plugin-react-helmet',

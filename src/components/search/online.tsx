@@ -5,6 +5,7 @@ import {
   Hits,
   Highlight,
 } from 'react-instantsearch-dom'
+import algolia from 'algoliasearch'
 import { Hit as HitObj } from 'react-instantsearch-core'
 import { SearchRecord } from '../../types'
 import { Link } from 'gatsby'
@@ -41,8 +42,10 @@ const OptionalHighlight = ({
 
 const Search = ({ value, onChange }: SearchProps) => (
   <InstantSearch
-    appId={process.env.GATSBY_ALGOLIA_APP_ID!}
-    apiKey={process.env.GATSBY_ALGOLIA_SEARCH_KEY!}
+    searchClient={algolia(
+      process.env.GATSBY_ALGOLIA_APP_ID!,
+      process.env.GATSBY_ALGOLIA_SEARCH_KEY!
+    )}
     searchState={{ query: value }}
     indexName="main"
   >
