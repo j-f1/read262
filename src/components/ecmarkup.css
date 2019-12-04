@@ -16,15 +16,16 @@ pre code.hljs {
 
 var {
   color: #2aa198;
-  transition: all 0.25s ease;
   cursor: pointer;
   padding-bottom: 1px;
-  border-bottom: 0.1em solid transparent;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.1em;
 }
-
+var:not(.referenced) {
+  text-decoration-color: transparent;
+}
 var.referenced {
   color: #a0a029;
-  border-color: currentColor;
 }
 @media (prefers-color-scheme: dark) {
   var {
