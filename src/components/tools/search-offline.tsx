@@ -28,28 +28,39 @@ const Highlight = ({ text, query }: { text: string; query: string }) => (
   </>
 )
 
-type ResultPage = Pick<SpecPage, 'route' | 'title' | 'secnum'>
+type ResultPage = Pick<SpecPage, 'route' | 'title' | 'secnum' | 'internal'>
+type Result = { doc: ResultPage; score: number }
 
 const worker =
   typeof location === 'undefined'
     ? null
-    : workerize<{ search: (query: string) => lunr.Index.Result[] }>(`
-  importScripts('https://unpkg.com/lunr@2.3.6')
+    : workerize<{ search: (query: string) => Array<Result> }>(/* JS */ `
+  importScripts(${JSON.stringify(new URL('/js-search.min.js', location.href))})
 
   const indexFile = ${JSON.stringify(
-    new URL('/lunr-index.json', location.href)
+    new URL('/search-data.json', location.href)
   )}
   console.log('[WORKER] loading index from', indexFile)
 
-  let index = null
-  fetch(indexFile)
+  const index = new JsSearch.Search('route')
+  index.tokenizer = new JsSearch.StopWordsTokenizer(
+    new JsSearch.SimpleTokenizer()
+  )
+  index.addIndex('title')
+  index.addIndex('secnum')
+  index.addIndex(['internal', 'content'])
+  const ready = fetch(indexFile)
     .then(res => res.json())
-    .then(data => (index = lunr.Index.load(data)))
+    .then(data => index.addDocuments(data))
     .then(() => console.log('[WORKER] index loaded'))
     .catch(err => console.error('Loading index failed:', err))
 
-  export function search(query) {
-    return index ? index.search(query) : []
+  export async function search(query) {
+    await ready
+    const tokens = index.tokenizer.tokenize(index.sanitizer.sanitize(query))
+    const score = index.searchIndex._createCalculateTfIdf()
+    return index.searchIndex.search(tokens, index._documents)
+      .map(doc => ({ doc, score: score(tokens, doc, index._documents) }))
   }
 `)
 
@@ -71,7 +82,7 @@ const Search = ({ value, onChange }: SearchProps) => {
     (e: Edge<unknown>) => e.node
   )
 
-  const [results, setResults] = useState(new Array<lunr.Index.Result>())
+  const [results, setResults] = useState(new Array<Result>())
   useEffect(() => {
     if (value === '') {
       setResults([])
@@ -97,16 +108,15 @@ const Search = ({ value, onChange }: SearchProps) => {
       {!!results.length && (
         <div className="ais-Hits">
           <ul className="ais-Hits-list">
-            {results.map(({ ref, score }) => {
-              const page = pages.find(({ route }) => route === ref)
-              if (!page) return null
+            {results.map(({ doc, score }) => {
+              if (!doc) return null
               return (
-                <li key={ref}>
-                  <Link to={page.route} className="search-hit">
+                <li key={doc.route}>
+                  <Link to={doc.route} className="search-hit">
                     <strong className="hit-title">
                       <SectionTitle
-                        secnum={page.secnum}
-                        title={<Highlight text={page.title} query={value} />}
+                        secnum={doc.secnum}
+                        title={<Highlight text={doc.title} query={value} />}
                       />
                     </strong>
                   </Link>{' '}

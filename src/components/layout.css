@@ -274,6 +274,7 @@ header h2 {
   box-sizing: border-box;
   overflow-y: auto;
   box-shadow: 5px 15px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s;
 }
 @media (prefers-color-scheme: dark) {
   .ais-Hits {
@@ -281,8 +282,23 @@ header h2 {
     box-shadow: 5px 15px 20px rgba(0, 0, 0, 1);
   }
 }
+:not(:focus-within) + .ais-Hits:not(:focus-within):not(:hover) {
+  opacity: 0;
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :not(:focus-within) + .ais-Hits:not(:focus-within):not(:hover) {
+    transform: translateY(10px);
+  }
+}
 .ais-Hits-list {
   padding: 0;
   margin: 0;
   list-style-type: none;
+}
+.hit-content {
+  margin-bottom: 0;
+}
+.ais-Hits-list li:not(:last-child) {
+  margin-bottom: 1em;
 }
