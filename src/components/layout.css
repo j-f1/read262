@@ -1,10 +1,10 @@
 @import './ecmarkup.css';
 
 :root {
-  --sans: Futura, Trebuchet MS, Arial, sans-serif;
+  --sans: Futura, system-ui, -apple-system, Trebuchet MS, Arial, sans-serif;
   --serif: Merriweather, georgia, serif;
-  --mono: Fira Code, SFMono-Regular, Consolas, Roboto Mono, Droid Sans Mono,
-    Liberation Mono, Menlo, Courier, monospace;
+  --mono: Fira Code VF, Fira Code, SFMono-Regular, Consolas, Roboto Mono,
+    Droid Sans Mono, Liberation Mono, Menlo, Courier, monospace;
   /* source: https://github.com/voodootikigod/logo.js/blob/1544bdee/js.html#L21 */
 
   --link: #0000aa;

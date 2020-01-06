@@ -1,5 +1,8 @@
 import React from 'react'
 
+import 'firacode'
+import 'typeface-merriweather'
+
 import Header from './header'
 import './layout.css'
 import Footer from './footer'

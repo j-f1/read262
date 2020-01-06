@@ -5335,6 +5335,11 @@ find-yarn-workspace-root@^1.2.1:
     fs-extra "^4.0.3"
     micromatch "^3.1.4"
 
+firacode@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/firacode/-/firacode-2.0.0.tgz#b1801c13e2d3235da2e4b0f07b62d3c94a71c5bb"
+  integrity sha512-Nb6qPlKbiqw6k3ES8I3TE4vv+LLYvJwvTO0K4oQseeF6rDCj2ufJX2MOZ/7lNNt7P7KebfULaxi3QYQ9aEBrTA==
+
 flat-cache@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-2.0.1.tgz#5d296d6f04bda44a4630a301413bdbc2ec085ec0"
@@ -12267,6 +12272,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typeface-merriweather@^0.0.72:
+  version "0.0.72"
+  resolved "https://registry.yarnpkg.com/typeface-merriweather/-/typeface-merriweather-0.0.72.tgz#2b990f5293252052d51d170c82d3892319ff0555"
+  integrity sha512-gO0+fcZ1fTyKUsYY1ltYOOTI6FmBGeEdyIfeQg9NL8aInndk0feiJJVJsKHm/DiyYrnQEezraAQhz/KQoqMGtw==
 
 typescript@^3.2.2:
   version "3.7.2"
