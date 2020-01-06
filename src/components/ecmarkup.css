@@ -434,9 +434,9 @@ figure table.real-table {
 figure figcaption {
   display: block;
   color: var(--secondary-text);
-  font-weight: bold;
   text-align: center;
   margin-bottom: 0.5em;
+  font-family: var(--sans);
 }
 
 emu-table table {
