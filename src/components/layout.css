@@ -161,8 +161,6 @@ footer {
   line-height: 1.25;
 
   border-top: 1px solid var(--border);
-  padding: 1em 2em 0;
-  margin: 0 -2em;
 }
 
 header {
@@ -246,4 +244,45 @@ header h2 {
 }
 .toc-list.is-appendix > li::before {
   content: counter(appendix, upper-alpha) '.';
+}
+
+.ais-SearchBox-form {
+  position: relative;
+}
+.ais-SearchBox-loadingIndicator {
+  position: absolute;
+  left: 130px;
+}
+.ais-SearchBox-loadingIndicator svg {
+  height: 10px;
+  margin-top: 4px;
+}
+.ais-SearchBox-submit,
+.ais-SearchBox-reset {
+  display: none;
+}
+.ais-Hits {
+  position: absolute;
+  background: #fff;
+  z-index: 1;
+  margin-left: -0.25em;
+  padding: 0.5em;
+  border: 0.5px solid var(--border);
+  border-radius: 5px;
+  max-width: 500px;
+  max-height: calc(100vh - 175px);
+  box-sizing: border-box;
+  overflow-y: auto;
+  box-shadow: 5px 15px 20px rgba(0, 0, 0, 0.25);
+}
+@media (prefers-color-scheme: dark) {
+  .ais-Hits {
+    background: #000;
+    box-shadow: 5px 15px 20px rgba(0, 0, 0, 1);
+  }
+}
+.ais-Hits-list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }

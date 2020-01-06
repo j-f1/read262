@@ -71,6 +71,15 @@ export async function sourceNodes({
     ids[child.id] = route
   }
 
+  Object.entries(ids).forEach(([id, route]) => createNode({
+    id,
+    route,
+    internal: {
+      type: 'IDMap',
+      contentDigest: id + '\n' + route
+    },
+  }))
+
   const nodes = new Array<SpecPage>()
   const buildPage = (clause: Element, parentRoute = '', nest = true) => {
     const children = Array.from(clause.children)

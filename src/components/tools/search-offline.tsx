@@ -18,7 +18,7 @@ const workerize: <T extends { [key: string]: (...args: any[]) => any }>(
 
 import { Edge, SpecPage } from '../../types'
 import SectionTitle from '../section-title'
-import { SearchProps } from '../search'
+import { SearchProps } from './search'
 
 const Highlight = ({ text, query }: { text: string; query: string }) => (
   <>
@@ -88,7 +88,12 @@ const Search = ({ value, onChange }: SearchProps) => {
 
   return (
     <div>
-      <input type="search" value={value} onChange={onChange} />
+      <input
+        type="search"
+        value={value}
+        onChange={onChange}
+        placeholder="Search here…"
+      />
       {!!results.length && (
         <ul>
           {results.map(({ ref, score }) => {
@@ -105,7 +110,10 @@ const Search = ({ value, onChange }: SearchProps) => {
                   </strong>
                 </Link>{' '}
                 {process.env.NODE_ENV === 'development' && (
-                  <small style={{ fontFamily: 'var(--sans)', opacity: 0.5 }}>
+                  <small
+                    style={{ fontFamily: 'var(--sans)', opacity: 0.5 }}
+                    title="hidden in production"
+                  >
                     Score: {Math.round(score * 10) / 10}
                   </small>
                 )}

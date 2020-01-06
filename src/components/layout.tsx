@@ -6,17 +6,14 @@ import 'typeface-merriweather'
 import Header from './header'
 import './layout.css'
 import Footer from './footer'
-import Search from './search'
+import { OnlineProvider } from './is-online'
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
-  <>
+  <OnlineProvider>
     <Header />
-    <main style={{ paddingTop: 0 }}>
-      <Search />
-      {children}
-    </main>
+    <main style={{ paddingTop: 0 }}>{children}</main>
     <Footer />
-  </>
+  </OnlineProvider>
 )
 
 export default Layout

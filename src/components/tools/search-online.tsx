@@ -9,10 +9,10 @@ import algolia from 'algoliasearch'
 import { Hit as HitObj } from 'react-instantsearch-core'
 import { SearchRecord } from '../../types'
 import { Link } from 'gatsby'
-import { SearchProps } from '../search'
+import { SearchProps } from './search'
 
 const Hit = ({ hit }: { hit: HitObj<SearchRecord> }) => (
-  <Link to={hit.route} className="search-hit">
+  <Link to={'/' + hit.route} className="search-hit">
     <strong className="hit-title">
       <span className="secnum">
         <OptionalHighlight attribute="secnum" hit={hit} />
@@ -41,16 +41,18 @@ const OptionalHighlight = ({
   )
 
 const Search = ({ value, onChange }: SearchProps) => (
-  <InstantSearch
-    searchClient={algolia(
-      process.env.GATSBY_ALGOLIA_APP_ID!,
-      process.env.GATSBY_ALGOLIA_SEARCH_KEY!
-    )}
-    searchState={{ query: value }}
-    indexName="main"
-  >
-    <SearchBox showLoadingIndicator onChange={onChange} />
-    {value && <Hits<SearchRecord> hitComponent={Hit} />}
-  </InstantSearch>
+  <div>
+    <InstantSearch
+      searchClient={algolia(
+        process.env.GATSBY_ALGOLIA_APP_ID!,
+        process.env.GATSBY_ALGOLIA_SEARCH_KEY!
+      )}
+      searchState={{ query: value }}
+      indexName="main"
+    >
+      <SearchBox showLoadingIndicator onChange={onChange} />
+      {value && <Hits<SearchRecord> hitComponent={Hit} />}
+    </InstantSearch>
+  </div>
 )
 export default Search
