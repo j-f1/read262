@@ -95,32 +95,34 @@ const Search = ({ value, onChange }: SearchProps) => {
         placeholder="Search here…"
       />
       {!!results.length && (
-        <ul>
-          {results.map(({ ref, score }) => {
-            const page = pages.find(({ route }) => route === ref)
-            if (!page) return null
-            return (
-              <li key={ref}>
-                <Link to={page.route} className="search-hit">
-                  <strong className="hit-title">
-                    <SectionTitle
-                      secnum={page.secnum}
-                      title={<Highlight text={page.title} query={value} />}
-                    />
-                  </strong>
-                </Link>{' '}
-                {process.env.NODE_ENV === 'development' && (
-                  <small
-                    style={{ fontFamily: 'var(--sans)', opacity: 0.5 }}
-                    title="hidden in production"
-                  >
-                    Score: {Math.round(score * 10) / 10}
-                  </small>
-                )}
-              </li>
-            )
-          })}
-        </ul>
+        <div className="ais-Hits">
+          <ul className="ais-Hits-list">
+            {results.map(({ ref, score }) => {
+              const page = pages.find(({ route }) => route === ref)
+              if (!page) return null
+              return (
+                <li key={ref}>
+                  <Link to={page.route} className="search-hit">
+                    <strong className="hit-title">
+                      <SectionTitle
+                        secnum={page.secnum}
+                        title={<Highlight text={page.title} query={value} />}
+                      />
+                    </strong>
+                  </Link>{' '}
+                  {process.env.NODE_ENV === 'development' && (
+                    <small
+                      style={{ fontFamily: 'var(--sans)', opacity: 0.5 }}
+                      title="hidden in production"
+                    >
+                      Score: {Math.round(score * 10) / 10}
+                    </small>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        </div>
       )}
     </div>
   )
