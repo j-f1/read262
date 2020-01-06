@@ -2,6 +2,7 @@ const exists = require('util').promisify(require('fs').exists)
 const writeFile = require('util').promisify(require('fs').writeFile)
 const link = require('util').promisify(require('fs').link)
 const path = require('path')
+const stripHtml = require('string-strip-html')
 
 exports.createPages = async ({ graphql }) => {
   const { data } = await graphql(/* GraphQL */ `
@@ -21,11 +22,22 @@ exports.createPages = async ({ graphql }) => {
     }
   `)
 
+  const opts = {
+    stripTogetherWithTheirContents: ['script', 'style', 'xml', 'emu-grammar'],
+  }
+
   const target = path.resolve(__dirname, './public/js-search.min.js')
   await Promise.all([
     writeFile(
       path.resolve(__dirname, './public/search-data.json'),
-      JSON.stringify(data.allSpecPage.edges.map(e => e.node)),
+      JSON.stringify(
+        data.allSpecPage.edges.map(e => ({
+          ...e.node,
+          internal: {
+            content: stripHtml(e.node.internal.content, opts),
+          },
+        }))
+      ),
       'utf8'
     ),
     exists(target).then(
