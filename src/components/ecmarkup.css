@@ -1,4 +1,28 @@
 /* Adapted from https://github.com/bterlson/ecmarkup/blob/c0b5352/css/elements.css */
+
+:root {
+  --var: #2aa198;
+  --var-referenced: #a0a029;
+  --opt: #b58900;
+  --table-header: #eee;
+
+  --diff-add: #e0f8e0;
+  --diff-add-border: #396;
+  --diff-del: #fee;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --diff-add: #024402;
+    --diff-add-border: #4a7;
+    --diff-del: #440d0d;
+
+    --var: #45bcb2;
+    --var-referenced: #bcbc45;
+    --opt: #ffd149;
+    --table-header: #333;
+  }
+}
+
 code {
   font-weight: bold;
   white-space: pre-wrap;
@@ -15,7 +39,7 @@ pre code.hljs {
 }
 
 var {
-  color: #2aa198;
+  color: var(--var);
   cursor: pointer;
   padding-bottom: 1px;
   text-decoration-line: underline;
@@ -25,15 +49,7 @@ var:not(.referenced) {
   text-decoration-color: transparent;
 }
 var.referenced {
-  color: #a0a029;
-}
-@media (prefers-color-scheme: dark) {
-  var {
-    color: #45bcb2;
-  }
-  var.referenced {
-    color: #bcbc45;
-  }
+  color: var(--var-referenced);
 }
 
 emu-const {
@@ -74,16 +90,10 @@ emu-eqn div:first-child {
 
 emu-note {
   margin: 1em 0;
-  color: #666;
-  border-left: 5px solid #ccc;
+  color: var(--secondary-text);
+  border-left: 5px solid var(--border);
   display: flex;
   flex-direction: row;
-}
-@media (prefers-color-scheme: dark) {
-  emu-note {
-    color: #aaa;
-    border-left-color: #333;
-  }
 }
 
 emu-note > span.note {
@@ -191,12 +201,12 @@ emu-nt {
 
 emu-nt a,
 emu-nt a:visited {
-  color: #333;
+  color: var(--text);
 }
 @media (prefers-color-scheme: dark) {
   emu-nt a,
   emu-nt a:visited {
-    color: #bbb;
+    color: var(--text);
   }
 }
 
@@ -243,22 +253,11 @@ emu-opt {
 
 emu-params,
 emu-constraints {
-  color: #2aa198;
+  color: var(--var);
 }
 
 emu-opt {
-  color: #b58900;
-}
-
-@media (prefers-color-scheme: dark) {
-  emu-params,
-  emu-constraints {
-    color: #45bcb2;
-  }
-
-  emu-opt {
-    color: #ffd149;
-  }
+  color: var(--opt);
 }
 
 emu-gprose {
@@ -267,27 +266,6 @@ emu-gprose {
 
 emu-production emu-gprose {
   margin-right: 1ex;
-}
-
-h1.shortname {
-  color: #f60;
-  font-size: 1.5em;
-  margin: 0;
-}
-
-h1.version {
-  color: #f60;
-  font-size: 1.5em;
-  margin: 0;
-}
-
-h1.title {
-  margin-top: 0;
-  color: #f60;
-}
-
-h1.first {
-  margin-top: 0;
 }
 
 h1,
@@ -327,47 +305,6 @@ h6 {
 
 h1:hover span.utils {
   display: block;
-}
-
-span.utils {
-  font-size: 18px;
-  line-height: 18px;
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  font-weight: normal;
-}
-
-span.utils:before {
-  content: '⤷';
-  display: inline-block;
-  padding: 0 5px;
-}
-
-span.utils > * {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-h1 span.utils span.anchor a,
-h2 span.utils span.anchor a,
-h3 span.utils span.anchor a,
-h4 span.utils span.anchor a,
-h5 span.utils span.anchor a,
-h6 span.utils span.anchor a {
-  text-decoration: none;
-  font-variant: small-caps;
-}
-
-h1 span.utils span.anchor a:hover,
-h2 span.utils span.anchor a:hover,
-h3 span.utils span.anchor a:hover,
-h4 span.utils span.anchor a:hover,
-h5 span.utils span.anchor a:hover,
-h6 span.utils span.anchor a:hover {
-  color: #333;
 }
 
 emu-intro h1,
@@ -496,15 +433,10 @@ figure table.real-table {
 }
 figure figcaption {
   display: block;
-  color: #555555;
+  color: var(--secondary-text);
   font-weight: bold;
   text-align: center;
   margin-bottom: 0.5em;
-}
-@media (prefers-color-scheme: dark) {
-  figure figcaption {
-    color: #aaaaaa;
-  }
 }
 
 emu-table table {
@@ -527,14 +459,7 @@ table.real-table th {
 emu-table th,
 emu-table thead td,
 table.real-table th {
-  background-color: #eeeeee;
-}
-@media (prefers-color-scheme: dark) {
-  emu-table th,
-  emu-table thead td,
-  table.real-table th {
-    background-color: #333;
-  }
+  background-color: var(--table-header);
 }
 
 /* Note: the left content edges of table.lightweight-table >tbody >tr >td
@@ -551,19 +476,6 @@ table.lightweight-table th {
 }
 
 /* diff styles */
-:root {
-  --diff-add: #e0f8e0;
-  --diff-add-border: #396;
-  --diff-del: #fee;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --diff-add: #024402;
-    --diff-add-border: #4a7;
-    --diff-del: #440d0d;
-  }
-}
-
 ins {
   background-color: var(--diff-add);
   text-decoration: none;

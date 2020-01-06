@@ -13,6 +13,8 @@
   --yellow: #f0db4f;
   --background: #fff;
   --text: #000;
+  --secondary-text: #666;
+  --border: #ccc;
 
   background: var(--background);
   color: var(--text);
@@ -35,6 +37,8 @@
     --yellow: #907f0c;
     --background: #1e1e1e;
     --text: #d6d6d6;
+    --secondary-text: #aaa;
+    --border: #333;
   }
   /* white becomes #1e1e1e */
   object,
@@ -153,10 +157,10 @@ article emu-note > span.note {
 footer {
   font-family: var(--sans);
   font-size: 0.75em;
-  color: #666;
+  color: var(--secondary-text);
   line-height: 1.25;
 
-  border-top: 1px solid #aaa;
+  border-top: 1px solid var(--border);
   padding: 1em 2em 0;
   margin: 0 -2em;
 }
