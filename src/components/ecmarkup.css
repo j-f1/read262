@@ -199,15 +199,10 @@ emu-nt {
   text-indent: 0;
 }
 
+emu-xref a emu-nt,
 emu-nt a,
 emu-nt a:visited {
   color: var(--text);
-}
-@media (prefers-color-scheme: dark) {
-  emu-nt a,
-  emu-nt a:visited {
-    color: var(--text);
-  }
 }
 
 emu-rhs emu-nt {

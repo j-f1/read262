@@ -139,8 +139,12 @@ emu-alg emu-xref[href$='#assert'] a {
 emu-nt a:not(:hover) {
   text-decoration: none;
 }
+emu-xref a:hover emu-nt,
 emu-nt a:hover {
   color: var(--link) !important;
+}
+emu-xref a:hover emu-nt {
+  text-decoration: underline;
 }
 
 /* square : characters */
@@ -211,7 +215,7 @@ header h2 {
   list-style-type: none;
 }
 .toc-list {
-  padding-left: 1ex;
+  padding-left: 0;
 }
 .toc-list ol {
   padding-left: 50px;
@@ -221,13 +225,13 @@ header h2 {
 }
 .toc-list li::before {
   font-family: var(--mono);
-  content: counters(idx, '.', decimal) '.';
+  content: counters(idx, '.', decimal);
   margin-left: calc(6px - 40px);
   text-align: right;
   position: relative;
   display: inline-block;
   right: 6px;
-  width: 60px;
+  width: 50px;
 }
 .toc-list.is-appendix {
   counter-reset: appendix;
@@ -240,10 +244,10 @@ header h2 {
   counter-increment: appendix-idx;
 }
 .toc-list.is-appendix li::before {
-  content: counter(appendix, upper-alpha) '.' counter(appendix-idx, decimal) '.';
+  content: counter(appendix, upper-alpha) '.' counter(appendix-idx, decimal);
 }
 .toc-list.is-appendix > li::before {
-  content: counter(appendix, upper-alpha) '.';
+  content: counter(appendix, upper-alpha);
 }
 
 .ais-SearchBox-form {
