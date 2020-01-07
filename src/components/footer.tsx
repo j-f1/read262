@@ -2,6 +2,8 @@ import React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import Octicon, { MarkGithub } from '@primer/octicons-react'
 
+import * as styles from './layout.module.css'
+
 function Twitter() {
   return (
     <path
@@ -24,9 +26,9 @@ export default function Footer() {
   `).specPage.internal.content
   const copyright = result.match(/<h2>Copyright Notice<\/h2><p>(.+?)<\/p>/)[1]
   return (
-    <footer>
-      <div className="container">
-        <ul>
+    <footer className={styles.footer}>
+      <div className={styles.container}>
+        <ul className={styles.footerContent}>
           <li>
             <a href="https://tc39.es/ecma262/">Spec content</a> {copyright} (
             <Link to="/copyright-and-software-license">BSD License</Link>)

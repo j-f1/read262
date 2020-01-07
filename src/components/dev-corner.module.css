@@ -1,0 +1,11 @@
+.corner {
+  opacity: 0.6;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  font-family: var(--sans);
+  background: #ccc;
+  padding: 8px;
+  border-top-right-radius: 5px;
+  user-select: none;
+}

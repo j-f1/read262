@@ -1,0 +1,40 @@
+.toc-list,
+.toc-list ol {
+  counter-reset: idx;
+  list-style-type: none;
+}
+.toc-list {
+  padding-left: 0;
+}
+.toc-list ol {
+  padding-left: 50px;
+}
+.toc-list li {
+  counter-increment: idx;
+}
+.toc-list li::before {
+  font-family: var(--mono);
+  content: counters(idx, '.', decimal);
+  margin-left: calc(6px - 40px);
+  text-align: right;
+  position: relative;
+  display: inline-block;
+  right: 6px;
+  width: 50px;
+}
+.appendix {
+  counter-reset: appendix;
+}
+.appendix > li {
+  counter-reset: appendix-idx;
+  counter-increment: appendix;
+}
+.appendix ol li {
+  counter-increment: appendix-idx;
+}
+.appendix li::before {
+  content: counter(appendix, upper-alpha) '.' counter(appendix-idx, decimal);
+}
+.appendix > li::before {
+  content: counter(appendix, upper-alpha);
+}

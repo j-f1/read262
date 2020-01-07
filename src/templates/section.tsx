@@ -7,6 +7,8 @@ import SectionTitle from '../components/section-title'
 import PrevNext from '../components/prev-next'
 import { Edge, SpecPage } from '../types'
 
+import './content.css'
+
 export default function SpecSection({
   data: {
     allSpecPage: {

@@ -4,20 +4,13 @@ import { Link } from 'gatsby'
 import SectionTitle from './section-title'
 import { SpecPageMeta } from '../types'
 
+import styles from './prev-next.module.css'
+
 type Props = { prev?: SpecPageMeta; next?: SpecPageMeta }
 
 const PrevNext = ({ prev, next }: Props) => (
   // adapted from https://github.com/gaearon/overreacted.io/blob/e1520ea8/src/templates/blog-post.js#L75-L98
-  <ul
-    style={{
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-      listStyle: 'none',
-      padding: 0,
-      fontFamily: 'var(--sans)',
-    }}
-  >
+  <ul className={styles.wrapper}>
     <li>
       {prev && (
         <Link
@@ -25,7 +18,7 @@ const PrevNext = ({ prev, next }: Props) => (
           rel="prev"
           aria-label={`Previous section (${prev.title})`}
         >
-          <span className="nav-arrow" aria-hidden="true">
+          <span className={styles.arrow} aria-hidden="true">
             &lt;-
           </span>
           <SectionTitle {...prev} />
@@ -40,7 +33,7 @@ const PrevNext = ({ prev, next }: Props) => (
           aria-label={`Next section (${next.title})`}
         >
           <SectionTitle {...next} />
-          <span className="nav-arrow" aria-hidden="true">
+          <span className={styles.arrow} aria-hidden="true">
             ->
           </span>
         </Link>

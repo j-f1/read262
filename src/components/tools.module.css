@@ -1,0 +1,16 @@
+.wrapper {
+  font-family: var(--sans);
+  user-select: none;
+  display: flex;
+  margin-top: 0.5em;
+  margin-bottom: -0.5em;
+}
+
+.wrapper label {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper label:not(:first-child) {
+  margin-left: 1em;
+}

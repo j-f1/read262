@@ -38,20 +38,6 @@ pre code.hljs {
   padding: 0;
 }
 
-var {
-  color: var(--var);
-  cursor: pointer;
-  padding-bottom: 1px;
-  text-decoration-line: underline;
-  text-decoration-thickness: 0.1em;
-}
-var:not(.referenced) {
-  text-decoration-color: transparent;
-}
-var.referenced {
-  color: var(--var-referenced);
-}
-
 emu-const {
   font-family: var(--sans);
 }

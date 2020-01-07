@@ -1,0 +1,82 @@
+:root {
+  --sans: Futura, system-ui, -apple-system, Trebuchet MS, Arial, sans-serif;
+  --serif: Merriweather, georgia, serif;
+  --mono: Fira Code VF, Fira Code, SFMono-Regular, Consolas, Roboto Mono,
+    Droid Sans Mono, Liberation Mono, Menlo, Courier, monospace;
+  /* source: https://github.com/voodootikigod/logo.js/blob/1544bdee/js.html#L21 */
+
+  --link: #0000aa;
+  --xref-link: #206ca7;
+  --black: #323330;
+  --yellow: #f0db4f;
+  --background: #fff;
+  --text: #000;
+  --secondary-text: #666;
+  --border: #ccc;
+
+  background: var(--background);
+  color: var(--text);
+
+  supported-color-schemes: light dark;
+  color-scheme: light dark;
+
+  font: 112.5%/1.45em;
+  font-weight: light;
+  font-family: var(--serif);
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --link: #5c5cd6;
+    --xref-link: #4894ce;
+    --black: #e3e3e5;
+    --yellow: #907f0c;
+    --background: #1e1e1e;
+    --text: #d6d6d6;
+    --secondary-text: #aaa;
+    --border: #333;
+  }
+  /* white becomes #1e1e1e */
+  object,
+  img {
+    filter: brightness(88.3%) invert() hue-rotate(0.5turn);
+  }
+}
+
+body {
+  margin: 0;
+  word-wrap: break-word;
+  -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+  -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+  -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+  font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+}
+
+a {
+  color: var(--link);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--black);
+  font-family: var(--sans);
+  text-rendering: optimizeLegibility;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration: underline dotted;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}

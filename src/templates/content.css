@@ -1,0 +1,78 @@
+@import './ecmarkup.css';
+
+article h1 {
+  margin: 0.67em 0 !important;
+}
+
+tt,
+code {
+  background-color: hsla(0, 0%, 0%, 0.04);
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-feature-settings: 'ss03', 'onum';
+  padding-left: 0.1em;
+  padding-right: 0.1em;
+}
+pre code {
+  background: none;
+  line-height: 1.42;
+}
+
+h1 .secnum {
+  opacity: 0.5;
+  font-weight: 300;
+}
+.secnum:empty {
+  display: none;
+}
+.secnum::after {
+  content: ' ';
+}
+h1 .secnum::after {
+  content: ' •';
+}
+emu-clause h1 .secnum::after {
+  content: ' • ';
+}
+
+emu-xref[aoid] a,
+emu-alg emu-xref[href$='#assert'] a {
+  color: var(--xref-link);
+  text-decoration: none;
+}
+
+emu-nt a:not(:hover) {
+  text-decoration: none;
+}
+emu-xref a:hover emu-nt,
+emu-nt a:hover {
+  color: var(--link) !important;
+}
+emu-xref a:hover emu-nt {
+  text-decoration: underline;
+}
+
+/* square : characters */
+emu-geq {
+  font-family: Cambria, Palatino Linotype, Palatino, Liberation Serif, serif;
+}
+
+article emu-note > span.note {
+  font-family: var(--sans);
+  min-width: 70px;
+  padding-left: 0.5em;
+}
+
+var {
+  color: var(--var);
+  cursor: pointer;
+  padding-bottom: 1px;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.1em;
+}
+var:not(.referenced) {
+  text-decoration-color: transparent;
+}
+var.referenced {
+  color: var(--var-referenced);
+}

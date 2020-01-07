@@ -11,16 +11,18 @@ import { SearchRecord } from '../../types'
 import { Link } from 'gatsby'
 import { SearchProps } from './search'
 
+import * as styles from './search.module.css'
+
 function Hit({ hit }: { hit: HitObj<SearchRecord> }) {
   return (
-    <Link to={'/' + hit.route} className="search-hit">
-      <strong className="hit-title">
+    <Link to={'/' + hit.route} className={styles.searchHit}>
+      <strong className={styles.hitTitle}>
         <span className="secnum">
           <OptionalHighlight attribute="secnum" hit={hit} />
         </span>
         <OptionalHighlight attribute="heading" hit={hit} />
       </strong>
-      <p className="hit-content">
+      <p className={styles.hitContent}>
         <OptionalHighlight attribute="content" hit={hit} />
       </p>
     </Link>

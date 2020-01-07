@@ -3,6 +3,7 @@ import { Link, graphql, useStaticQuery } from 'gatsby'
 import useMedia from 'use-media'
 import GithubCorner from 'react-github-corner'
 import Tools from './tools'
+import * as styles from './layout.module.css'
 
 export default function Header() {
   const iconFits = useMedia('(min-width: 825px)')
@@ -19,11 +20,11 @@ export default function Header() {
     }
   `)
   return (
-    <header>
-      <div className="container">
-        <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/">
-          <h1>{title}</h1>
-          <h2>{version}</h2>
+    <header className={styles.header}>
+      <div className={styles.container}>
+        <Link className={styles.homeLink} to="/">
+          <h1 className={styles.mainTitle}>{title}</h1>
+          <h2 className={styles.subtitle}>{version}</h2>
         </Link>
         <Tools />
       </div>

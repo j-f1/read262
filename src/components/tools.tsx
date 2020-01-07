@@ -3,26 +3,17 @@ import React from 'react'
 import Search from './tools/search'
 import SecIDLookup from './tools/sec-id-lookup'
 
+import styles from './tools.module.css'
+
 export default function Tools() {
   return (
-    <div
-      style={{
-        fontFamily: 'var(--sans)',
-        userSelect: 'none',
-        WebkitUserSelect: 'none',
-        display: 'flex',
-        marginTop: '0.5em',
-        marginBottom: '-0.5em',
-      }}
-    >
+    <div className={styles.wrapper}>
       <label>
         Search
-        <br />
         <Search />
       </label>
-      <label style={{ marginLeft: '1em', display: 'block' }}>
+      <label>
         Open section
-        <br />
         <SecIDLookup />
       </label>
     </div>

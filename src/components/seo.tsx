@@ -5,7 +5,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 export default function SEO({
   description = '',
   lang = 'en',
-  meta = new Array<JSX.IntrinsicElements['meta']>(),
+  meta = new Array<any>(),
   keywords = new Array<string>(),
   title = '',
 }) {

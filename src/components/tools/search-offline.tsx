@@ -8,6 +8,8 @@ import { SpecPage } from '../../types'
 import SectionTitle from '../section-title'
 import { SearchProps } from './search'
 
+import * as styles from './search.module.css'
+
 type HighlightProps = { text: string; query: string }
 const Highlight = ({ text, query }: HighlightProps) => (
   <>
@@ -84,8 +86,8 @@ export default function Search({ value, onChange }: SearchProps) {
               if (!doc) return null
               return (
                 <li key={doc.route}>
-                  <Link to={doc.route} className="search-hit">
-                    <strong className="hit-title">
+                  <Link to={doc.route} className={styles.searchHit}>
+                    <strong className={styles.hitTitle}>
                       <SectionTitle
                         secnum={doc.secnum}
                         title={<Highlight text={doc.title} query={value} />}
