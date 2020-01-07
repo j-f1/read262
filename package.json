@@ -17,6 +17,7 @@
     "node": ">=10.x"
   },
   "dependencies": {
+    "@primer/octicons-react": "^9.3.1",
     "@rehooks/online-status": "^1.0.0",
     "@types/react-instantsearch-dom": "^5.2.2",
     "algolia-html-extractor": "^0.0.1",

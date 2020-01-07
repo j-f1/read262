@@ -1163,6 +1163,13 @@
     string-width "^2.0.0"
     strip-ansi "^3"
 
+"@primer/octicons-react@^9.3.1":
+  version "9.3.1"
+  resolved "https://registry.yarnpkg.com/@primer/octicons-react/-/octicons-react-9.3.1.tgz#f38812d387373383d40bb490b56d04eaddfbd5fe"
+  integrity sha512-UOxcHuGAJ4YvmWodrgBnx44z/bPiD2C/TD7HlOB3BvvT9ozAOwoEm7lKKQqPo9SeDLu73ZsfbFl1AvnBuspzmQ==
+  dependencies:
+    prop-types "^15.6.1"
+
 "@reach/router@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@reach/router/-/router-1.2.1.tgz#34ae3541a5ac44fa7796e5506a5d7274a162be4e"
