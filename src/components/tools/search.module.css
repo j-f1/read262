@@ -14,6 +14,30 @@
   margin-bottom: 0;
 }
 
+[type='text'],
+[type='search'] {
+  appearance: none;
+  border: 2px solid var(--background);
+  border-radius: 5px;
+  outline-offset: -1px;
+  box-shadow: 0 0 0 1px var(--border);
+  margin-left: -1px;
+  padding: 2px;
+}
+[type='text']:focus,
+[type='search']:focus {
+  animation: outline-offset 0.05s;
+}
+
+@keyframes outline-offset {
+  from {
+    outline-offset: 2px;
+  }
+  to {
+    outline-offset: -1px;
+  }
+}
+
 [type='search']::-webkit-search-cancel-button,
 [type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
