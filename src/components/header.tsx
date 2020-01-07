@@ -4,7 +4,7 @@ import useMedia from 'use-media'
 import GithubCorner from 'react-github-corner'
 import Tools from './tools'
 
-const Header = () => {
+export default function Header() {
   const iconFits = useMedia('(min-width: 825px)')
   const {
     specMeta: { title, version },
@@ -37,5 +37,3 @@ const Header = () => {
     </header>
   )
 }
-
-export default Header

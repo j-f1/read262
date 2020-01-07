@@ -7,7 +7,7 @@ import SectionTitle from '../components/section-title'
 import PrevNext from '../components/prev-next'
 import { Edge, SpecPage } from '../types'
 
-const SpecSection = ({
+export default function SpecSection({
   data: {
     allSpecPage: {
       edges: [
@@ -25,7 +25,7 @@ const SpecSection = ({
   },
 }: {
   data: { allSpecPage: { edges: [Edge<SpecPage>] } }
-}) => {
+}) {
   React.useEffect(() => {
     const handler = (event: MouseEvent) => {
       const { target } = (event as unknown) as { target: HTMLElement }
@@ -87,5 +87,3 @@ export const query = graphql`
     }
   }
 `
-
-export default SpecSection

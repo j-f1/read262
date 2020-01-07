@@ -4,13 +4,9 @@ import { Link } from 'gatsby'
 import SectionTitle from './section-title'
 import { SpecPageMeta } from '../types'
 
-const PrevNext = ({
-  prev,
-  next,
-}: {
-  prev?: SpecPageMeta
-  next?: SpecPageMeta
-}) => (
+type Props = { prev?: SpecPageMeta; next?: SpecPageMeta }
+
+const PrevNext = ({ prev, next }: Props) => (
   // adapted from https://github.com/gaearon/overreacted.io/blob/e1520ea8/src/templates/blog-post.js#L75-L98
   <ul
     style={{

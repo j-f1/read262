@@ -33,3 +33,7 @@ export interface SearchRecord {
   heading?: string
   secnum?: string
 }
+
+export interface WrapperProps {
+  children: React.ReactNode
+}

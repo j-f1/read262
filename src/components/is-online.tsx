@@ -1,27 +1,28 @@
 import useIsOnline from '@rehooks/online-status'
 import React, { useState, useDebugValue, useContext } from 'react'
+import { WrapperProps } from '../types'
 
 const Context = React.createContext(true)
 
-export function OnlineProvider({ children }: { children: React.ReactNode }) {
+const devCornerStyle: React.CSSProperties = {
+  opacity: 0.6,
+  position: 'fixed',
+  left: 0,
+  bottom: 0,
+  fontFamily: 'var(--sans)',
+  background: '#ccc',
+  padding: 8,
+  borderTopRightRadius: 5,
+  userSelect: 'none',
+  WebkitUserSelect: 'none',
+}
+
+export function OnlineProvider({ children }: WrapperProps) {
   if (process.env.NODE_ENV === 'development') {
     const [isOnline, setOnline] = useState(useIsOnline())
     return (
       <Context.Provider value={isOnline}>
-        <div
-          style={{
-            opacity: 0.6,
-            position: 'fixed',
-            left: 0,
-            bottom: 0,
-            fontFamily: 'var(--sans)',
-            background: '#ccc',
-            padding: 8,
-            borderTopRightRadius: 5,
-            userSelect: 'none',
-            WebkitUserSelect: 'none',
-          }}
-        >
+        <div style={devCornerStyle}>
           <a href="/___graphql">GraphQL Explorer</a>
           <br />
           <label>

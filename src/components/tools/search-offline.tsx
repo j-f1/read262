@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { graphql, Link, useStaticQuery } from 'gatsby'
+import { Link } from 'gatsby'
 import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
+import workerize from './workerize'
 
-const workerize: <T extends { [key: string]: (...args: any[]) => any }>(
-  code: string,
-  options?: {
-    type?: 'classic' | 'module'
-    credentials?: 'omit' | 'same-origin' | 'include'
-    name?: string
-  }
-) => {
-  [K in keyof T]: T[K] extends (...args: infer P) => infer R
-    ? (...args: P) => Promise<R>
-    : never
-} = require('workerize').default
-
-import { Edge, SpecPage } from '../../types'
+import { SpecPage } from '../../types'
 import SectionTitle from '../section-title'
 import { SearchProps } from './search'
 
-const Highlight = ({ text, query }: { text: string; query: string }) => (
+type HighlightProps = { text: string; query: string }
+const Highlight = ({ text, query }: HighlightProps) => (
   <>
     {parse(text, match(text, query)).map(({ text, highlight }, i) =>
       highlight ? <mark key={i}>{text}</mark> : text
@@ -64,24 +53,7 @@ const worker =
   }
 `)
 
-const Search = ({ value, onChange }: SearchProps) => {
-  const data = useStaticQuery(graphql`
-    query GetPageResults {
-      allSpecPage {
-        edges {
-          node {
-            route
-            title
-            secnum
-          }
-        }
-      }
-    }
-  `)
-  const pages: ResultPage[] = data.allSpecPage.edges.map(
-    (e: Edge<unknown>) => e.node
-  )
-
+export default function Search({ value, onChange }: SearchProps) {
   const [results, setResults] = useState(new Array<Result>())
   useEffect(() => {
     if (value === '') {
@@ -137,5 +109,3 @@ const Search = ({ value, onChange }: SearchProps) => {
     </div>
   )
 }
-
-export default Search

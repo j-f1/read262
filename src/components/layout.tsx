@@ -7,13 +7,14 @@ import Header from './header'
 import './layout.css'
 import Footer from './footer'
 import { OnlineProvider } from './is-online'
+import { WrapperProps } from '../types'
 
-const Layout = ({ children }: { children: React.ReactNode }) => (
-  <OnlineProvider>
-    <Header />
-    <main style={{ paddingTop: 0 }}>{children}</main>
-    <Footer />
-  </OnlineProvider>
-)
-
-export default Layout
+export default function Layout({ children }: WrapperProps) {
+  return (
+    <OnlineProvider>
+      <Header />
+      <main style={{ paddingTop: 0 }}>{children}</main>
+      <Footer />
+    </OnlineProvider>
+  )
+}

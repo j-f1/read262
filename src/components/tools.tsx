@@ -2,9 +2,8 @@ import React from 'react'
 
 import Search from './tools/search'
 import SecIDLookup from './tools/sec-id-lookup'
-import useMedia from 'use-media'
 
-const Tools = () => {
+export default function Tools() {
   return (
     <div
       style={{
@@ -29,4 +28,3 @@ const Tools = () => {
     </div>
   )
 }
-export default Tools

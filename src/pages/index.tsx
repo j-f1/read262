@@ -19,13 +19,13 @@ function nestPages(pages: SpecPage[]) {
   return nestedPages
 }
 
-const IndexPage = ({
+export default function IndexPage({
   data: {
     allSpecPage: { edges },
   },
 }: {
   data: { allSpecPage: { edges: Array<Edge<SpecPage>> } }
-}) => {
+}) {
   const pages = nestPages(edges.map(edge => edge.node))
   const appendixIdx = pages.findIndex(p => p.secnum[0] === 'A')
   const intro = pages[0]
@@ -74,5 +74,3 @@ export const query = graphql`
     }
   }
 `
-
-export default IndexPage
