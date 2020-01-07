@@ -1,11 +1,18 @@
 require('ts-node/register')
 require('dotenv').config({ path: require.resolve('./.env.public') })
 
+const { readFileSync } = require('fs')
+
 module.exports = {
   siteMetadata: {
     title: 'read262',
     description: 'Read the ECMAScript spec in your browser',
     author: '@j-f1',
+    copyright: readFileSync(require.resolve('./LICENSE'), 'utf8')
+      .split('\n')[2]
+      .split(' ')
+      .slice(1)
+      .join(' '),
   },
   plugins: [
     'gatsby-plugin-sharp',

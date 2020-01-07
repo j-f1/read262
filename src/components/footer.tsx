@@ -15,16 +15,23 @@ function Twitter() {
 Twitter.size = [250, 205] as [number, number]
 
 export default function Footer() {
-  const result = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     query CopyrightPage {
+      site {
+        meta: siteMetadata {
+          copyright
+        }
+      }
       specPage(id: { eq: "page-sec-copyright-and-software-license" }) {
         internal {
           content
         }
       }
     }
-  `).specPage.internal.content
-  const copyright = result.match(/<h2>Copyright Notice<\/h2><p>(.+?)<\/p>/)[1]
+  `)
+  const copyright = data.specPage.internal.content.match(
+    /<h2>Copyright Notice<\/h2><p>(.+?)<\/p>/
+  )[1]
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -34,7 +41,7 @@ export default function Footer() {
             <Link to="/copyright-and-software-license">BSD License</Link>)
           </li>
           <li>
-            Site © 2018–2020 Jed Fox{' '}
+            Site {data.site.meta.copyright}{' '}
             <a href="https://github.com/j-f1">
               <Octicon icon={MarkGithub} size={13} />
             </a>{' '}
@@ -43,7 +50,7 @@ export default function Footer() {
             </a>{' '}
             (
             <a href="https://github.com/j-f1/read262/blob/master/LICENSE">
-              MIT Licensed
+              MIT License
             </a>
             )
           </li>
