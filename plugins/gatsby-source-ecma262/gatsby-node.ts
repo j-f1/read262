@@ -71,14 +71,18 @@ export async function sourceNodes({
     ids[child.id] = route
   }
 
-  Object.entries(ids).forEach(([id, route]) => createNode({
-    id,
-    route,
-    internal: {
-      type: 'IDMap',
-      contentDigest: id + '\n' + route
-    },
-  }))
+  Object.entries(ids)
+    .filter(([id]) => !id.startsWith('_'))
+    .forEach(([id, route]) =>
+      createNode({
+        id,
+        route,
+        internal: {
+          type: 'IDMap',
+          contentDigest: id + '\n' + route,
+        },
+      })
+    )
 
   const nodes = new Array<SpecPage>()
   const buildPage = (clause: Element, parentRoute = '', nest = true) => {
@@ -123,9 +127,10 @@ export async function sourceNodes({
       id: 'page-' + id,
       route,
       secnum: secnum && secnum.textContent ? secnum.textContent : '',
-      title: secnum
+      title: (secnum
         ? (header.textContent || '').replace(secnum.textContent || '', '')
-        : header.textContent || '',
+        : header.textContent || ''
+      ).trim(),
       hasContent: html !== '',
       internal: {
         type: 'SpecPage',
