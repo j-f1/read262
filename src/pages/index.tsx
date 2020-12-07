@@ -29,8 +29,8 @@ export default function IndexPage({
 }: {
   data: { allSpecPage: { edges: Array<Edge<SpecPage>> } }
 }) {
-  const pages = nestPages(edges.map(edge => edge.node))
-  const appendixIdx = pages.findIndex(p => p.secnum[0] === 'A')
+  const pages = nestPages(edges.map((edge) => edge.node))
+  const appendixIdx = pages.findIndex((p) => p.secnum[0] === 'A')
   const mainContent = pages.slice(1, appendixIdx)
   const appendix = pages.slice(appendixIdx)
   return (

@@ -63,7 +63,7 @@ export default function Search({ value, onChange }: SearchProps) {
       return
     }
     let active = true
-    worker!.search(value).then(results => {
+    worker!.search(value).then((results) => {
       if (active) setResults(results)
     })
     return () => {

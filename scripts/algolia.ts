@@ -48,7 +48,7 @@ const spinner = ora()
           cssSelector:
             'p, emu-grammar, emu-clause>ul, emu-clause>ol, div>ul, div>ol',
         })
-        .map(record => {
+        .map((record) => {
           const heading = record.headings.slice(-1)[0]
           const secnum = heading && heading.querySelector('.secnum')
           return {
@@ -101,7 +101,7 @@ const spinner = ora()
   tty && spinner.start('Pushing records')
   await indexToUse.waitTask((await indexToUse.clearIndex()).taskID)
   let done = 0
-  const chunkJobs = chunk(records, 1000).map(async function(chunk) {
+  const chunkJobs = chunk(records, 1000).map(async function (chunk) {
     const { taskID } = await indexToUse.addObjects(chunk)
     done += chunk.length
     tty && (spinner.text = `Pushing records (${done}/${records.length})`)
@@ -148,7 +148,7 @@ const spinner = ora()
     )
     return targetIndex.waitTask(taskID)
   }
-})().catch(err => {
+})().catch((err) => {
   spinner.fail('Error:')
   console.error(err)
   return process.exit(1)

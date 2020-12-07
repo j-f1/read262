@@ -18,7 +18,7 @@ export function OnlineProvider({ children }: WrapperProps) {
             <input
               type="checkbox"
               checked={isOnline}
-              onChange={e => setOnline(e.target.checked)}
+              onChange={(e) => setOnline(e.target.checked)}
             />{' '}
             <code>useOnline()</code>
           </label>

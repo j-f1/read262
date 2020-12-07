@@ -20,14 +20,14 @@ export default function SecIDLookup() {
   `).allIdMap.nodes
   return (
     <form
-      onSubmit={event => {
+      onSubmit={(event) => {
         const value = inputRef.current!.value
         const id = value.startsWith('#')
           ? value.slice(1)
           : /https?:\/\/(tc39\.es|tc39\.github\.io)\/ecma262/.test(value)
           ? new URL(value).hash.slice(1)
           : value
-        const result = sections.find(x => x.id === id)
+        const result = sections.find((x) => x.id === id)
         if (result) {
           navigate(result.route)
         }

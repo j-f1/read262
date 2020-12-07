@@ -20,7 +20,7 @@ export async function sourceNodes({
   } = new JSDOM(
     fs.existsSync(cache)
       ? await promisify(fs.readFile)(cache, 'utf8')
-      : await fetch(specURL.toString()).then(res => res.text())
+      : await fetch(specURL.toString()).then((res) => res.text())
   )
   const meta = {
     title: document.querySelector('h1.title')!.textContent,
@@ -87,7 +87,7 @@ export async function sourceNodes({
   const nodes = new Array<SpecPage>()
   const buildPage = (clause: Element, parentRoute = '', nest = true) => {
     const children = Array.from(clause.children)
-    const firstSubsection = children.findIndex(el =>
+    const firstSubsection = children.findIndex((el) =>
       el.matches(selectors.clause)
     )
     const header = clause.querySelector('h1')
@@ -104,13 +104,13 @@ export async function sourceNodes({
 
     for (const para of content) {
       // force absolute URI
-      para.querySelectorAll('object').forEach(object => {
+      para.querySelectorAll('object').forEach((object) => {
         object.data = new URL(object.data, specURL).toString()
       })
-      para.querySelectorAll('img').forEach(img => {
+      para.querySelectorAll('img').forEach((img) => {
         img.src = new URL(img.src, specURL).toString()
       })
-      para.querySelectorAll('[href]').forEach(link => {
+      para.querySelectorAll('[href]').forEach((link) => {
         const href = link.getAttribute('href')
         if (href && href.startsWith('#')) {
           if (!ids[href.slice(1)]) {
@@ -122,7 +122,7 @@ export async function sourceNodes({
       })
     }
 
-    const html = content.map(el => el.outerHTML).join('')
+    const html = content.map((el) => el.outerHTML).join('')
     nodes.push({
       id: 'page-' + id,
       route,
@@ -167,7 +167,7 @@ export async function sourceNodes({
     node.prev = pick(findNode(i, -1), 'route', 'secnum', 'title')
     node.next = pick(findNode(i, +1), 'route', 'secnum', 'title')
   })
-  nodes.forEach(node => createNode(node))
+  nodes.forEach((node) => createNode(node))
 }
 
 export async function createPages(
@@ -210,11 +210,8 @@ const pick = <T, K extends keyof Def<T>>(
   ...keys: K[]
 ): Pick<Def<T>, K> | undefined =>
   obj
-    ? keys.reduce(
-        (res, key) => {
-          res[key] = (obj as Def<T>)[key]
-          return res
-        },
-        {} as Pick<Def<T>, K>
-      )
+    ? keys.reduce((res, key) => {
+        res[key] = (obj as Def<T>)[key]
+        return res
+      }, {} as Pick<Def<T>, K>)
     : undefined

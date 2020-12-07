@@ -31,7 +31,7 @@ exports.createPages = async ({ graphql }) => {
     writeFile(
       path.resolve(__dirname, './public/search-data.json'),
       JSON.stringify(
-        data.allSpecPage.edges.map(e => ({
+        data.allSpecPage.edges.map((e) => ({
           ...e.node,
           internal: {
             content: stripHtml(e.node.internal.content, opts),
@@ -41,7 +41,7 @@ exports.createPages = async ({ graphql }) => {
       'utf8'
     ),
     exists(target).then(
-      exists =>
+      (exists) =>
         exists ||
         link(
           path.resolve(
@@ -51,7 +51,7 @@ exports.createPages = async ({ graphql }) => {
           target
         )
     ),
-  ]).catch(err => {
+  ]).catch((err) => {
     console.error('failed to write file', err)
   })
 }

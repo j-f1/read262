@@ -19,7 +19,7 @@ const PrevNext = ({ prev, next }: Props) => (
           aria-label={`Previous section (${prev.title})`}
         >
           <span className={styles.arrow} aria-hidden="true">
-            &lt;-
+            {'<-'}
           </span>
           <SectionTitle {...prev} />
         </Link>
@@ -34,7 +34,7 @@ const PrevNext = ({ prev, next }: Props) => (
         >
           <SectionTitle {...next} />
           <span className={styles.arrow} aria-hidden="true">
-            ->
+            {'->'}
           </span>
         </Link>
       )}

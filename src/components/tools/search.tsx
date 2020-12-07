@@ -13,7 +13,7 @@ export type SearchProps = {
 export default function Search() {
   const [value, setValue] = useState('')
   const onChange = useCallback<SearchProps['onChange']>(
-    event => setValue(event.currentTarget.value),
+    (event) => setValue(event.currentTarget.value),
     []
   )
 
