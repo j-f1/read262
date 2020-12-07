@@ -44,8 +44,8 @@ export default function SpecSection({
           clause = clause.parentElement
         }
         Array.from(clause.querySelectorAll('var'))
-          .filter(el => el.textContent === name)
-          .forEach(decl => decl.classList.toggle('referenced', shouldSelect))
+          .filter((el) => el.textContent === name)
+          .forEach((decl) => decl.classList.toggle('referenced', shouldSelect))
       }
     }
     document.addEventListener('click', handler)
