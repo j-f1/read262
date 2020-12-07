@@ -1,7 +1,8 @@
-patch-package
+diff --git a/node_modules/@types/react-instantsearch-dom/index.d.ts b/node_modules/@types/react-instantsearch-dom/index.d.ts
+index de2a9ab..3df0c37 100644
 --- a/node_modules/@types/react-instantsearch-dom/index.d.ts
 +++ b/node_modules/@types/react-instantsearch-dom/index.d.ts
-@@ -122,7 +122,7 @@ export interface SearchBoxProps extends CommonWidgetProps {
+@@ -107,7 +107,7 @@ export interface SearchBoxProps extends CommonWidgetProps {
  
    onSubmit?: (event: React.SyntheticEvent<HTMLFormElement>) => any;
    onReset?: (event: React.SyntheticEvent<HTMLFormElement>) => any;
