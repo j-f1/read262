@@ -4,6 +4,7 @@ import path from 'path'
 import { JSDOM } from 'jsdom'
 import { promisify } from 'util'
 import { SpecPage } from '../../src/types'
+import { URL } from 'url'
 
 const specURL = new URL('https://tc39.es/ecma262/')
 

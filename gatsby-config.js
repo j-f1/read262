@@ -29,6 +29,7 @@ module.exports = {
         background_color: '#f3df49',
         theme_color: '#f3df49',
         display: 'minimal-ui',
+        icon: 'src/logo.png',
       },
     },
     {
@@ -38,5 +39,12 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
+      options: {
+        analyzerMode: 'static',
+        reportFilename: require('path').join(__dirname, 'public/analysis.html'),
+      },
+    },
   ],
 }

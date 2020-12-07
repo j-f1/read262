@@ -5,7 +5,7 @@ import path from 'path'
 
 import glob from 'glob'
 import HtmlExtractor from 'algolia-html-extractor'
-import algolia from 'algoliasearch'
+import algolia, { SearchClient, SearchIndex } from 'algoliasearch'
 import ora from 'ora'
 import chunk from 'lodash.chunk'
 import chalk from 'chalk'
@@ -99,14 +99,14 @@ const spinner = ora()
   }
 
   tty && spinner.start('Pushing records')
-  await indexToUse.waitTask((await indexToUse.clearIndex()).taskID)
+  await indexToUse.waitTask((await indexToUse.clearObjects()).taskID)
   let done = 0
   const chunkJobs = chunk(records, 1000).map(async function (chunk) {
-    const { taskID } = await indexToUse.addObjects(chunk)
+    const { taskIDs } = await indexToUse.saveObjects(chunk)
     done += chunk.length
     tty && (spinner.text = `Pushing records (${done}/${records.length})`)
     spinner.render()
-    await indexToUse.waitTask(taskID)
+    await Promise.all(taskIDs.map((id) => indexToUse.waitTask(id)))
   })
   await Promise.all(chunkJobs)
   spinner.succeed('Records pushed')
@@ -117,18 +117,18 @@ const spinner = ora()
     spinner.succeed(chalk`Deployed updated index {bold ${indexName}}`)
   }
 
-  async function indexExists(index: algolia.Index) {
+  async function indexExists(index: SearchIndex) {
     try {
-      const { nbHits } = await index.search({})
+      const { nbHits } = await index.search('')
       return nbHits > 0
     } catch (e) {
       return false
     }
   }
   async function scopedCopyIndex(
-    client: algolia.Client,
-    sourceIndex: algolia.Index,
-    targetIndex: algolia.Index
+    client: SearchClient,
+    sourceIndex: SearchIndex,
+    targetIndex: SearchIndex
   ) {
     const { taskID } = await client.copyIndex(
       sourceIndex.indexName,
@@ -138,9 +138,9 @@ const spinner = ora()
     return targetIndex.waitTask(taskID)
   }
   async function moveIndex(
-    client: algolia.Client,
-    sourceIndex: algolia.Index,
-    targetIndex: algolia.Index
+    client: SearchClient,
+    sourceIndex: SearchIndex,
+    targetIndex: SearchIndex
   ) {
     const { taskID } = await client.moveIndex(
       sourceIndex.indexName,
