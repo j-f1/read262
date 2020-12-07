@@ -11,7 +11,7 @@ module.exports = {
     copyright: readFileSync(require.resolve('./LICENSE'), 'utf8')
       .split('\n')[2]
       .split(' ')
-      .slice(1)
+      .slice(1, -2)
       .join(' '),
   },
   plugins: [

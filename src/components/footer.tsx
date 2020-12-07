@@ -32,11 +32,12 @@ export default function Footer() {
           </li>
           <li>
             Site {data.site.meta.copyright}{' '}
+            <a href="https://jedfox.com">Jed Fox</a>{' '}
             <a href="https://github.com/j-f1">
               <GitHubIcon>GitHub Profile</GitHubIcon>
             </a>{' '}
             <a href="https://twitter.com/jed_fox1">
-              <TwitterIcon>TwitterProfile</TwitterIcon>
+              <TwitterIcon>Twitter Profile</TwitterIcon>
             </a>{' '}
             (
             <a href="https://github.com/j-f1/read262/blob/master/LICENSE">
@@ -45,7 +46,7 @@ export default function Footer() {
             )
           </li>
           <li>
-            Built with <a href="https://www.gatsbyjs.org">Gatsby</a>
+            Built with <a href="https://www.gatsbyjs.com">Gatsby</a>
           </li>
           <li>
             <a href="https://github.com/j-f1/read262">Contribute on GitHub</a>
