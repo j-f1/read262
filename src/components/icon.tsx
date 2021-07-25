@@ -15,7 +15,7 @@ export function Icon({ size, label, ...props }: IconComponentProps) {
       style={{ fill: 'currentcolor', verticalAlign: 'text-bottom' }}
     >
       <text style={{ fill: 'none' }}>{label}</text>
-      <path fill-rule="evenodd" {...props}></path>
+      <path fillRule="evenodd" {...props}></path>
     </svg>
   )
 }
