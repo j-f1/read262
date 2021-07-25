@@ -1,7 +1,0 @@
-diff --git a/node_modules/@rehooks/online-status/src/index.d.ts b/node_modules/@rehooks/online-status/src/index.d.ts
-new file mode 100644
-index 0000000..38fd4c3
---- /dev/null
-+++ b/node_modules/@rehooks/online-status/src/index.d.ts
-@@ -0,0 +1 @@
-+export default function useOnlineStatus(): boolean;

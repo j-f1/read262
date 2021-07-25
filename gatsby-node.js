@@ -2,7 +2,7 @@ const exists = require('util').promisify(require('fs').exists)
 const writeFile = require('util').promisify(require('fs').writeFile)
 const link = require('util').promisify(require('fs').link)
 const path = require('path')
-const stripHtml = require('string-strip-html')
+const { stripHtml } = require('string-strip-html')
 
 exports.createPages = async ({ graphql }) => {
   const { data } = await graphql(/* GraphQL */ `
