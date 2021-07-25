@@ -62,14 +62,23 @@ export async function sourceNodes({
         ? segments.slice(0, 2).join('/')
         : segments.slice(0, 2).join('/') + '#' + child.id)
 
-    if (ids[child.id]) {
-      console.warn(
-        `warning! Attempted to assign #${
-          child.id
-        } to ${route}, but it’s already assigned to ${ids[child.id]}`
-      )
+    if (route.startsWith('/grammar-summary')) {
+      if (!ids[child.id]) {
+        console.warn(
+          `Found ID #${child.id} (at ${route} in the grammar summary), but it’s not assigned anywhere else`
+        )
+        ids[child.id] = route
+      }
+    } else {
+      if (ids[child.id]) {
+        console.warn(
+          `Attempted to assign #${
+            child.id
+          } to ${route}, but it’s already assigned to ${ids[child.id]}`
+        )
+      }
+      ids[child.id] = route
     }
-    ids[child.id] = route
   }
 
   Object.entries(ids)
