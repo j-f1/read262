@@ -2,7 +2,7 @@ import useIsOnline from '@rehooks/online-status'
 import React, { useState, useDebugValue, useContext } from 'react'
 import { WrapperProps } from '../types'
 
-import styles from './dev-corner.module.css'
+import * as styles from './dev-corner.module.css'
 
 const Context = React.createContext(true)
 

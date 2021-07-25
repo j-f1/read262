@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import SectionTitle from './section-title'
 import { SpecPageMeta } from '../types'
 
-import styles from './prev-next.module.css'
+import * as styles from './prev-next.module.css'
 
 type Props = { prev?: SpecPageMeta; next?: SpecPageMeta }
 
