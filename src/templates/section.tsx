@@ -30,7 +30,7 @@ export default function SpecSection({
 }) {
   React.useEffect(() => {
     const handler = (event: MouseEvent) => {
-      const { target } = (event as unknown) as { target: HTMLElement }
+      const { target } = event as unknown as { target: HTMLElement }
       if (!target) return
       if (target.matches('article a') && target.getAttribute('href')) {
         event.preventDefault()
