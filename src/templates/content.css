@@ -76,3 +76,14 @@ var:not(.referenced) {
 var.referenced {
   color: var(--var-referenced);
 }
+
+[normative-optional],
+[legacy] {
+  margin-block: 1em;
+  border-radius: 5px;
+}
+
+.clause-attributes-tag,
+.clause-attributes-tag a {
+  font-family: var(--sans);
+}

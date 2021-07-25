@@ -9,6 +9,9 @@
   --diff-add: #e0f8e0;
   --diff-add-border: #396;
   --diff-del: #fee;
+
+  --clause-warning-fg: #ff6600;
+  --clause-warning-bg: #ffeedd;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -20,6 +23,8 @@
     --var-referenced: #bcbc45;
     --opt: #ffd149;
     --table-header: #333;
+
+    --clause-warning-bg: #331a00;
   }
 }
 
@@ -490,4 +495,21 @@ tr.ins > td {
 
 tr.del > td {
   background-color: var(--diff-del);
+}
+
+[normative-optional],
+[legacy] {
+  border-left: 5px solid var(--clause-warning-fg);
+  padding: 0.5em;
+  display: block;
+  background: var(--clause-warning-bg);
+}
+
+.clause-attributes-tag {
+  text-transform: uppercase;
+  color: var(--clause-warning-fg);
+}
+
+.clause-attributes-tag a {
+  color: var(--clause-warning-fg);
 }
