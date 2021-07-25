@@ -63,7 +63,11 @@ export async function sourceNodes({
         : segments.slice(0, 2).join('/') + '#' + child.id)
 
     if (route.startsWith('/grammar-summary')) {
-      if (!ids[child.id]) {
+      if (
+        !ids[child.id] &&
+        !child.id.startsWith('_ref') &&
+        !child.id.startsWith('sec-')
+      ) {
         console.warn(
           `Found ID #${child.id} (at ${route} in the grammar summary), but it’s not assigned anywhere else`
         )
