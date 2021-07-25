@@ -93,7 +93,12 @@ export async function sourceNodes({
     )
     const header = clause.querySelector('h1')
     if (!header)
-      throw new TypeError('could not find header for section ' + clause.id)
+      throw new TypeError(
+        'could not find header for section ' + clause.innerHTML
+      )
+
+    const secnum = header.querySelector('.secnum')
+    if (secnum?.textContent === '2') nest = false
 
     const content = children.slice(
       children.indexOf(header) + 1,
@@ -101,7 +106,6 @@ export async function sourceNodes({
     )
     const id = clause.id
     const route = parentRoute + '/' + id.replace('sec-', '')
-    const secnum = header.querySelector('.secnum')
 
     for (const para of content) {
       // force absolute URI
