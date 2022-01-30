@@ -41,6 +41,8 @@ exports.default = ({ title, layoutContent, meta, pages }) => {
         <link href="/assets/css/layout.css" rel="stylesheet" />
         <link href="/assets/css/search.css" rel="stylesheet" />
         <link href="/assets/css/tools.css" rel="stylesheet" />
+        <link href="/assets/css/ecmarkup.css" rel="stylesheet" />
+        <link href="/assets/css/content.css" rel="stylesheet" />
       </head>
       <body>
         <Header meta={meta} />
