@@ -1,4 +1,4 @@
-.wrapper {
+.tools {
   font-family: var(--sans);
   user-select: none;
   display: flex;
@@ -6,11 +6,11 @@
   margin-bottom: -0.5em;
 }
 
-.wrapper label {
+.tools label {
   display: flex;
   flex-direction: column;
 }
 
-.wrapper label:not(:first-child) {
+.tools label:not(:first-child) {
   margin-left: 1em;
 }

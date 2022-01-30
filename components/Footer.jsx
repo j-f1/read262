@@ -1,37 +1,27 @@
-import React from 'react'
-import { Link, useStaticQuery, graphql } from 'gatsby'
+const { readFileSync } = require('node:fs')
+const { createElement } = require('eleventy-hast-jsx')
 
-import * as styles from './layout.module.css'
-import { GitHubIcon, TwitterIcon } from './icon'
+const { GitHubIcon, TwitterIcon } = require('./Icon')
 
-export default function Footer() {
-  const data = useStaticQuery(graphql`
-    query CopyrightPage {
-      site {
-        meta: siteMetadata {
-          copyright
-        }
-      }
-      specPage(id: { eq: "page-sec-copyright-and-software-license" }) {
-        internal {
-          content
-        }
-      }
-    }
-  `)
-  const copyright = data.specPage.internal.content.match(
-    /<h2>Copyright Notice<\/h2><p>(.+?)<\/p>/
-  )[1]
+module.exports = ({ pages }) => {
+  const copyright = pages
+    .find((p) => p.id === 'sec-copyright-and-software-license')
+    .content.match(/<h2>Copyright Notice<\/h2><p>(.+?)<\/p>/)[1]
   return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
-        <ul className={styles.footerContent}>
+    <footer>
+      <div class="container">
+        <ul class="footer-content">
           <li>
             <a href="https://tc39.es/ecma262/">Spec content</a> {copyright} (
-            <Link to="/copyright-and-software-license">BSD License</Link>)
+            <a href="/copyright-and-software-license">BSD License</a>)
           </li>
           <li>
-            Site {data.site.meta.copyright}{' '}
+            Site{' '}
+            {readFileSync(require.resolve('../LICENSE'), 'utf8')
+              .split('\n')[2]
+              .split(' ')
+              .slice(1, -2)
+              .join(' ')}{' '}
             <a href="https://jedfox.com">Jed Fox</a>{' '}
             <a href="https://github.com/j-f1">
               <GitHubIcon>GitHub Profile</GitHubIcon>
