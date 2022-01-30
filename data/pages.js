@@ -25,7 +25,7 @@ module.exports = async () => {
       !nest || firstSubsection === -1 ? undefined : firstSubsection
     )
     const id = clause.id
-    const permalink = parentPermalink + '/' + id.replace('sec-', '')
+    const permalink = parentPermalink + id.replace('sec-', '') + '/'
 
     for (const para of content) {
       // force absolute URI

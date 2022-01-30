@@ -18,8 +18,8 @@ module.exports = async () => {
     const permalink =
       '/' +
       (child.matches(selectors.clause) && segments.length < 2
-        ? segments.slice(0, 2).join('/')
-        : segments.slice(0, 2).join('/') + '#' + child.id)
+        ? segments.slice(0, 2).join('/') + '/'
+        : segments.slice(0, 2).join('/') + '/#' + child.id)
 
     if (permalink.startsWith('/grammar-summary')) {
       if (

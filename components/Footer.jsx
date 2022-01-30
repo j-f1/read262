@@ -3,6 +3,12 @@ const { createElement } = require('eleventy-hast-jsx')
 
 const { GitHubIcon, TwitterIcon } = require('./Icon')
 
+const siteCopyright = readFileSync(require.resolve('../LICENSE'), 'utf8')
+  .split('\n')[2]
+  .split(' ')
+  .slice(1, -2)
+  .join(' ')
+
 module.exports = ({ pages }) => {
   const copyright = pages
     .find((p) => p.id === 'sec-copyright-and-software-license')
@@ -16,13 +22,7 @@ module.exports = ({ pages }) => {
             <a href="/copyright-and-software-license">BSD License</a>)
           </li>
           <li>
-            Site{' '}
-            {readFileSync(require.resolve('../LICENSE'), 'utf8')
-              .split('\n')[2]
-              .split(' ')
-              .slice(1, -2)
-              .join(' ')}{' '}
-            <a href="https://jedfox.com">Jed Fox</a>{' '}
+            Site {siteCopyright} <a href="https://jedfox.com">Jed Fox</a>{' '}
             <a href="https://github.com/j-f1">
               <GitHubIcon>GitHub Profile</GitHubIcon>
             </a>{' '}
