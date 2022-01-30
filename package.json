@@ -4,8 +4,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "cache-spec": "curl https://tc39.es/ecma262/ > plugins/gatsby-source-ecma262/cache.html",
-    "postinstall": "patch-package; cd plugins/gatsby-source-ecma262; yarn",
+    "cache-spec": "curl https://tc39.es/ecma262/ > util/cache.html",
+    "postinstall": "patch-package",
     "build": "eleventy",
     "start": "eleventy --serve",
     "prettier": "prettier . --ignore-path .gitignore",

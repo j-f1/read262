@@ -16,8 +16,6 @@ function onSubmit(event) {
     ? new URL(value).hash.slice(1)
     : value
   const result = __sections.find((x) => x[0] === id)
-  if (result) {
-    location.href = result[1]
-  }
+  if (result) location.href = result[1]
   event.preventDefault()
 }
