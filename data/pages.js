@@ -1,63 +1,57 @@
 const { URL } = require('node:url')
 
 module.exports = async () => {
-  const { document, specURL, selectors } = await import(
-    '../util/spec-loader.mjs'
-  )
+  const { spec, specURL, selectors } = await import('../util/spec-loader.mjs')
+  const { select, selectAll, matches } = await import('hast-util-select')
+  const { toString } = await import('hast-util-to-string')
 
   const nodes = []
+  /** @param {import('hast').Element} clause */
   const buildPage = (clause, parentPermalink = '/', nest = true) => {
-    const children = Array.from(clause.children)
-    const firstSubsection = children.findIndex((el) =>
-      el.matches(selectors.clause)
+    const children = Array.from(
+      clause.children.filter((c) => c.type === 'element')
     )
-    const header = clause.querySelector('h1')
+    const firstSubsection = children.findIndex((el) =>
+      matches(selectors.clause, el)
+    )
+    const header = select('h1', clause)
     if (!header)
       throw new TypeError(
-        'could not find header for section ' + clause.innerHTML
+        'could not find header for section ' + toString(clause)
       )
 
-    const secnum = header.querySelector('.secnum')
-    if (secnum?.textContent === '2') nest = false
+    const secnum = select('.secnum', header)
+    if (secnum && toString(secnum) === '2') nest = false
 
     const content = children.slice(
       children.indexOf(header) + 1,
       !nest || firstSubsection === -1 ? undefined : firstSubsection
     )
-    const id = clause.id
+    const id = clause.properties.id
     const permalink = parentPermalink + id.replace('sec-', '') + '/'
 
     for (const para of content) {
       // force absolute URI
-      para.querySelectorAll('object').forEach((object) => {
-        object.data = new URL(object.data, specURL).toString()
+      selectAll('object', para).forEach((object) => {
+        object.properties.data = new URL(
+          object.properties.data,
+          specURL
+        ).toString()
       })
-      para.querySelectorAll('img').forEach((img) => {
-        img.src = new URL(img.src, specURL).toString()
-      })
-      para.querySelectorAll('[href]').forEach((link) => {
-        const href = link.getAttribute('href')
-        if (href && href.startsWith('#')) {
-          // if (!ids[href.slice(1)]) {
-          //   console.warn(`Warning! Unrecognized ID ${href.slice(1)}`)
-          //   return
-          // }
-          // link.setAttribute('href', ids[href.slice(1)])
-        }
+      selectAll('img', para).forEach((img) => {
+        img.properties.src = new URL(img.properties.src, specURL).toString()
       })
     }
 
-    const html = content.map((el) => el.outerHTML).join('')
     nodes.push({
       id,
       permalink,
-      secnum: secnum && secnum.textContent ? secnum.textContent : '',
+      secnum: secnum ? toString(secnum) : '',
       title: (secnum
-        ? (header.textContent || '').replace(secnum.textContent || '', '')
-        : header.textContent || ''
+        ? toString(header).replace(toString(secnum) || '', '')
+        : toString(header) || ''
       ).trim(),
-      hasContent: html !== '',
-      content: html,
+      content,
     })
 
     if (nest && firstSubsection !== -1) {
@@ -67,10 +61,9 @@ module.exports = async () => {
     }
   }
 
-  for (const clause of Array.from(
-    document.querySelectorAll(
-      '#spec-container > emu-intro, #spec-container > emu-clause, #spec-container > emu-annex'
-    )
+  for (const clause of selectAll(
+    '#spec-container > emu-intro, #spec-container > emu-clause, #spec-container > emu-annex',
+    spec
   )) {
     buildPage(clause)
   }
@@ -78,7 +71,7 @@ module.exports = async () => {
   const findNode = (i, di) => {
     i += di
     while (nodes[i]) {
-      if (nodes[i].hasContent) return nodes[i]
+      if (nodes[i].content.length > 0) return nodes[i]
       i += di
     }
   }

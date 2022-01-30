@@ -4,7 +4,7 @@ const Footer = require('../components/Footer')
 
 const description = 'Read the ECMAScript spec in your browser'
 
-exports.default = ({ title, layoutContent, meta, pages }) => {
+exports.default = async ({ title, layoutContent, meta, pages }) => {
   const pageTitle = title ? `${title} | read262` : 'read262'
 
   return (
@@ -50,7 +50,7 @@ exports.default = ({ title, layoutContent, meta, pages }) => {
         <main class="container">
           <Raw html={layoutContent} />
         </main>
-        <Footer pages={pages} />
+        {await (<Footer pages={pages} />)}
       </body>
     </html>
   )

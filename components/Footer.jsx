@@ -9,10 +9,20 @@ const siteCopyright = readFileSync(require.resolve('../LICENSE'), 'utf8')
   .slice(1, -2)
   .join(' ')
 
-module.exports = ({ pages }) => {
-  const copyright = pages
-    .find((p) => p.id === 'sec-copyright-and-software-license')
-    .content.match(/<h2>Copyright Notice<\/h2><p>(.+?)<\/p>/)[1]
+module.exports = async ({ pages }) => {
+  const { select } = await import('hast-util-select')
+  const { toString } = await import('hast-util-to-string')
+  const copyright = toString(
+    select(
+      'h2 + p',
+      <div>
+        {
+          pages.find((p) => p.id === 'sec-copyright-and-software-license')
+            .content
+        }
+      </div>
+    )
+  )
   return (
     <footer>
       <div class="container">

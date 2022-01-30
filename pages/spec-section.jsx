@@ -15,14 +15,30 @@ exports.data = {
   },
 }
 
-exports.default = ({ section }) => {
+exports.default = async ({ section, sections }) => {
+  const { selectAll } = await import('hast-util-select')
+
+  // force absolute URI
+  section.content.forEach((p) =>
+    selectAll('[href]', p).forEach((link) => {
+      const href = link.properties.href
+      if (href && href.startsWith('#')) {
+        if (!sections[href.slice(1)]) {
+          console.warn(`Warning! Unrecognized ID ${href.slice(1)}`)
+          return
+        }
+        link.properties.href = sections[href.slice(1)]
+      }
+    })
+  )
+
   return (
     <>
       <article>
         <h1>
           <SectionTitle title={section.title} secnum={section.secnum} />
         </h1>
-        <Raw html={section.content} />
+        {section.content}
         {section.title === 'Colophon' ? (
           <>
             <h2>About read262</h2>

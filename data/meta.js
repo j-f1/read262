@@ -1,8 +1,10 @@
 module.exports = async () => {
-  const { document } = await import('../util/spec-loader.mjs')
+  const { spec } = await import('../util/spec-loader.mjs')
+  const { select } = await import('hast-util-select')
+  const { toString } = await import('hast-util-to-string')
 
   return {
-    title: document.querySelector('h1.title').textContent,
-    version: document.querySelector('h1.version').textContent,
+    title: toString(select('h1.title', spec)),
+    version: toString(select('h1.version', spec)),
   }
 }

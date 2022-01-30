@@ -4,5 +4,6 @@ module.exports = {
     layout: null,
     permalink: 'all-sections.js',
   },
-  render: ({ sections }) => `window.__sections = ${JSON.stringify(sections)}`,
+  render: ({ sections }) =>
+    `window.__sections = ${JSON.stringify(Object.entries(sections))}`,
 }
