@@ -1,10 +1,7 @@
 const handler = (event) => {
   const { target } = event
   if (!target) return
-  if (target.matches('article a') && target.getAttribute('href')) {
-    event.preventDefault()
-    navigate(target.getAttribute('href'))
-  } else if (target.matches('article var')) {
+  if (target.matches('article var')) {
     const name = target.textContent
     const shouldSelect = !target.classList.contains('referenced')
     let clause = target
