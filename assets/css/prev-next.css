@@ -1,4 +1,4 @@
-.wrapper {
+.prev-next {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -7,7 +7,7 @@
   font-family: var(--sans);
 }
 
-.arrow {
+.prev-next-arrow {
   font-family: var(--mono);
   display: inline-block;
   white-space: nowrap;

@@ -6,7 +6,7 @@ module.exports = async () => {
   )
 
   const nodes = []
-  const buildPage = (clause, parentPermalink = '', nest = true) => {
+  const buildPage = (clause, parentPermalink = '/', nest = true) => {
     const children = Array.from(clause.children)
     const firstSubsection = children.findIndex((el) =>
       el.matches(selectors.clause)

@@ -43,6 +43,7 @@ exports.default = ({ title, layoutContent, meta, pages }) => {
         <link href="/assets/css/tools.css" rel="stylesheet" />
         <link href="/assets/css/ecmarkup.css" rel="stylesheet" />
         <link href="/assets/css/content.css" rel="stylesheet" />
+        <script type="module" src="/assets/js/click-var.mjs" />
       </head>
       <body>
         <Header meta={meta} />
