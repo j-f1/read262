@@ -20,8 +20,11 @@ module.exports = async () => {
         'could not find header for section ' + toString(clause)
       )
 
-    const secnum = select('.secnum', header)
-    if (secnum && toString(secnum) === '2') nest = false
+    let secnum = select('.secnum', header)
+    if (secnum) secnum = toString(secnum)
+    else secnum = ''
+
+    if (secnum === '2' || secnum == '17' || secnum === 'D') nest = false
 
     const content = children.slice(
       children.indexOf(header) + 1,
@@ -46,9 +49,9 @@ module.exports = async () => {
     nodes.push({
       id,
       permalink,
-      secnum: secnum ? toString(secnum) : '',
+      secnum,
       title: (secnum
-        ? toString(header).replace(toString(secnum) || '', '')
+        ? toString(header).replace(secnum, '')
         : toString(header) || ''
       ).trim(),
       content,

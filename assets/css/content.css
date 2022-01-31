@@ -85,3 +85,10 @@ var.referenced {
 .clause-attributes-tag a {
   font-family: var(--sans);
 }
+
+dfn:target {
+  background: var(--yellow);
+  border-radius: 5px;
+  padding-inline: 3px;
+  margin-inline: -3px;
+}

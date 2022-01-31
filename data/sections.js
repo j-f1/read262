@@ -32,7 +32,7 @@ module.exports = async () => {
         console.warn(
           `Found ID #${id} (at ${permalink} in the grammar summary), but it’s not assigned anywhere else`
         )
-        ids[child.properties.id] = permalink
+        ids[id] = permalink
       }
     } else if (!(id.startsWith('prod-') && child.tagName === 'emu-rhs')) {
       if (ids[id]) {
