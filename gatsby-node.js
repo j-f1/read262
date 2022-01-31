@@ -5,23 +5,6 @@ const path = require('path')
 const { stripHtml } = require('string-strip-html')
 
 exports.createPages = async ({ graphql }) => {
-  const { data } = await graphql(/* GraphQL */ `
-    query GetSearchData {
-      allSpecPage {
-        edges {
-          node {
-            route
-            title
-            secnum
-            internal {
-              content
-            }
-          }
-        }
-      }
-    }
-  `)
-
   const opts = {
     stripTogetherWithTheirContents: ['script', 'style', 'xml', 'emu-grammar'],
   }

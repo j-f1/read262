@@ -16,33 +16,23 @@
     "node": ">=10.x"
   },
   "dependencies": {
-    "@rehooks/online-status": "^1.0.0",
     "algolia-html-extractor": "^0.0.1",
     "algoliasearch": "^4.10.3",
     "autosuggest-highlight": "^3.1.1",
-    "classnames": "^2.3.1",
     "dotenv": "^10.0.0",
     "firacode": "^5.2.0",
     "js-search": "^2.0.0",
-    "prop-types": "^15.6.2",
     "string-strip-html": "^8.3.0",
-    "ts-node": "^10.1.0",
     "typeface-merriweather": "^1.1.13",
     "workerize": "^0.1.8"
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
     "@types/autosuggest-highlight": "^3.1.1",
-    "@types/jsdom": "^16.2.13",
     "@types/lodash.chunk": "^4.2.4",
-    "@types/lowlight": "^0.0.3",
     "@types/ora": "^3.0.0",
-    "@types/parse5": "6.0.1",
-    "@types/react-dom": "^17.0.9",
-    "@types/react-helmet": "^6.1.2",
     "chalk": "^4.1.1",
     "eleventy-hast-jsx": "^0.2.0",
-    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.24",
     "glob": "^7.1.7",
     "hast-util-select": "^5.0.1",
     "hast-util-to-string": "^2.0.0",
@@ -55,13 +45,5 @@
     "typescript": "^4.3.5",
     "unified": "^10.1.1",
     "unist-util-parents": "^2.0.0"
-  },
-  "guppy": {
-    "id": "2124b010-0b81-11e9-90f7-191942761272",
-    "name": "read262",
-    "type": "gatsby",
-    "icon": "/static/media/icon_roundbird.f7041b49.jpg",
-    "color": "#4919b7",
-    "createdAt": 1546098484646
   }
 }
