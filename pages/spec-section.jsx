@@ -35,9 +35,6 @@ exports.default = async ({ section, sections }) => {
   return (
     <>
       <article>
-        <h1>
-          <SectionTitle title={section.title} secnum={section.secnum} />
-        </h1>
         {section.content}
         {section.title === 'Colophon' ? (
           <>

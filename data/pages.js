@@ -27,7 +27,7 @@ module.exports = async () => {
     if (secnum === '2' || secnum == '17' || secnum === 'D') nest = false
 
     const content = children.slice(
-      children.indexOf(header) + 1,
+      children.indexOf(header),
       !nest || firstSubsection === -1 ? undefined : firstSubsection
     )
     const id = clause.properties.id

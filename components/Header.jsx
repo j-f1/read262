@@ -14,7 +14,16 @@ module.exports = ({ meta: { title, version } }) => (
       <div class="tools">
         <label>
           Search
-          {/* <Search /> */}
+          <input
+            disabled
+            id="search-box"
+            type="search"
+            placeholder="Enable JS to search"
+          />
+          <script type="module" src="/assets/js/search-offline.mjs" />
+          <div class="ais-Hits">
+            <ul class="ais-Hits-list" id="search-results" />
+          </div>
         </label>
         <label>
           Open section

@@ -21,7 +21,7 @@
     "autosuggest-highlight": "^3.1.1",
     "dotenv": "^10.0.0",
     "firacode": "^5.2.0",
-    "js-search": "^2.0.0",
+    "lunr": "^2.3.9",
     "string-strip-html": "^8.3.0",
     "typeface-merriweather": "^1.1.13",
     "workerize": "^0.1.8"
@@ -44,6 +44,7 @@
     "rehype-parse": "^8.0.4",
     "typescript": "^4.3.5",
     "unified": "^10.1.1",
-    "unist-util-parents": "^2.0.0"
+    "unist-util-parents": "^2.0.0",
+    "unist-util-remove": "^3.1.0"
   }
 }
