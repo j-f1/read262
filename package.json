@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
+    "@milahu/patch-package": "^6.4.11",
     "@types/autosuggest-highlight": "^3.1.1",
     "@types/glob": "^7.2.0",
     "@types/lodash.chunk": "^4.2.4",
