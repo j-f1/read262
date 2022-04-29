@@ -12,11 +12,13 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPlugin(require('eleventy-hast-jsx').plugin)
 
   eleventyConfig.addPassthroughCopy('assets/css')
+  eleventyConfig.addPassthroughCopy('assets/images')
   eleventyConfig.addPassthroughCopy('assets/js')
   eleventyConfig.addPassthroughCopy({
     'node_modules/algoliasearch/dist/algoliasearch-lite.esm.browser.js':
       'assets/vendor/algoliasearch.js',
     'node_modules/instantsearch.js/dist/': 'assets/vendor/instantsearch',
+    'assets/root': '/',
   })
 
   eleventyConfig.addWatchTarget('assets')

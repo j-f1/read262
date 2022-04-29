@@ -1,0 +1,20 @@
+{
+  "name": "read262",
+  "short_name": "read262",
+  "start_url": "/",
+  "background_color": "#f0db4f",
+  "theme_color": "#f0db4f",
+  "display": "minimal-ui",
+  "icons": [
+    {
+      "src": "/assets/images/logo-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

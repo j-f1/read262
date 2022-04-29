@@ -4,13 +4,14 @@ const Footer = require('../components/Footer')
 
 const description = 'Read the ECMAScript spec in your browser'
 
-exports.default = async ({ title, layoutContent, meta, pages }) => {
+exports.default = async ({ title, layoutContent, meta, pages, eleventy }) => {
   const pageTitle = title ? `${title} | read262` : 'read262'
 
   return (
     <html lang="en">
       <head>
         <meta charset="utf-8" />
+        <title>{pageTitle}</title>
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta
           name="viewport"
@@ -26,6 +27,7 @@ exports.default = async ({ title, layoutContent, meta, pages }) => {
           content="#907f0c"
           media="(prefers-color-scheme: dark)"
         />
+        <link rel="icon" href="/assets/images/logo-32.png" type="image/png" />
         <meta name="description" content={description} />
         <meta name="og:title" content={pageTitle} />
         <meta name="og:description" content={description} />
@@ -34,9 +36,12 @@ exports.default = async ({ title, layoutContent, meta, pages }) => {
         <meta name="twitter:cardtwitter:creator" content="Jed Fox" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={description} />
-        <title>{pageTitle}</title>
-        <meta name="theme-color" content="#f0db4f" />
-        <meta name="generator" content="Eleventy 1.0.0" />
+        <meta name="generator" content={eleventy.generator} />
+        <link
+          rel="manifest"
+          href="/manifest.webmanifest"
+          crossorigin="anonymous"
+        />
         <link href="/assets/css/globals.css" rel="stylesheet" />
         <link href="/assets/css/layout.css" rel="stylesheet" />
         <link href="/assets/css/search.css" rel="stylesheet" />
