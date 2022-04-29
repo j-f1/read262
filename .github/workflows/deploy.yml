@@ -1,0 +1,66 @@
+name: GitHub Pages
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store/
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+            pnpm-
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.32.9
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: .node-version
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Eleventy
+        run: pnpm build
+        env:
+          ALGOLIA_PUSH_KEY: ${{ secrets.ALGOLIA_PUSH_KEY }}
+          DEBUG: Eleventy:Benchmark
+
+      - name: Update Algolia
+        run: node scripts/algolia.mjs
+
+      - name: Create Archive
+        run: tar -vv --create --directory public --file gh-pages-${{ github.sha }}.tar .
+
+      - name: Upload Archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: Built Website
+          path: gh-pages-${{ github.sha }}.tar
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
