@@ -65,7 +65,7 @@
   padding: 0.5em;
   border: 0.5px solid var(--border);
   border-radius: 5px;
-  max-width: 500px;
+  width: 500px;
   max-height: calc(100vh - 175px);
   box-sizing: border-box;
   overflow-y: auto;
@@ -78,6 +78,15 @@
     box-shadow: 5px 15px 20px rgba(0, 0, 0, 1);
   }
 }
+
+@media (max-width: 530px) {
+  .ais-Hits {
+    width: 100%;
+    margin-left: -1.0875rem;
+    margin-top: 0.5rem;
+    border-radius: 0;
+  }
+}
 :not(:focus-within) + .ais-Hits:not(:focus-within):not(:hover) {
   opacity: 0;
   visibility: hidden;
@@ -86,6 +95,10 @@
   :not(:focus-within) + .ais-Hits:not(:focus-within):not(:hover) {
     transform: translateY(10px);
   }
+}
+
+.ais-Hits--empty {
+  display: none;
 }
 .ais-Hits-list {
   padding: 0;

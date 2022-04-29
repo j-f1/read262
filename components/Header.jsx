@@ -14,16 +14,26 @@ module.exports = ({ meta: { title, version } }) => (
       <div class="tools">
         <label>
           Search
-          <input
-            disabled
-            id="search-box"
-            type="search"
-            placeholder="Enable JS to search"
-          />
-          <script type="module" src="/assets/js/search-offline.mjs" />
-          <div class="ais-Hits">
-            <ul class="ais-Hits-list" id="search-results" />
+          <div id="search-box">
+            <input
+              type="search"
+              id="search-box-placeholder"
+              disabled
+              placeholder="Enable JS to search"
+            />
           </div>
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css"
+            integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8="
+            crossorigin="anonymous"
+          />
+          <script
+            defer
+            src="/assets/vendor/instantsearch/instantsearch.development.js"
+          />
+          <script type="module" defer src="/assets/js/search.mjs" />
+          <div id="search-results" style="margin-top: -1em" />
         </label>
         <label>
           Open section
