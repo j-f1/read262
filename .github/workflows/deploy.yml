@@ -46,11 +46,12 @@ jobs:
       - name: Run Eleventy
         run: pnpm build
         env:
-          ALGOLIA_PUSH_KEY: ${{ secrets.ALGOLIA_PUSH_KEY }}
           DEBUG: Eleventy:Benchmark
 
       - name: Update Algolia
         run: node scripts/algolia.mjs
+        env:
+          ALGOLIA_PUSH_KEY: ${{ secrets.ALGOLIA_PUSH_KEY }}
 
       - name: Create Archive
         run: tar -vv --create --directory public --file gh-pages-${{ github.sha }}.tar .
