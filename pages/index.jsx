@@ -28,7 +28,7 @@ exports.default = ({ pages: flatPages }) => {
       <ol class="toc-list">
         {mainContent.map(({ id, permalink, title, content, children }) => (
           <li key={id}>
-            {content.length > 0 ? <a href={permalink}>{title}</a> : title}
+            {content.length > 1 ? <a href={permalink}>{title}</a> : title}
             {children && children.length ? <PageList pages={children} /> : null}
           </li>
         ))}
@@ -37,7 +37,7 @@ exports.default = ({ pages: flatPages }) => {
       <ol class="toc-list appendix">
         {appendix.map(({ id, permalink, title, content, children }) => (
           <li key={id}>
-            {content.length > 0 ? <a href={permalink}>{title}</a> : title}
+            {content.length > 1 ? <a href={permalink}>{title}</a> : title}
             {children && children.length ? <PageList pages={children} /> : null}
           </li>
         ))}
@@ -51,7 +51,7 @@ function PageList({ pages }) {
     <ol>
       {pages.map(({ id, permalink, title, content }) => (
         <li key={id}>
-          {content.length > 0 ? <a href={permalink}>{title}</a> : title}
+          {content.length > 1 ? <a href={permalink}>{title}</a> : title}
         </li>
       ))}
     </ol>

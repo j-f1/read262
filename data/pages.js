@@ -74,7 +74,7 @@ module.exports = async () => {
   const findNode = (i, di) => {
     i += di
     while (nodes[i]) {
-      if (nodes[i].content.length > 0) return nodes[i]
+      if (nodes[i].content.length > 1) return nodes[i]
       i += di
     }
   }

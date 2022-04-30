@@ -1,6 +1,3 @@
-const { createElement, Raw } = require('eleventy-hast-jsx')
-
-const SectionTitle = require('../components/SectionTitle')
 const PrevNext = require('../components/PrevNext')
 
 exports.data = {
