@@ -50,7 +50,11 @@ exports.default = async ({ title, layoutContent, meta, pages, eleventy }) => {
         <link href="/assets/css/content.css" rel="stylesheet" />
         <link href="/assets/fonts/merriweather/index.css" rel="stylesheet" />
         <link href="/assets/fonts/fira-code/fira_code.css" rel="stylesheet" />
-        <script type="module" src="/assets/js/click-var.mjs" />
+        <script async src="/assets/js/click-var.js" />
+        <script async src="/assets/vendor/algoliasearch.js" />
+        <script async src="/assets/vendor/instantsearch.js" />
+        <script async src="/assets/js/search.js" />
+        <script async src="/all-sections.js" />
       </head>
       <body>
         <Header meta={meta} />
