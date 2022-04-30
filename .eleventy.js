@@ -20,6 +20,8 @@ module.exports = (eleventyConfig) => {
     'node_modules/instantsearch.js/dist/instantsearch.production.min.js':
       'assets/vendor/instantsearch.js',
     'assets/root': '/',
+    'node_modules/@fontsource/merriweather/': 'assets/fonts/merriweather',
+    'node_modules/firacode/distr': 'assets/fonts/fira-code',
   })
 
   eleventyConfig.addWatchTarget('assets')

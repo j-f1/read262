@@ -15,10 +15,11 @@
     "node": ">=10.x"
   },
   "dependencies": {
+    "@fontsource/merriweather": "^4.5.8",
     "algoliasearch": "^4.13.0",
+    "firacode": "^6.2.0",
     "instantsearch.js": "^4.40.5",
-    "jsdom": "^19.0.0",
-    "typeface-merriweather": "^1.1.13"
+    "jsdom": "^19.0.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.0-canary.8",

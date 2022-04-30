@@ -2,12 +2,14 @@ lockfileVersion: 5.3
 
 specifiers:
   '@11ty/eleventy': ^2.0.0-canary.8
+  '@fontsource/merriweather': ^4.5.8
   '@types/glob': ^7.2.0
   '@types/lodash.chunk': ^4.2.7
   algoliasearch: ^4.13.0
   chalk-template: ^0.4.0
   dotenv: ^16.0.0
   eleventy-hast-jsx: ^0.3.1
+  firacode: ^6.2.0
   glob: ^8.0.1
   hast-util-select: ^5.0.1
   hast-util-to-html: ^8.0.3
@@ -19,15 +21,15 @@ specifiers:
   patch-package: ^6.4.7
   prettier: ^2.6.2
   rehype-parse: ^8.0.4
-  typeface-merriweather: ^1.1.13
   unified: ^10.1.2
   unist-util-parents: ^2.0.0
 
 dependencies:
+  '@fontsource/merriweather': 4.5.8
   algoliasearch: 4.13.0
+  firacode: 6.2.0
   instantsearch.js: 4.40.5_algoliasearch@4.13.0
   jsdom: 19.0.0
-  typeface-merriweather: 1.1.13
 
 devDependencies:
   '@11ty/eleventy': 2.0.0-canary.8
@@ -462,6 +464,10 @@ packages:
       '@babel/helper-validator-identifier': 7.16.7
       to-fast-properties: 2.0.0
     dev: true
+
+  /@fontsource/merriweather/4.5.8:
+    resolution: {integrity: sha512-sygVh+v1LCK3Nu2x/VLFwaZorsCE+G5SoxXUx632QH8A6Fh2HWxX2Pzs8iL5P7fAjgM4nyF6PxQmfT3hhOykfg==}
+    dev: false
 
   /@iarna/toml/2.2.5:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
@@ -1366,6 +1372,10 @@ packages:
     dependencies:
       micromatch: 4.0.5
     dev: true
+
+  /firacode/6.2.0:
+    resolution: {integrity: sha512-t5R3aO2BmhRXnYtKXbImLVNsILuCIbJ/XlDzBufjpi3il8P/CVdpWco83Ud3r2Tl0gitAmyP4o1fbJ52ozV1jw==}
+    dev: false
 
   /form-data/4.0.0:
     resolution: {integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==}
@@ -2865,10 +2875,6 @@ packages:
     engines: {node: '>= 0.8.0'}
     dependencies:
       prelude-ls: 1.1.2
-    dev: false
-
-  /typeface-merriweather/1.1.13:
-    resolution: {integrity: sha512-ho6xe/y/uHIKVXsFtK+dJfRCD5KZqJCMYTCcXfuCwQHQbeQ83a7hVkxfRMTEIjZOSXw5SevOjnwJuZ5QgWEHiw==}
     dev: false
 
   /uc.micro/1.0.6:
