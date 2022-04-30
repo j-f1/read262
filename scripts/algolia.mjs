@@ -5,12 +5,14 @@ import path from 'node:path'
 import { promisify } from 'node:util'
 import { fileURLToPath } from 'node:url'
 
+import { select } from 'hast-util-select'
 import glob from 'glob'
-import HtmlExtractor from './extract-html.mjs'
+import { extract } from './extract-html.mjs'
 import algolia from 'algoliasearch'
 import ora from 'ora'
 import chunk from 'lodash.chunk'
 import chalk from 'chalk'
+import { toString } from 'hast-util-to-string'
 
 import dotenv from 'dotenv'
 dotenv.config({
@@ -28,8 +30,6 @@ if (!process.env.ALGOLIA_PUSH_KEY) {
   console.error('No ALGOLIA_PUSH_KEY specified')
   process.exit(1)
 }
-
-const extractor = new HtmlExtractor()
 
 const siteDir = fileURLToPath(new URL('../public', import.meta.url))
 const tty = !!process.stdout.isTTY
@@ -55,32 +55,24 @@ try {
     n++
     const content = await fs.readFile(path.join(siteDir, filename), 'utf8')
     records = records.concat(
-      extractor
-        .run(content, {
-          cssSelector:
-            'p, emu-grammar, emu-clause>ul, emu-clause>ol, div>ul, div>ol',
-        })
-        .map((record) => {
-          const heading = record.headings.slice(-1)[0]
-          const secnum = heading && heading.querySelector('.secnum')
-          return {
-            objectID: record.objectID,
-            route:
-              filename
-                .replace(/\\/g, '/')
-                .replace(/^public/, '')
-                .replace(/(\/index)?\.html$/, '') +
-              (record.anchor ? `#${record.anchor}` : ''),
-            content: record.content.replace(/\s+/g, ' ').trim(),
-            heading: heading
-              ? heading.textContent.replace(
-                  secnum ? secnum.textContent : '',
-                  ''
-                )
-              : undefined,
-            secnum: secnum ? secnum.textContent : undefined,
-          }
-        })
+      extract(content).map((record) => {
+        const heading = record.headings.slice(-1)[0]
+        const secnum = select('.secnum', heading)
+        return {
+          objectID: record.objectID,
+          route:
+            filename
+              .replace(/\\/g, '/')
+              .replace(/^public/, '')
+              .replace(/(\/index)?\.html$/, '') +
+            (record.anchor ? `#${record.anchor}` : ''),
+          content: record.content.replace(/\s+/g, ' ').trim(),
+          heading: heading
+            ? toString(heading).replace(secnum ? toString(secnum) : '', '')
+            : undefined,
+          secnum: secnum ? toString(secnum) : undefined,
+        }
+      })
     )
   }
 
