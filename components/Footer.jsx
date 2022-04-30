@@ -45,7 +45,7 @@ module.exports = async ({ pages }) => {
             )
           </li>
           <li>
-            Built with <a href="https://www.gatsbyjs.com">Gatsby</a>
+            Built with <a href="https://11ty.dev">Eleventy</a>
           </li>
           <li>
             <a href="https://github.com/j-f1/read262">Contribute on GitHub</a>
