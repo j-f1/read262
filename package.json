@@ -16,17 +16,17 @@
     "node": ">=10.x"
   },
   "dependencies": {
-    "algolia-html-extractor": "^0.0.1",
-    "algoliasearch": "^4.10.3",
+    "algoliasearch": "^4.13.0",
     "dotenv": "^10.0.0",
     "instantsearch.js": "^4.40.5",
+    "jsdom": "^19.0.0",
     "typeface-merriweather": "^1.1.13"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.0-canary.8",
     "@milahu/patch-package": "^6.4.11",
     "@types/glob": "^7.2.0",
-    "@types/lodash.chunk": "^4.2.4",
+    "@types/lodash.chunk": "^4.2.7",
     "chalk": "^4.1.2",
     "eleventy-hast-jsx": "^0.3.1",
     "glob": "^7.2.0",
@@ -37,7 +37,7 @@
     "patch-package": "^6.4.7",
     "prettier": "^2.6.2",
     "rehype-parse": "^8.0.4",
-    "unified": "^10.1.1",
+    "unified": "^10.1.2",
     "unist-util-parents": "^2.0.0"
   }
 }

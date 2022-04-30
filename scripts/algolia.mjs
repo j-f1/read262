@@ -1,5 +1,4 @@
 // @ts-check
-///<reference path="./globals.d.ts" />
 
 import fs from 'node:fs/promises'
 import path from 'node:path'
@@ -7,7 +6,7 @@ import { promisify } from 'node:util'
 import { fileURLToPath } from 'node:url'
 
 import glob from 'glob'
-import HtmlExtractor from 'algolia-html-extractor'
+import HtmlExtractor from './extract-html.mjs'
 import algolia from 'algoliasearch'
 import ora from 'ora'
 import chunk from 'lodash.chunk'
