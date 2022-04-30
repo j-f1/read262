@@ -1,5 +1,3 @@
-const { createElement } = require('eleventy-hast-jsx')
-
 const SectionTitle = require('./SectionTitle')
 
 module.exports = ({ prev, next }) => (

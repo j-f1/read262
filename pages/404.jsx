@@ -1,5 +1,3 @@
-const { createElement } = require('eleventy-hast-jsx')
-
 exports.data = {
   title: '404: Not Found',
   permalink: '404.html',

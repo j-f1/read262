@@ -1,4 +1,4 @@
-const { createElement, Raw } = require('eleventy-hast-jsx')
+const { Raw } = require('eleventy-hast-jsx')
 const Header = require('../components/Header')
 const Footer = require('../components/Footer')
 

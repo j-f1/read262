@@ -1,5 +1,4 @@
 const { readFileSync } = require('node:fs')
-const { createElement } = require('eleventy-hast-jsx')
 
 const { GitHubIcon, TwitterIcon } = require('./Icon')
 

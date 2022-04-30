@@ -1,5 +1,3 @@
-const { createElement } = require('eleventy-hast-jsx')
-
 function Icon({ size, label, ...props }) {
   return (
     <svg

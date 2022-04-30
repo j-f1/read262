@@ -1,7 +1,5 @@
-const { createElement } = require('eleventy-hast-jsx')
-
 module.exports = () => (
-  <form onSubmit={`(${onSubmit})(event)`}>
+  <form onSubmit={`(${onSubmit})(event)`} style="margin-bottom: 0">
     <input type="text" placeholder="Paste tc39.es URL" />
     <button type="submit">Go</button>
     <script src="/all-sections.js" />

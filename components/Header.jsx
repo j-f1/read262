@@ -1,4 +1,3 @@
-const { createElement } = require('eleventy-hast-jsx')
 const SecIDLookup = require('./SecIDLookup')
 
 const css = String.raw
