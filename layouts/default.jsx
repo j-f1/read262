@@ -53,7 +53,7 @@ exports.default = async ({ title, layoutContent, meta, pages, eleventy }) => {
         <script async src="/assets/js/click-var.js" />
         <script async src="/assets/vendor/algoliasearch.js" />
         <script async src="/assets/vendor/instantsearch.js" />
-        <script async src="/assets/js/search.js" />
+        <script type="module" async src="/assets/js/search.js" />
         <script async src="/all-sections.js" />
       </head>
       <body>

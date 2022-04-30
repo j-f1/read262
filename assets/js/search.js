@@ -33,11 +33,16 @@ const onLoad = () => {
     },
   })
 
+  let timerId
   search.addWidgets([
     instantsearch.widgets.searchBox({
       container: '#search-box',
       placeholder: 'Search here…',
       showLoadingIndicator: true,
+      queryHook(query, search) {
+        clearTimeout(timerId)
+        timerId = setTimeout(() => search(query), 250)
+      },
     }),
 
     instantsearch.widgets.hits({
