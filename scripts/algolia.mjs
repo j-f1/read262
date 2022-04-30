@@ -46,10 +46,12 @@ try {
 
   for (const filename of matches) {
     i++
-    tty &&
-      (spinner.text = chalk`Reading files ({bold ${String(
+    if (tty) {
+      spinner.text = chalk`Reading pages ({bold ${String(
         Math.round((i / matches.length) * 100)
-      )}%}) {gray ${filename}}`)
+      )}%}) {gray ${filename.replace('/index.html', '')}}`
+    }
+
     if (filename.includes('404') || filename.includes('public/index.html'))
       continue
     n++
