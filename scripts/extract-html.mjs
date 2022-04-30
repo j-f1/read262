@@ -43,10 +43,10 @@ export function extract(input) {
       // Which level heading is it?
       currentLvl = parseInt(node.tagName.slice(1), 10) - 1
       // Update this level, and set all the following ones to nil
-      currentHierarchy[`lvl${currentLvl}`] = node
+      currentHierarchy[currentLvl] = node
 
       for (let i = currentLvl + 1; i < 6; i += 1) {
-        currentHierarchy[`lvl${i}`] = null
+        currentHierarchy[i] = null
       }
 
       // Update the anchor, if the new heading has one
