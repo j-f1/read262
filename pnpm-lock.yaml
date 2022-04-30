@@ -7,10 +7,10 @@ specifiers:
   '@types/lodash.chunk': ^4.2.4
   algolia-html-extractor: ^0.0.1
   algoliasearch: ^4.10.3
-  chalk: ^4.1.1
+  chalk: ^4.1.2
   dotenv: ^10.0.0
   eleventy-hast-jsx: ^0.3.1
-  glob: ^7.1.7
+  glob: ^7.2.0
   hast-util-select: ^5.0.1
   hast-util-to-string: ^2.0.0
   instantsearch.js: ^4.40.5
