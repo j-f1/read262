@@ -77,8 +77,6 @@ export function extract(input) {
           options.maxWeight - (currentLvl == null ? 0 : (currentLvl + 1) * 10),
       },
     }
-
-    item.objectID = uuid(item)
     items.push(item)
 
     currentPosition += 1
@@ -116,31 +114,4 @@ function extractAnchor(node, _isParent = false) {
   }
 
   return null
-}
-
-/**
- * Generate a unique identifier for the item
- * @template {{}} T
- * @param {T} item
- */
-function uuid(item) {
-  // We first get all the keys of the object, sorted alphabetically...
-  const keys = Object.keys(item)
-  keys.sort()
-
-  // ...then we build a huge array of "key=value" pairs...
-  const orderedArray = keys
-    .filter((k) => k !== 'objectID')
-    .map((key) => {
-      let value = item[key]
-      // We apply the method recursively on other hashes
-      if (typeof value === 'object' && value != null) {
-        value = uuid(value)
-      }
-
-      return `${key}=${value}`
-    })
-
-  // ...then we build a unique md5 hash of it
-  return createHash('md5').update(orderedArray.join(',')).digest('hex')
 }
