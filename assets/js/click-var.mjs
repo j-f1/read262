@@ -1,6 +1,8 @@
-const handler = (event) => {
+// @ts-check
+
+document.addEventListener('click', (event) => {
   const { target } = event
-  if (!target) return
+  if (!(target instanceof HTMLElement)) return
   if (target.matches('article var')) {
     const name = target.textContent
     const shouldSelect = !target.classList.contains('referenced')
@@ -13,6 +15,4 @@ const handler = (event) => {
       .filter((el) => el.textContent === name)
       .forEach((decl) => decl.classList.toggle('referenced', shouldSelect))
   }
-}
-
-document.addEventListener('click', handler)
+})

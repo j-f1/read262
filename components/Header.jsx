@@ -27,11 +27,9 @@ module.exports = ({ meta: { title, version } }) => (
             integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8="
             crossorigin="anonymous"
           />
-          <script
-            defer
-            src="/assets/vendor/instantsearch/instantsearch.development.js"
-          />
-          <script type="module" defer src="/assets/js/search.mjs" />
+          <script defer src="/assets/vendor/algoliasearch.js" />
+          <script defer src="/assets/vendor/instantsearch.js" />
+          <script type="module" defer src="/assets/js/search.js" />
           <div id="search-results" style="margin-top: -1em" />
         </label>
         <label>

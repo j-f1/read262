@@ -1,7 +1,5 @@
 // @ts-check
-///<reference types="../vendor/instantsearch.js" />
-
-import algoliasearch from '../vendor/algoliasearch.js'
+///<reference types="../vendor/global.js" />
 
 const searchClient = algoliasearch(
   '31SWLKOAHM',

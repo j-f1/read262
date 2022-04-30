@@ -15,9 +15,10 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy('assets/images')
   eleventyConfig.addPassthroughCopy('assets/js')
   eleventyConfig.addPassthroughCopy({
-    'node_modules/algoliasearch/dist/algoliasearch-lite.esm.browser.js':
+    'node_modules/algoliasearch/dist/algoliasearch-lite.umd.js':
       'assets/vendor/algoliasearch.js',
-    'node_modules/instantsearch.js/dist/': 'assets/vendor/instantsearch',
+    'node_modules/instantsearch.js/dist/instantsearch.production.min.js':
+      'assets/vendor/instantsearch.js',
     'assets/root': '/',
   })
 
