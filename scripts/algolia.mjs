@@ -9,12 +9,10 @@ import { fileURLToPath } from 'node:url'
 import { select } from 'hast-util-select'
 import glob from 'glob'
 import { extract } from './extract-html.mjs'
-import algolia from 'algoliasearch'
 import ora from 'ora'
-import chunk from 'lodash.chunk'
 import chalk from 'chalk-template'
 import { toString } from 'hast-util-to-string'
-import { fullAtomic, verbose } from 'algolia-indexing'
+import indexing from 'algolia-indexing'
 
 import dotenv from 'dotenv'
 dotenv.config({
@@ -24,7 +22,7 @@ dotenv.config({
   path: fileURLToPath(new URL('../.env.public', import.meta.url)),
 })
 
-verbose()
+indexing.verbose()
 
 /** @typedef {import('./types').SearchRecord} SearchRecord */
 /** @typedef {import('algoliasearch').SearchIndex} SearchIndex */
@@ -83,7 +81,7 @@ try {
 
   spinner.succeed(`Read ${records.length} records from ${n} files`)
 
-  fullAtomic(
+  indexing.fullAtomic(
     {
       apiKey: process.env.ALGOLIA_PUSH_KEY,
       appId: process.env.ALGOLIA_APP_ID,
