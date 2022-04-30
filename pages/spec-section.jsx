@@ -71,13 +71,9 @@ exports.default = async ({ section, sections }) => {
               </a>
               . Search is provided by{' '}
               <a href="https://www.algolia.com">Algolia</a>, and the site is
-              hosted on GitHub Pages.
-              <a href="https://zapier.com">Zapier</a> is used to automate
-              deploys whenever the spec repo is updated (
-              <a href="https://zapier.com/shared/7baef3f269fd297f91fbeae398a4dca8d370d1b7">
-                here’s the Zap I use
-              </a>
-              ). The yellow color is copied from the JS logo.
+              hosted on GitHub Pages. <a href="https://zapier.com">Zapier</a> is
+              used to automate deploys whenever the spec repo is updated. The
+              yellow color is copied from the JS logo.
             </p>
             <p>read262 supports Dark Mode automatically.</p>
           </>
