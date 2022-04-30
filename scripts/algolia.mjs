@@ -11,7 +11,7 @@ import { extract } from './extract-html.mjs'
 import algolia from 'algoliasearch'
 import ora from 'ora'
 import chunk from 'lodash.chunk'
-import chalk from 'chalk'
+import chalk from 'chalk-template'
 import { toString } from 'hast-util-to-string'
 
 import dotenv from 'dotenv'
