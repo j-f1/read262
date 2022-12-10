@@ -49,7 +49,7 @@ try {
   let n = 0
   tty && (spinner.text = `Reading ${matches.length} files`)
 
-  for (const filename of ['abstract-operations/type-conversion/index.html']) {
+  for (const filename of matches) {
     i++
     if (tty) {
       spinner.text = chalk`Reading pages ({bold ${String(
