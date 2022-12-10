@@ -38,7 +38,10 @@ const tty = !!process.stdout.isTTY
 const spinner = ora()
 try {
   spinner.start('Globbing')
-  const matches = await promisify(glob)('**/*.html', { cwd: siteDir })
+  const matches = await promisify(glob)('**/*.html', {
+    cwd: siteDir,
+    ignore: ['index.html', '404.html', 'assets/**'],
+  })
 
   /** @type {SearchRecord[]} */
   let records = []
@@ -46,7 +49,7 @@ try {
   let n = 0
   tty && (spinner.text = `Reading ${matches.length} files`)
 
-  for (const filename of matches) {
+  for (const filename of ['abstract-operations/type-conversion/index.html']) {
     i++
     if (tty) {
       spinner.text = chalk`Reading pages ({bold ${String(
@@ -54,12 +57,18 @@ try {
       )}%}) {gray ${filename.replace('/index.html', '')}}`
     }
 
-    if (filename.includes('404') || filename.includes('public/index.html'))
-      continue
     n++
     const content = await fs.readFile(path.join(siteDir, filename), 'utf8')
+    let extracted = []
+    try {
+      extracted = extract(content)
+    } catch (e) {
+      spinner.fail(`Error extracting ${filename}`)
+      console.error(e)
+      continue
+    }
     records = records.concat(
-      extract(content).map((record) => {
+      extracted.map((record) => {
         const heading = record.headings.slice(-1)[0]
         const secnum = select('.secnum', heading)
         return {
@@ -70,9 +79,10 @@ try {
               .replace(/(\/index)?\.html$/, '') +
             (record.anchor ? `#${record.anchor}` : ''),
           content: record.content.replace(/\s+/g, ' ').trim(),
-          heading: heading
-            ? toString(heading).replace(secnum ? toString(secnum) : '', '')
-            : undefined,
+          headings: record.headings.map(([k, v]) => [+k, v && toString(v)]),
+          // heading: heading
+          //   ? toString(heading).replace(secnum ? toString(secnum) : '', '')
+          //   : undefined,
           secnum: secnum ? toString(secnum) : undefined,
         }
       })
@@ -81,14 +91,19 @@ try {
 
   spinner.succeed(`Read ${records.length} records from ${n} files`)
 
-  indexing.fullAtomic(
-    {
-      apiKey: process.env.ALGOLIA_PUSH_KEY,
-      appId: process.env.ALGOLIA_APP_ID,
-      indexName: 'main',
-    },
-    records
-  )
+  if (process.argv.includes('--dry-run')) {
+    await fs.writeFile('records.json', JSON.stringify(records, null, 2))
+    spinner.info('Dry run, wrote records.json')
+  } else {
+    await indexing.fullAtomic(
+      {
+        apiKey: process.env.ALGOLIA_PUSH_KEY,
+        appId: process.env.ALGOLIA_APP_ID,
+        indexName: 'main',
+      },
+      records
+    )
+  }
 } catch (err) {
   spinner.fail('Error:')
   console.error(err)

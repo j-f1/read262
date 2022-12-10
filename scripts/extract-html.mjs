@@ -3,7 +3,6 @@
 
 import { unified } from 'unified'
 import rehypeParse from 'rehype-parse'
-import { createHash } from 'node:crypto'
 import { select, selectAll, matches } from 'hast-util-select'
 import { toString } from 'hast-util-to-string'
 import { toHtml } from 'hast-util-to-html'
@@ -18,15 +17,7 @@ const options = {
 /** @param {string} input */
 export function extract(input) {
   const items = []
-  /** @type {Record<'0' | '1' | '2' | '3' | '4' | '5', import('hast').Element | null>} */
-  const currentHierarchy = {
-    0: null,
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-  }
+  const currentHierarchy = []
   let currentPosition = 0 // Position of the DOM node in the tree
   let currentLvl = null // Current closest headings level
   let currentAnchor = null // Current closest anchor
@@ -34,20 +25,21 @@ export function extract(input) {
   // We select all nodes that match either the headings or the elements to
   // extract. This will allow us to loop over it in order it appears in the DOM
   for (const node of selectAll(
-    `${options.headingSelector},${options.cssSelector}`,
+    `:any(${options.headingSelector},${options.cssSelector})`,
     /** @type {import('hast').Root} */
-    (parents(unified().use(rehypeParse).parse(input)))
+    (parents(select('article', unified().use(rehypeParse).parse(input))))
   )) {
     // If it's a heading, we update our current hierarchy
     if (matches(options.headingSelector, node)) {
-      // Which level heading is it?
-      currentLvl = parseInt(node.tagName.slice(1), 10) - 1
+      console.log(
+        toString(node),
+        parseInt(node.tagName.slice(1), 10) - 1 + countClauseNesting(node),
+        currentHierarchy.map(toString)
+      )
+      currentHierarchy.length =
+        parseInt(node.tagName.slice(1), 10) - 1 + countClauseNesting(node)
       // Update this level, and set all the following ones to nil
-      currentHierarchy[currentLvl] = node
-
-      for (let i = currentLvl + 1; i < 6; i += 1) {
-        currentHierarchy[i] = null
-      }
+      currentHierarchy.push(node)
 
       // Update the anchor, if the new heading has one
       const newAnchor = extractAnchor(node)
@@ -68,7 +60,7 @@ export function extract(input) {
     const item = {
       html: toHtml(node),
       content,
-      headings: Object.values(currentHierarchy).filter((h) => h),
+      headings: Object.entries(currentHierarchy),
       anchor: currentAnchor,
       node,
       customRanking: {
@@ -83,6 +75,14 @@ export function extract(input) {
   }
 
   return items
+}
+
+function countClauseNesting(node) {
+  if (node.parent.tagName === 'emu-clause') {
+    return 1 + countClauseNesting(/** @type {any} */ (node).parent)
+  }
+
+  return 0
 }
 
 // Returns the anchor to the node
