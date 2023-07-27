@@ -59,8 +59,8 @@ devDependencies:
     specifier: ^6.3.1
     version: 6.3.1
   prettier:
-    specifier: ^2.6.2
-    version: 2.6.2
+    specifier: ^3.0.0
+    version: 3.0.0
   rehype-parse:
     specifier: ^8.0.4
     version: 8.0.4
@@ -3277,9 +3277,9 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: false
 
-  /prettier@2.6.2:
-    resolution: {integrity: sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==}
-    engines: {node: '>=10.13.0'}
+  /prettier@3.0.0:
+    resolution: {integrity: sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 

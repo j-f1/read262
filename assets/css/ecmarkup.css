@@ -203,7 +203,10 @@ emu-rhs emu-nt {
 emu-t {
   display: inline-block;
   font-family: var(--mono);
-  font-feature-settings: 'calt' off, 'onum', 'zero';
+  font-feature-settings:
+    'calt' off,
+    'onum',
+    'zero';
   font-weight: bold;
   white-space: nowrap;
   text-indent: 0;

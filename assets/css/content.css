@@ -52,7 +52,12 @@ emu-xref a:hover emu-nt {
 
 /* square : characters */
 emu-geq {
-  font-family: Cambria, Palatino Linotype, Palatino, Liberation Serif, serif;
+  font-family:
+    Cambria,
+    Palatino Linotype,
+    Palatino,
+    Liberation Serif,
+    serif;
 }
 
 article emu-note > span.note {

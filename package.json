@@ -7,7 +7,7 @@
     "cache-spec": "curl https://tc39.es/ecma262/ > util/cache.html",
     "build": "eleventy",
     "start": "eleventy --serve",
-    "prettier": "prettier . --ignore-path .gitignore",
+    "prettier": "prettier . --ignore-path .gitignore --ignore-path .prettierignore",
     "format": "yarn prettier --write",
     "test": "yarn prettier --check && yarn tsc"
   },
@@ -34,7 +34,7 @@
     "hast-util-to-html": "^8.0.4",
     "hast-util-to-string": "^2.0.0",
     "ora": "^6.3.1",
-    "prettier": "^2.6.2",
+    "prettier": "^3.0.0",
     "rehype-parse": "^8.0.4",
     "unified": "^10.1.2",
     "unist-util-parents": "^3.0.0"
