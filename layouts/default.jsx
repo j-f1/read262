@@ -48,7 +48,12 @@ exports.default = async ({ title, layoutContent, meta, pages, eleventy }) => {
         <link href="/assets/css/tools.css" rel="stylesheet" />
         <link href="/assets/css/ecmarkup.css" rel="stylesheet" />
         <link href="/assets/css/content.css" rel="stylesheet" />
-        <link href="/assets/fonts/merriweather/index.css" rel="stylesheet" />
+        <link href="/assets/fonts/merriweather/300.css" rel="stylesheet" />
+        <link href="/assets/fonts/merriweather/300-italic.css" rel="stylesheet" />
+        <link href="/assets/fonts/merriweather/400.css" rel="stylesheet" />
+        <link href="/assets/fonts/merriweather/400-italic.css" rel="stylesheet" />
+        <link href="/assets/fonts/merriweather/700.css" rel="stylesheet" />
+        <link href="/assets/fonts/merriweather/700-italic.css" rel="stylesheet" />
         <link href="/assets/fonts/fira-code/fira_code.css" rel="stylesheet" />
         <script async src="/assets/js/click-var.js" />
         <script async src="/assets/vendor/algoliasearch.js" />

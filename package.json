@@ -15,7 +15,7 @@
     "node": ">=10.x"
   },
   "dependencies": {
-    "@fontsource/merriweather": "^4.5.14",
+    "@fontsource/merriweather": "^5.0.5",
     "algoliasearch": "^4.19.1",
     "firacode": "^6.2.0",
     "instantsearch.js": "^4.56.8",
