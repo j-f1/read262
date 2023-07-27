@@ -3,7 +3,6 @@
 
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { promisify } from 'node:util'
 import { fileURLToPath } from 'node:url'
 
 import { select } from 'hast-util-select'
@@ -38,7 +37,7 @@ const tty = !!process.stdout.isTTY
 const spinner = ora()
 try {
   spinner.start('Globbing')
-  const matches = await promisify(glob)('**/*.html', {
+  const matches = await glob('**/*.html', {
     cwd: siteDir,
     ignore: ['index.html', '404.html', 'assets/**'],
   })
