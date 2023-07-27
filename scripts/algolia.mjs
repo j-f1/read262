@@ -7,7 +7,7 @@ import { promisify } from 'node:util'
 import { fileURLToPath } from 'node:url'
 
 import { select } from 'hast-util-select'
-import glob from 'glob'
+import { glob } from 'glob'
 import { extract } from './extract-html.mjs'
 import ora from 'ora'
 import chalk from 'chalk-template'
