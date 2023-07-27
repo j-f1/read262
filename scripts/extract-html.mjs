@@ -31,11 +31,11 @@ export function extract(input) {
   )) {
     // If it's a heading, we update our current hierarchy
     if (matches(options.headingSelector, node)) {
-      console.log(
-        toString(node),
-        parseInt(node.tagName.slice(1), 10) - 1 + countClauseNesting(node),
-        currentHierarchy.map(toString)
-      )
+      // console.log(
+      //   toString(node),
+      //   parseInt(node.tagName.slice(1), 10) - 1 + countClauseNesting(node),
+      //   currentHierarchy.map(toString)
+      // )
       currentHierarchy.length =
         parseInt(node.tagName.slice(1), 10) - 1 + countClauseNesting(node)
       // Update this level, and set all the following ones to nil
